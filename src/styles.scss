@@ -1,5 +1,10 @@
-$primary-color: yellow;
+$primary-color: rgb(184, 184, 177);
 
 body {
   background-color: $primary-color;
+}
+
+.container{
+  max-width: 860px;
+  margin: auto;
 }

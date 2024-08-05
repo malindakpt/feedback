@@ -1,9 +1,13 @@
+import Content from './Componenets/Content';
+import Header from './Componenets/Header';
 import "./styles.scss"
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello</h1>
+    <div className="container">
+      <Header />
+      <Content />
+
     </div>
   );
 }

@@ -1,0 +1,219 @@
+{
+  "hash": "39fb2357eecf81b0daa1",
+  "version": "5.93.0",
+  "time": 183,
+  "builtAt": 1722828641988,
+  "publicPath": "auto",
+  "outputPath": "D:\\work\\project101\\feedback\\dist",
+  "assetsByChunkName": {
+    "app": [
+      "app.bundle.js"
+    ],
+    "vendor": [
+      "app.bundle.js"
+    ]
+  },
+  "assets": [
+    {
+      "type": "asset",
+      "name": "app.bundle.js",
+      "size": 662,
+      "emitted": false,
+      "comparedForEmit": true,
+      "cached": false,
+      "info": {
+        "javascriptModule": false,
+        "size": 662
+      },
+      "chunkNames": [
+        "app",
+        "vendor"
+      ],
+      "chunkIdHints": [],
+      "auxiliaryChunkNames": [],
+      "auxiliaryChunkIdHints": [],
+      "related": {},
+      "chunks": [
+        "app",
+        "vendor"
+      ],
+      "auxiliaryChunks": [],
+      "isOverSizeLimit": false
+    }
+  ],
+  "chunks": [
+    {
+      "rendered": true,
+      "initial": true,
+      "entry": true,
+      "recorded": false,
+      "size": 0,
+      "sizes": {},
+      "names": [
+        "app"
+      ],
+      "idHints": [],
+      "runtime": [
+        "app"
+      ],
+      "files": [
+        "app.bundle.js"
+      ],
+      "auxiliaryFiles": [],
+      "hash": "1c8d9a8d53f80ec24c21",
+      "childrenByOrder": {},
+      "id": "app",
+      "siblings": [],
+      "parents": [],
+      "children": [],
+      "modules": [],
+      "origins": [
+        {
+          "module": "",
+          "moduleIdentifier": "",
+          "moduleName": "",
+          "loc": "app",
+          "request": "./src/index.js"
+        }
+      ]
+    },
+    {
+      "rendered": false,
+      "initial": true,
+      "entry": true,
+      "recorded": false,
+      "size": 0,
+      "sizes": {},
+      "names": [
+        "vendor"
+      ],
+      "idHints": [],
+      "runtime": [
+        "vendor"
+      ],
+      "files": [
+        "app.bundle.js"
+      ],
+      "auxiliaryFiles": [],
+      "hash": "aba573451fce6946807d",
+      "childrenByOrder": {},
+      "id": "vendor",
+      "siblings": [],
+      "parents": [],
+      "children": [],
+      "modules": [],
+      "origins": [
+        {
+          "module": "",
+          "moduleIdentifier": "",
+          "moduleName": "",
+          "loc": "vendor",
+          "request": "./src/vendor.js"
+        }
+      ]
+    }
+  ],
+  "modules": [],
+  "entrypoints": {
+    "app": {
+      "name": "app",
+      "chunks": [
+        "app"
+      ],
+      "assets": [
+        {
+          "name": "app.bundle.js",
+          "size": 662
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": 662,
+      "auxiliaryAssets": [],
+      "filteredAuxiliaryAssets": 0,
+      "auxiliaryAssetsSize": 0,
+      "children": {},
+      "childAssets": {},
+      "isOverSizeLimit": false
+    },
+    "vendor": {
+      "name": "vendor",
+      "chunks": [
+        "vendor"
+      ],
+      "assets": [
+        {
+          "name": "app.bundle.js",
+          "size": 662
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": 662,
+      "auxiliaryAssets": [],
+      "filteredAuxiliaryAssets": 0,
+      "auxiliaryAssetsSize": 0,
+      "children": {},
+      "childAssets": {},
+      "isOverSizeLimit": false
+    }
+  },
+  "namedChunkGroups": {
+    "app": {
+      "name": "app",
+      "chunks": [
+        "app"
+      ],
+      "assets": [
+        {
+          "name": "app.bundle.js",
+          "size": 662
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": 662,
+      "auxiliaryAssets": [],
+      "filteredAuxiliaryAssets": 0,
+      "auxiliaryAssetsSize": 0,
+      "children": {},
+      "childAssets": {},
+      "isOverSizeLimit": false
+    },
+    "vendor": {
+      "name": "vendor",
+      "chunks": [
+        "vendor"
+      ],
+      "assets": [
+        {
+          "name": "app.bundle.js",
+          "size": 662
+        }
+      ],
+      "filteredAssets": 0,
+      "assetsSize": 662,
+      "auxiliaryAssets": [],
+      "filteredAuxiliaryAssets": 0,
+      "auxiliaryAssetsSize": 0,
+      "children": {},
+      "childAssets": {},
+      "isOverSizeLimit": false
+    }
+  },
+  "errors": [
+    {
+      "loc": "app",
+      "message": "Module not found: Error: Can't resolve './src/index.js' in 'D:\\work\\project101\\feedback'",
+      "details": "resolve './src/index.js' in 'D:\\work\\project101\\feedback'\n  using description file: D:\\work\\project101\\feedback\\package.json (relative path: .)\n    Field 'browser' doesn't contain a valid alias configuration\n    using description file: D:\\work\\project101\\feedback\\package.json (relative path: ./src/index.js)\n      no extension\n        Field 'browser' doesn't contain a valid alias configuration\n        D:\\work\\project101\\feedback\\src\\index.js doesn't exist\n      .js\n        Field 'browser' doesn't contain a valid alias configuration\n        D:\\work\\project101\\feedback\\src\\index.js.js doesn't exist\n      .json\n        Field 'browser' doesn't contain a valid alias configuration\n        D:\\work\\project101\\feedback\\src\\index.js.json doesn't exist\n      .wasm\n        Field 'browser' doesn't contain a valid alias configuration\n        D:\\work\\project101\\feedback\\src\\index.js.wasm doesn't exist\n      as directory\n        D:\\work\\project101\\feedback\\src\\index.js doesn't exist",
+      "stack": "ModuleNotFoundError: Module not found: Error: Can't resolve './src/index.js' in 'D:\\work\\project101\\feedback'\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\Compilation.js:2100:28\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\NormalModuleFactory.js:904:13\n    at eval (eval at create (D:\\work\\project101\\feedback\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:10:1)\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\NormalModuleFactory.js:341:22\n    at eval (eval at create (D:\\work\\project101\\feedback\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:9:1)\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\NormalModuleFactory.js:518:22\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\NormalModuleFactory.js:151:11\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\NormalModuleFactory.js:776:25\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\NormalModuleFactory.js:988:8\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\NormalModuleFactory.js:1118:5"
+    },
+    {
+      "loc": "vendor",
+      "message": "Module not found: Error: Can't resolve './src/vendor.js' in 'D:\\work\\project101\\feedback'",
+      "details": "resolve './src/vendor.js' in 'D:\\work\\project101\\feedback'\n  using description file: D:\\work\\project101\\feedback\\package.json (relative path: .)\n    Field 'browser' doesn't contain a valid alias configuration\n    using description file: D:\\work\\project101\\feedback\\package.json (relative path: ./src/vendor.js)\n      no extension\n        Field 'browser' doesn't contain a valid alias configuration\n        D:\\work\\project101\\feedback\\src\\vendor.js doesn't exist\n      .js\n        Field 'browser' doesn't contain a valid alias configuration\n        D:\\work\\project101\\feedback\\src\\vendor.js.js doesn't exist\n      .json\n        Field 'browser' doesn't contain a valid alias configuration\n        D:\\work\\project101\\feedback\\src\\vendor.js.json doesn't exist\n      .wasm\n        Field 'browser' doesn't contain a valid alias configuration\n        D:\\work\\project101\\feedback\\src\\vendor.js.wasm doesn't exist\n      as directory\n        D:\\work\\project101\\feedback\\src\\vendor.js doesn't exist",
+      "stack": "ModuleNotFoundError: Module not found: Error: Can't resolve './src/vendor.js' in 'D:\\work\\project101\\feedback'\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\Compilation.js:2100:28\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\NormalModuleFactory.js:904:13\n    at eval (eval at create (D:\\work\\project101\\feedback\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:10:1)\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\NormalModuleFactory.js:341:22\n    at eval (eval at create (D:\\work\\project101\\feedback\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:9:1)\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\NormalModuleFactory.js:518:22\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\NormalModuleFactory.js:151:11\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\NormalModuleFactory.js:776:25\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\NormalModuleFactory.js:988:8\n    at D:\\work\\project101\\feedback\\node_modules\\webpack\\lib\\NormalModuleFactory.js:1118:5"
+    }
+  ],
+  "errorsCount": 2,
+  "warnings": [],
+  "warningsCount": 0,
+  "children": []
+}
