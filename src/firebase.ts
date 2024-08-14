@@ -4,12 +4,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDtGYDcWvAjSQIDX2CP76CF-vL9umLeHFw",
-  authDomain: "feedback-1-66f9f.firebaseapp.com",
-  projectId: "feedback-1-66f9f",
-  storageBucket: "feedback-1-66f9f.appspot.com",
-  messagingSenderId: "573605604137",
-  appId: "1:573605604137:web:e91ad3002796aaa859e538",
+  apiKey: "AIzaSyANQgqruX24y7QdYBwUQNjfGgJ2kYgu_LE",
+  authDomain: "feedback-60b9d.firebaseapp.com",
+  projectId: "feedback-60b9d",
+  storageBucket: "feedback-60b9d.appspot.com",
+  messagingSenderId: "795367922413",
+  appId: "1:795367922413:web:ca7ebaca938b8ca06e8ae4"
 };
 
 const app = initializeApp(firebaseConfig);
