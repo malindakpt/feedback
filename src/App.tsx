@@ -1,19 +1,22 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Login from "./login";
-import Register from "./register";
+
+import LoginContainer from "./components/login/login_container";
+import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import RegisterContainer from "./components/register/register_container";
+// import Welcome from "./Welcome"; 
+// import PrivateRoute from "./PrivateRoute"; 
+// import { Route } from "react-router-dom";
 
 function App() {
   return (
-    <Router>
-      <div>
-        <h1>Feedback App</h1>
+    <div>
+      <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<RegisterContainer />} />
+          <Route path="/login" element={<LoginContainer />} />
         </Routes>
-      </div>
-    </Router>
+      </BrowserRouter>
+    </div>
   );
 }
 
