@@ -1,16 +1,21 @@
 // src/App.tsx
 import React from 'react';
 import './App.css';
-import StarRating from './components/StarReview';
+import { StarReview } from './components/StarReview';
+import TextRating from './components/StarReviewMUI';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-const App: React.FC = () => {
+function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <StarRating />
-      </header>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/starreview" element={<StarReview />} />
+          <Route path="/text-rating" element={<TextRating />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
-};
+}
 
 export default App;

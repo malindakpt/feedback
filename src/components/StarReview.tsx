@@ -1,31 +1,23 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Rating from '@mui/material/Rating';
-import Typography from '@mui/material/Typography';
+import React from 'react';
+import { useState } from 'react';
+import { Stack,Rating } from '@mui/material';
 
-export default function BasicRating() {
-  const [value, setValue] = React.useState<number | null>(1);
-
+export const StarReview = () => {
+    const [value, setValue] = useState<number | null>(1)
+    console.log({ value })
+    const handleChange = (
+      _event: React.ChangeEvent<unknown>, 
+      newValue: number | null
+    ) => {
+      setValue(newValue)
+    }
   return (
-    <Box
-      sx={{
-        '& > legend': { mt: 2 },
-      }}
-    >
-      <Typography component="legend">Rate Employee</Typography>
-      <Rating
-        name="simple-controlled"
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-      />
-      {/* <Typography component="legend">Read only</Typography>
-      <Rating name="read-only" value={value} readOnly />
-      <Typography component="legend">Disabled</Typography>
-      <Rating name="disabled" value={value} disabled />
-      <Typography component="legend">No rating given</Typography>
-      <Rating name="no-value" value={null} /> */}
-    </Box>
-  );
+    <Stack spacing={2}>
+      <Rating 
+        value={value} 
+        onChange={handleChange} 
+        precision={.5} 
+        size='large'/>
+    </Stack>
+  )
 }
