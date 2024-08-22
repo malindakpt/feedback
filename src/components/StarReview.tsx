@@ -2,7 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import { Stack,Rating } from '@mui/material';
 
-export const StarReview = () => {
+interface StarReviewProps {
+  onRatingChange: (value: number | null) => void;
+}
+
+export const StarReview: React.FC<StarReviewProps> = ({onRatingChange}) => {
     const [value, setValue] = useState<number | null>(1)
     console.log({ value })
     const handleChange = (
@@ -10,6 +14,7 @@ export const StarReview = () => {
       newValue: number | null
     ) => {
       setValue(newValue)
+      onRatingChange(newValue);
     }
   return (
     <Stack spacing={2}>
