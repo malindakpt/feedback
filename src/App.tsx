@@ -3,6 +3,7 @@ import './App.css';
 import { StarReview } from './components/StarReview';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createData, deleteData } from './services/crudService';
+import { Collection } from './Enums/collections.enum';
 
 function App() {
   const [data, setData] = useState({
@@ -19,7 +20,7 @@ function App() {
 
   const handleCreateData = async () => {
     try {
-      const id = await createData("users", data);
+      const id = await createData(Collection.Employee, data);
       if (id) {
         setId(id);
       } else {
@@ -33,7 +34,7 @@ function App() {
 
   const handleDeleteData = async () => {
     try {
-      await deleteData("users", id);
+      await deleteData(Collection.Employee, id);
       setId("");
       console.log("Document deleted successfully!");
     } catch (error) {

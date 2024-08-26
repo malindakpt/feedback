@@ -6,38 +6,35 @@ import{
     getDoc,
     getDocs,
     onSnapshot,
-    setDoc,
+    addDoc,
     updateDoc
 } from "firebase/firestore";
 import {db} from "./firebase"
+import { Collection } from "../Enums/collections.enum";
 
-const generateRandomID = () => {
-    const characters =
-        "ABCDEFGGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01233456789";
-    let randomID = "";
+// const generateRandomID = () => {
+//     const characters =
+//         "ABCDEFGGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01233456789";
+//     let randomID = "";
 
-    for (let i =0; i < 10; i++) {
-        const randomIndex = Math.floor(Math.random() * characters.length);
-        randomID += characters.charAt(randomIndex);
-    }
-    return randomID;
-}
+//     for (let i =0; i < 10; i++) {
+//         const randomIndex = Math.floor(Math.random() * characters.length);
+//         randomID += characters.charAt(randomIndex);
+//     }
+//     return randomID;
+// }
 
-export const createData = async (collectionName: string, data: object): Promise<string | undefined> => {
-  const id = generateRandomID();
+export const createData = async (collectionName: Collection, data: object): Promise<string | undefined> => {
   try {
-    const docRef = doc(db, collectionName, id);
-    await setDoc(docRef, {
-      id,
-      ...data
-    });
-    return id
+    const collectionRef = collection(db, collectionName);
+    const docRef = await addDoc(collectionRef, data);
+    return docRef.id; // Return the automatically generated ID
   } catch (error) {
     console.error("Error adding document: ", error);
   }
 };
 
-export const readData = async (collection:string , id:string) => {
+export const readData = async (collection:Collection , id:string) => {
     try {
       const docRef = doc(db, collection, id);
       const docSnap = await getDoc(docRef);
@@ -52,7 +49,7 @@ export const readData = async (collection:string , id:string) => {
     }
 }
 
-export const updateData = async (collection:string, id:string, data:object)  => {
+export const updateData = async (collection:Collection, id:string, data:object)  => {
     try {
       const docRef = doc(db, collection, id);
       await updateDoc(docRef, {
@@ -66,7 +63,7 @@ export const updateData = async (collection:string, id:string, data:object)  => 
     }
   };
 
-  export const deleteData = async (collectionName: string, id: string): Promise<void> => {
+  export const deleteData = async (collectionName: Collection, id: string): Promise<void> => {
     try {
       const docRef = doc(db, collectionName, id);
       await deleteDoc(docRef);
