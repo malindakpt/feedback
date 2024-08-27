@@ -2,10 +2,15 @@ import React from 'react';
 import './App.css';
 import EmpImage from './Components/EmpImage';
 import EmpList from './Components/EmpList';
-import ImageAvatars from './Components/EmpImage2';
-import ImageAvatars2 from './Components/EmpImage3';
+
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import CompanyView from './Components/CompanyView';
+import BranchView from './Components/BranchView';
+import EmployeeView from './Components/EmployeeView';
+import User from './Components/User/User';
+import UserDetails from './Components/User/UserDetails';
+
 
 
 function App() {
@@ -40,6 +45,8 @@ function App() {
 
 
   ]
+
+
   return (
     <div>
       <BrowserRouter>
@@ -54,8 +61,14 @@ function App() {
             }
           />
           <Route path='/emplist' element={<EmpList employees={employees}/>} />
-          <Route path="/avatars" element={<ImageAvatars />} />
-          <Route path='/avatars2' element={<ImageAvatars2/>}/>
+          
+          <Route path='/:companyId' element={<CompanyView/>} />
+          <Route path='/:companyId/:branchId' element={<BranchView/>} />
+          <Route path='/:companyId/:branchId/:employeeId' element={<EmployeeView/>} />
+
+          <Route path='/users' element={<User/>} />
+          <Route path='/users/:id' element={<UserDetails/>} />
+          
         </Routes>
       </BrowserRouter>
     </div>
