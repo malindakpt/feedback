@@ -4,6 +4,7 @@ import { StarReview } from './components/StarReview';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createData, deleteData } from './services/crudService';
 import { Collection } from './Enums/collections.enum';
+import ImageUploader from './components/ImageUploader';
 
 function App() {
   const [data, setData] = useState({
@@ -47,6 +48,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/starreview" element={<StarReview onRatingChange={handleRatingChange} />} />
+          <Route path="/upload" element={<ImageUploader />} />
         </Routes>
       </BrowserRouter>
       <button onClick={handleCreateData}>Create Data in FireStore</button>
