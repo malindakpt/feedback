@@ -1,6 +1,7 @@
+// BranchManager.tsx
 import React, { useState } from 'react';
-import AddBranchForm from '../branch/Addbranchform';
-import EditBranchForm from '../branch/Editbranchform';
+import AddBranchForm from '../branch/Addbranch_form';
+import EditBranchForm from '../branch/Editbranch_form';
 
 const BranchManager: React.FC = () => {
   const [branches, setBranches] = useState<{ id: string; name: string; location: string }[]>([]);
