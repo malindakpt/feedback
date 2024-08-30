@@ -58,7 +58,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
         >
         Register
       </Button>
-      <Link href="/login" variant="body2">
+      <Link href="/admin/login" variant="body2">
         Already have an account? Login here
       </Link>
     </Container>

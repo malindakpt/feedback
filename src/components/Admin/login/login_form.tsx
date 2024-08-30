@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, TextField, Container } from '@mui/material';
 import './login.scss';
+import { Link } from 'react-router-dom';
 
 interface LoginFormProps {
   email: string;
@@ -45,6 +46,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
         >
         Login
       </Button>
+      <Link to="/admin/company-view">View Home Page</Link>
     </Container>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import RegisterForm from './register_form';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../../services/auth/firebase';
+import { auth } from '../../../services/auth/firebase';
 // import { useHistory } from 'react-router-dom';
 
 const RegisterContainer: React.FC = () => {
