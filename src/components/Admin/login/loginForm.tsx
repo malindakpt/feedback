@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, TextField, Container } from '@mui/material';
-import './login.scss';
 import { Link } from 'react-router-dom';
 
 interface LoginFormProps {
@@ -8,16 +7,21 @@ interface LoginFormProps {
   password: string;
   setEmail: (email: string) => void;
   setPassword: (password: string) => void;
-  handleLogin: () => void;
+  handleLogin: (username: string, password: string) => Promise<void>;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({
-  email,
-  password,
-  setEmail,
-  setPassword,
-  handleLogin
+const LoginForm: React.FC<LoginFormProps> = ({ 
+  email, 
+  password, 
+  setEmail, 
+  setPassword, 
+  handleLogin 
 }) => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleLogin(email, password); // Call the handleLogin function passed as a prop
+  };
+
   return (
     <div className="login-container">
     <Container maxWidth="sm" className="login-form-container">
@@ -41,7 +45,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
       <Button 
           variant="contained" 
           color="primary" 
-          onClick={handleLogin} 
+          onClick={handleSubmit} 
           className="login-button"
         >
         Login

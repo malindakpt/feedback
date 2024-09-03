@@ -1,25 +1,30 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectIsAuthenticated } from '../components/Admin/login/authslice';
+import PrivateRoute from './Privaterotes';
 
 // ADMIN
-import RegisterContainer from '../components/Admin/registration/regiter_container';
-import LoginContainer from '../components/Admin/login/login_container';
+import RegisterContainer from '../components/Admin/registration/registerContainer';
+import LoginContainer from '../components/Admin/login/loginContainer';
 import BranchManager from '../components/branch/branch_manager';
-import Branch_view from '../components/Admin/branch_view';
-import Company_view from '../components/Admin/company_view';
-import S_Branchview from '../components/Admin/single_view/s_branchview';
-import S_Employeeview from '../components/Admin/single_view/s_employeeview';
+import BranchView from '../components/Admin/branchView';
+import CompanyView from '../components/Admin/companyView';
+import BranchStatView from '../components/Admin/single_view/branchStatView';
+import EmployeeStatView from '../components/Admin/single_view/employeeStatView';
 
 // USER
-import Branch_feedback from '../components/User/branch_feedback';
-import Employee_feedback from '../components/User/employee_feedback';
-import Single_Employee_feedback from '../components/User/single_employee_feedback';
+import BranchFeedback from '../components/user/branchFeedback';
+import EmployeeFeedback from '../components/user/employeesFeedback';
+import SingleEmployeefeedback from '../components/user/employerFeedback';
 
 // LAYOUTS
 import AdminLayout from '../Routes/AdminLayout';
 import UserLayout from '../Routes/UserLayouts';
 
 const AppRoutes: React.FC = () => {
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+
   return (
     <Router>
       <Routes>
@@ -28,18 +33,18 @@ const AppRoutes: React.FC = () => {
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="register" element={<RegisterContainer />} />
           <Route path="login" element={<LoginContainer />} />
-          <Route path="branch-manager" element={<BranchManager />} />
-          <Route path="branch-view" element={<Branch_view />} />
-          <Route path="company-view" element={<Company_view />} />
-          <Route path="branch-view/:id" element={<S_Branchview />} />
-          <Route path="employee-view/:id" element={<S_Employeeview />} />
+          <PrivateRoute path="branch-manager" element={<BranchManager />} />
+          <PrivateRoute path="branchView" element={<BranchView />} />
+          <PrivateRoute path="companyView" element={<CompanyView />} />
+          <PrivateRoute path="branchStatView/:id" element={<BranchStatView />} />
+          <PrivateRoute path="employeeStatView/:id" element={<EmployeeStatView />} />
         </Route>
 
         {/* USER ROUTES */}
         <Route path="/" element={<UserLayout />}>
-          <Route path="branch_feedback" element={<Branch_feedback />} />
-          <Route path="employees_list" element={<Employee_feedback />} />
-          <Route path="employee/:id" element={<Single_Employee_feedback />} />
+          <Route path="branchFeedback/:id" element={<BranchFeedback />} />
+          <Route path="employeesList/:id" element={<EmployeeFeedback />} />
+          <Route path="employee/:id" element={<SingleEmployeefeedback />} />
         </Route>
 
       </Routes>

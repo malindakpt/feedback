@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, TextField, Container, Link } from '@mui/material';
-import './register.scss';
+
 
 interface RegisterFormProps {
   serviceNu: string;
