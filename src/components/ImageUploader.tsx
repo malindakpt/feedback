@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL, listAll } from 'firebase/storage';
 import { storage } from '../services/firebase';
 
 interface ImageUploaderProps {
@@ -19,7 +19,15 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ branchID, companyID, empl
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      setImage(event.target.files[0]);
+      const file = event.target.files[0];
+      const validImageTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/gif'];
+  
+      if (validImageTypes.includes(file.type)) {
+        setImage(file);
+      } else {
+        alert('Please upload a valid image file (JPEG, PNG, JPG, GIF).');
+        setImage(null);
+      }
     }
   };
 
@@ -27,27 +35,43 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ branchID, companyID, empl
     setEnteredID(event.target.value);
   };
 
-  const handleUpload = () => {
-    if (image && selectedOption && enteredID) {
-      const folderName = selectedOption;
+const handleUpload = () => {
+  if (image && selectedOption && enteredID) {
+    const folderName = selectedOption;
+    const folderRef = ref(storage, folderName);
 
-      const storageRef = ref(storage, `${folderName}/${enteredID}`);
-      const uploadTask = uploadBytesResumable(storageRef, image);
+    listAll(folderRef)
+      .then((res) => {
+        const imageExists = res.items.some((itemRef) => itemRef.name === enteredID);
 
-      uploadTask.on(
-        'state_changed',
-        null,
-        (error) => {
-          console.error('Upload failed:', error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log('Image URL:', downloadURL);
-          });
+        if (imageExists) {
+          console.error('image with this ID already exists.');
+          alert('A image with this ID already exists. Please use a different ID.');
+        } else {
+          const storageRef = ref(storage, `${folderName}/${enteredID}`);
+          const uploadTask = uploadBytesResumable(storageRef, image);
+
+          uploadTask.on(
+            'state_changed',
+            null,
+            (uploadError) => {
+              console.error('Upload failed:', uploadError);
+            },
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                console.log('Image URL:', downloadURL);
+                alert('Image uploaded successfully!');
+              });
+            }
+          );
         }
-      );
-    }
-  };
+      })
+      .catch((error) => {
+        console.error('Error checking folder:', error);
+      });
+  }
+};
+
 
   return (
     <div>
