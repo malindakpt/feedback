@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createData, deleteData } from './services/crudService';
 import { Collection } from './Enums/collections.enum';
 import ImageUploader from './components/ImageUploader';
+import RetrieveImages from './components/retrieveImage';
 
 function App() {
   const [data, setData] = useState({
@@ -19,7 +20,7 @@ function App() {
     console.log(`Rating changed to: ${value}`);
   };
 
-  const handleCreateData = async () => {
+  /* const handleCreateData = async () => {
     try {
       const id = await createData(Collection.Employee, data);
       if (id) {
@@ -41,7 +42,7 @@ function App() {
     } catch (error) {
       console.error("Error deleting document:", error);
     }
-  };
+  }; */
 
   return (
     <div>
@@ -49,10 +50,11 @@ function App() {
         <Routes>
           <Route path="/starreview" element={<StarReview onRatingChange={handleRatingChange} />} />
           <Route path="/upload" element={<ImageUploader />} />
+          <Route path="/imageview" element={<RetrieveImages />} />
         </Routes>
       </BrowserRouter>
-      <button onClick={handleCreateData}>Create Data in FireStore</button>
-      <button onClick={handleDeleteData} disabled={!id}>Delete Data in FireStore</button>
+      {/* <button onClick={handleCreateData}>Create Data in FireStore</button>
+      <button onClick={handleDeleteData} disabled={!id}>Delete Data in FireStore</button> */}
     </div>
   );
 }

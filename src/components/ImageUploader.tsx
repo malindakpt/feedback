@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { ref, uploadBytesResumable, getDownloadURL, listAll } from 'firebase/storage';
 import { storage } from '../services/firebase';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+
 
 interface ImageUploaderProps {
   branchID?: string;
@@ -12,6 +14,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ branchID, companyID, empl
   const [selectedOption, setSelectedOption] = useState<string>('');
   const [image, setImage] = useState<File | null>(null);
   const [enteredID, setEnteredID] = useState<string>('');
+  const navigate = useNavigate();
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
@@ -72,6 +75,10 @@ const handleUpload = () => {
   }
 };
 
+const handleViewImages = () => {
+  navigate('/imageview'); // Programmatically navigate to the images view page
+};
+
 
   return (
     <div>
@@ -95,6 +102,8 @@ const handleUpload = () => {
       <button onClick={handleUpload} disabled={!image || !selectedOption || !enteredID}>
         Upload Image
       </button>
+
+      <button onClick={handleViewImages}>View Images</button>
     </div>
   );
 };
