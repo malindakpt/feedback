@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import RegisterForm from './registerForm';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../../services/auth/firebase';
-// import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterContainer: React.FC = () => {
-  const [serviceNu, setserviceNu] = useState('');
+  const [serviceNu, setServiceNu] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const history = useHistory();
+  const navigate = useNavigate(); // Use useNavigate from react-router-dom
 
   const handleRegister = async () => {
     try {
-      await createUserWithEmailAndPassword(auth,email, password);
+      await createUserWithEmailAndPassword(auth, email, password);
       alert('Registration successful');
-      // history.push('/login');
+      navigate('/login'); // Redirect to login page after successful registration
     } catch (error) {
       console.error('Registration error', error);
       alert('Unsuccessful registration. Please try again.');
@@ -26,7 +26,7 @@ const RegisterContainer: React.FC = () => {
       serviceNu={serviceNu}
       email={email}
       password={password}
-      setserviceNu={setserviceNu}
+      setserviceNu={setServiceNu}
       setEmail={setEmail}
       setPassword={setPassword}
       handleRegister={handleRegister}

@@ -1,37 +1,36 @@
 import React, { useState } from 'react';
-import LoginForm from './loginForm';
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../../../services/auth/firebase';
 import { useDispatch } from 'react-redux';
-import { login } from './authslice';
+import LoginForm from '../login/LoginForm';
+import { login } from './authSlice'; 
+import { AppDispatch } from '../login/store'; 
+import { useNavigate } from 'react-router-dom';
 
 const LoginContainer: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
-  const handleLogin = async(username: string, password: string) => {
+  const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await dispatch(login({ email, password }));
       alert('Login successful');
+      navigate('/admin/companyView');
     } catch (error) {
-      console.error('Registration error', error);
+      console.error('Login error', error);
       alert('Unsuccessful Login. Please try again.');
     }
-    dispatch(login());
   };
 
   return (
     <LoginForm
       email={email}
-      password={password}
       setEmail={setEmail}
+      password={password}
       setPassword={setPassword}
       handleLogin={handleLogin}
     />
-    
   );
-   
 };
 
 export default LoginContainer;
