@@ -10,6 +10,8 @@ import BranchView from './Components/BranchView';
 import EmployeeView from './Components/EmployeeView';
 import User from './Components/User/User';
 import UserDetails from './Components/User/UserDetails';
+import AddCompany from './Components/AddCompany';
+import ViewCompanies from './Components/ViewCompanies';
 
 
 
@@ -68,6 +70,9 @@ function App() {
 
           <Route path='/users' element={<User/>} />
           <Route path='/users/:id' element={<UserDetails/>} />
+
+          <Route path='/addcompany' element={<AddCompany/>} />
+          <Route path='/viewcompany' element={<ViewCompanies/>} />
           
         </Routes>
       </BrowserRouter>
