@@ -4,7 +4,7 @@ import PrivateRoute from '../Routes/Privateroutes';
 
 // ADMIN
 import RegisterContainer from '../components/Admin/registration/registerContainer';
-import LoginContainer from '../components/Admin/login/LoginContainer';
+import LoginContainer from '../components/Admin/login/loginContainer';
 import BranchManager from '../components/branch/branchManager';
 import BranchView from '../components/Admin/branchView';
 import CompanyView from '../components/Admin/companyView';
