@@ -5,7 +5,7 @@ function branch_view() {
   return (
     <div>
       View Branch Details with Charts<br/>
-      <Link to="/admin/branch-view/id">View Branch Single Page</Link>
+      <Link to="/admin/branchStatView/:id">View Branch Single Page</Link>
       </div>
   )
 }

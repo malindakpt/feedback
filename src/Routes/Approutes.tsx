@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes,Navigate } from 'react-router-dom';
 import PrivateRoute from '../Routes/Privateroutes';
 
 // ADMIN
@@ -12,9 +12,9 @@ import BranchStatView from '../components/Admin/SingleView/branchStatView';
 import EmployeeStatView from '../components/Admin/SingleView/employeeStatView';
 
 // USER
-import BranchFeedback from '../components/user/branchFeedback';
-import EmployeeFeedback from '../components/user/employeesFeedback';
-import SingleEmployeeFeedback from '../components/user/employerFeedback';
+import BranchFeedback from '../components/UsersView/branchFeedback';
+import EmployeeFeedback from '../components/UsersView/employeesFeedback';
+import SingleEmployeeFeedback from '../components/UsersView/employerFeedback';
 
 // LAYOUTS
 import AdminLayout from '../Routes/AdminLayout';
@@ -24,13 +24,15 @@ const AppRoutes: React.FC = () => {
   return (
     <Router>
       <Routes>
+      <Route path="/" element={<Navigate to="/login" />} />
+
         {/* ADMIN ROUTES */}
         <Route path="login" element={<LoginContainer />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="register" element={<RegisterContainer />} />
           
           {/* Protected Admin Routes */}
-          <Route element={<PrivateRoute allowedRoles={['admin', 'superAdmin']} />}>
+          <Route element={<PrivateRoute />}>
             <Route path="branch-manager" element={<BranchManager />} />
             <Route path="branchView" element={<BranchView />} />
             <Route path="companyView" element={<CompanyView />} />

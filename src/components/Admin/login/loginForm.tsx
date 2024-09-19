@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, TextField, Container } from '@mui/material';
+import { TextField, Button, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 interface LoginFormProps {
@@ -7,24 +7,13 @@ interface LoginFormProps {
   password: string;
   setEmail: (email: string) => void;
   setPassword: (password: string) => void;
-  handleLogin: (username: string, password: string) => Promise<void>;
+  handleLogin: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ 
-  email, 
-  password, 
-  setEmail, 
-  setPassword, 
-  handleLogin 
-}) => {
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    handleLogin(email, password); // Call the handleLogin function passed as a prop
-  };
-
+const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPassword, handleLogin }) => {
   return (
-    <div className="login-container">
     <Container maxWidth="sm" className="login-form-container">
+      <h1>Login</h1>
       <TextField
         label="Email"
         variant="outlined"
@@ -37,22 +26,23 @@ const LoginForm: React.FC<LoginFormProps> = ({
         label="Password"
         variant="outlined"
         fullWidth
-        type="password"
         margin="normal"
+        type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Button 
-          variant="contained" 
-          color="primary" 
-          onClick={handleSubmit} 
-          className="login-button"
-        >
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleLogin}
+      >
         Login
       </Button>
-      <Link to="/admin/company-view">View Home Page</Link>
+      <p>
+        Don&apos;t have an account?{' '}
+        <Link to="/admin/register">Register here</Link>.
+      </p>
     </Container>
-    </div>
   );
 };
 

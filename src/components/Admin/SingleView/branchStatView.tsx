@@ -1,9 +1,9 @@
 import React from 'react'
 
-function s_branchview() {
+function SinglebranchView() {
   return (
-    <div>s_branchview</div>
+    <div>Single branch Stat view</div>
   )
 }
 
-export default s_branchview
+export default SinglebranchView
