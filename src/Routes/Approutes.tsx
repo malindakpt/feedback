@@ -16,6 +16,10 @@ import BranchFeedback from '../components/user/branchFeedback';
 import EmployeeFeedback from '../components/user/employeesFeedback';
 import SingleEmployeeFeedback from '../components/user/employerFeedback';
 
+// ImageUploader
+import ImageUploader from '../components/ImageUploader/ImageUploader';
+import RetrieveImages from '../components/ImageUploader/retrieveImage';
+
 // LAYOUTS
 import AdminLayout from '../Routes/AdminLayout';
 import UserLayout from '../Routes/UserLayouts';
@@ -44,6 +48,8 @@ const AppRoutes: React.FC = () => {
           <Route path="branchFeedback/:id" element={<BranchFeedback />} />
           <Route path="employeesList/:id" element={<EmployeeFeedback />} />
           <Route path="employee/:id" element={<SingleEmployeeFeedback />} />
+          <Route path="/uploadimage" element={<ImageUploader />} />
+          <Route path="/imageview" element={<RetrieveImages />} />
         </Route>
       </Routes>
     </Router>
