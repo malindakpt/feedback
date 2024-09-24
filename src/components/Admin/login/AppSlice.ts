@@ -2,8 +2,15 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../../services/auth/firebase';
-import { User } from '../../../User/UserState';
-import { AuthState, initialAuthState } from '../../../User/AppState';
+import { User } from '../../../interfaces/User';
+import { AppState } from '../../../interfaces/App';
+
+export const initialAuthState: AppState = {
+  user: null,
+  isAuthenticated: false,
+  status: 'idle',
+  error: null,
+};
 
 export const login = createAsyncThunk<
   User, 
@@ -44,7 +51,7 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
         state.user = action.payload;
-        state.isAuthenticated = true;
+        // state.isAuthenticated = true;
         state.status = 'idle';
         state.error = null;
       })
