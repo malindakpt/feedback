@@ -26,7 +26,7 @@ import {
     }
   };
   
-  export const readData = async <T extends DocumentData>(
+  export const readEntity = async <T extends DocumentData>(
     collectionName: Collection,
     id: string
   ): Promise<T | undefined> => {
@@ -43,7 +43,7 @@ import {
     }
   };
   
-  export const updateData = async <T extends DocumentData>(
+  export const updateEntity = async <T extends DocumentData>(
     collectionName: Collection,
     id: string,
     data: PartialWithFieldValue<T>
@@ -57,7 +57,7 @@ import {
     }
   };
   
-  export const deleteData = async (
+  export const deleteEntity = async (
     collectionName: Collection,
     id: string
   ): Promise<void> => {
@@ -70,7 +70,7 @@ import {
     }
   };
   
-  export const readAllData = async <T>(collectionName: string): Promise<T[] | undefined> => {
+  export const readAllEntity = async <T>(collectionName: string): Promise<T[] | undefined> => {
     try {
       const collectionRef = collection(db, collectionName);
       const snapshot = await getDocs(collectionRef); 
