@@ -13,7 +13,7 @@ import {
   import { db } from "./auth/firebase";
   import { Collection } from "../Enums/collections.enum";
   
-  export const createData = async <T extends DocumentData>(
+  export const createEntity = async <T extends DocumentData>(
     collectionName: Collection,
     data: WithFieldValue<T>
   ): Promise<string | undefined> => {
