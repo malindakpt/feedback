@@ -41,7 +41,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPas
       <p>
         Don&apos;t have an account?{' '}
         <Link to="/admin/register">Register here</Link>.
-      </p>
+      </p><br/>
+
+      <p>
+        <Link to="/admin/filtereddata">Filtered Data </Link>.
+      </p><br/>
+
     </Container>
   );
 };

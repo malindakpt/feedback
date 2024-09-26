@@ -4,6 +4,7 @@ import LoginContainer from './components/Admin/login/LoginContainer';
 import RegisterContainer from './components/Admin/registration/registerContainer';
 import BranchManager from './components/branch/branchManager';
 import AppRoutes from './Routes/Approutes';
+
 const App: React.FC = () => {
   return (
       

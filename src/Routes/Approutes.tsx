@@ -11,6 +11,8 @@ import CompanyView from '../components/Admin/companyView';
 import BranchStatView from '../components/Admin/SingleView/branchStatView';
 import EmployeeStatView from '../components/Admin/SingleView/employeeStatView';
 
+import FilteredData from '../components/filteredData';
+
 // USER
 import BranchFeedback from '../components/UsersView/branchFeedback';
 import EmployeeFeedback from '../components/UsersView/employeesFeedback';
@@ -30,6 +32,7 @@ const AppRoutes: React.FC = () => {
         <Route path="login" element={<LoginContainer />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="register" element={<RegisterContainer />} />
+          <Route path="filtereddata" element={<FilteredData />} />
           
           {/* Protected Admin Routes */}
           <Route element={<PrivateRoute />}>
@@ -38,6 +41,7 @@ const AppRoutes: React.FC = () => {
             <Route path="companyView" element={<CompanyView />} />
             <Route path="branchStatView/:id" element={<BranchStatView />} />
             <Route path="employeeStatView/:id" element={<EmployeeStatView />} />
+            
           </Route>
         </Route>
 
