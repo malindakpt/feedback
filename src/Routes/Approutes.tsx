@@ -36,7 +36,7 @@ const AppRoutes: React.FC = () => {
           <Route path="filtereddata" element={<FilteredData />} />
           
           {/* Protected Admin Routes */}
-          <Route element={<PrivateRoute allowedRoles={['admin', 'superAdmin']} />}>
+          <Route element={<PrivateRoute  />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="branch-manager" element={<BranchManager />} />
             <Route path="branchView" element={<BranchView />} />
