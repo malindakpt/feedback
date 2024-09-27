@@ -10,6 +10,7 @@ import BranchView from '../components/Admin/branchView';
 import CompanyView from '../components/Admin/companyView';
 import BranchStatView from '../components/Admin/SingleView/branchStatView';
 import EmployeeStatView from '../components/Admin/SingleView/employeeStatView';
+import Dashboard from '../components/Admin/Dashboard';
 
 // USER
 import BranchFeedback from '../components/UsersView/branchFeedback';
