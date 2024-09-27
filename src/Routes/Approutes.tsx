@@ -10,6 +10,7 @@ import BranchView from '../components/Admin/branchView';
 import CompanyView from '../components/Admin/companyView';
 import BranchStatView from '../components/Admin/SingleView/branchStatView';
 import EmployeeStatView from '../components/Admin/SingleView/employeeStatView';
+import Dashboard from '../components/Admin/Dashboard';
 
 import FilteredData from '../components/filteredData';
 
@@ -35,7 +36,8 @@ const AppRoutes: React.FC = () => {
           <Route path="filtereddata" element={<FilteredData />} />
           
           {/* Protected Admin Routes */}
-          <Route element={<PrivateRoute />}>
+          <Route element={<PrivateRoute allowedRoles={['admin', 'superAdmin']} />}>
+            <Route path="dashboard" element={<Dashboard />} />
             <Route path="branch-manager" element={<BranchManager />} />
             <Route path="branchView" element={<BranchView />} />
             <Route path="companyView" element={<CompanyView />} />
