@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import LoginForm from '../login/loginForm';
-import { login } from './authslice'; 
+import { login } from './AppSlice'; 
 import { AppDispatch } from '../login/store';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ const LoginContainer: React.FC = () => {
   
   const dispatch: AppDispatch = useDispatch(); // Use AppDispatch for type-safe dispatch
   const navigate = useNavigate();
-  const { isAuthenticated, status, error } = useSelector((state: RootState) => state.auth);
+  // const { isAuthenticated, status, error } = useSelector((state: RootState) => state.auth);
 
   const handleLogin = async () => {
     try {
