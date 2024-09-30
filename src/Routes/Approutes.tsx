@@ -6,16 +6,16 @@ import PrivateRoute from '../Routes/Privateroutes';
 import RegisterContainer from '../components/Admin/registration/registerContainer';
 import LoginContainer from '../components/Admin/login/loginContainer';
 import BranchManager from '../components/branch/branchManager';
-import BranchView from '../components/Admin/branchView';
-import CompanyView from '../components/Admin/companyView';
-import BranchStatView from '../components/Admin/SingleView/branchStatView';
-import EmployeeStatView from '../components/Admin/SingleView/employeeStatView';
-import Dashboard from '../components/Admin/Dashboard';
+import BranchView from '../Components/Admin/branchView';
+import CompanyView from '../Components/Admin/companyView';
+import BranchStatView from '../Components/Admin/SingleView/branchStatView';
+import EmployeeStatView from '../Components/Admin/SingleView/employeeStatView';
+import Dashboard from '../Components/Admin/Dashboard';
 
 // USER
-import BranchFeedback from '../components/user/branchFeedback';
-import EmployeeFeedback from '../components/user/employeesFeedback';
-import SingleEmployeeFeedback from '../components/user/employerFeedback';
+import BranchFeedback from '../Components/user/branchFeedback';
+import EmployeeFeedback from '../Components/user/employeesFeedback';
+import SingleEmployeeFeedback from '../Components/user/employerFeedback';
 
 // LAYOUTS
 import AdminLayout from '../Routes/AdminLayout';

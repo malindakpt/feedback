@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField } from '@mui/material';
 
-interface TextInputProps {
+export interface TextInputProps {
   label: string;
   value: string;
   onChange: (value: string) => void;
