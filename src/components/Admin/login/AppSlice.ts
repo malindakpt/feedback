@@ -8,8 +8,7 @@ import { AppState } from '../../../interfaces/App';
 export const initialAuthState: AppState = {
   user: null,
   isAuthenticated: false,
-  status: 'idle',
-  error: null,
+  
 };
 
 export const login = createAsyncThunk<
@@ -45,14 +44,14 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
-        state.error = null;
+        
       })
       .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
         state.user = action.payload;
-        state.error = null;
+        
       })
       .addCase(login.rejected, (state, action: PayloadAction<string | undefined>) => {
-        state.error = action.payload || 'Failed to login';
+        
       });
   },
 });
