@@ -21,6 +21,9 @@ import SingleEmployeeFeedback from '../components/user/employerFeedback';
 import AdminLayout from '../Routes/AdminLayout';
 import UserLayout from '../Routes/UserLayouts';
 
+// CHART COMPONENT
+import ChartData from '../components/Shared/chartData';
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -47,6 +50,9 @@ const AppRoutes: React.FC = () => {
           <Route path="employeesList/:id" element={<EmployeeFeedback />} />
           <Route path="employee/:id" element={<SingleEmployeeFeedback />} />
         </Route>
+
+         {/* CHART ROUTE */}
+         <Route path="/chart" element={<ChartData />} />
       </Routes>
     </Router>
   );
