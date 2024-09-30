@@ -1,9 +1,9 @@
 import React from 'react'
 
-function s_employeeview() {
+function SingleemployeeView() {
   return (
-    <div>s_employeeview</div>
+    <div>Single Employee View</div>
   )
 }
 
-export default s_employeeview
+export default SingleemployeeView
