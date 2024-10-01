@@ -15,7 +15,7 @@ const TextInput: React.FC<TextInputProps> = ({
   value,
   onChange,
   name,
-  error = false,
+  error = true,
   required = false,
 }) => {
   return (
