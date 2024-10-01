@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import ChartComponent, { ChartProps } from './chartComponent';
+import ChartComponent, { ChartProps } from './Charts';
 import { ChartType } from '../../Enums/chartTypes.enum'; // Adjust the path as per your structure
 
 export default {

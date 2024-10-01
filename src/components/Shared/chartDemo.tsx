@@ -1,5 +1,5 @@
 import React from 'react';
-import ChartComponent from './chartComponent'; // Adjust the path based on your file structure
+import ChartComponent from './Charts'; // Adjust the path based on your file structure
 import { ChartType } from '../../Enums/chartTypes.enum'; // Adjust the path based on your file structure
 
 const data = [
@@ -16,7 +16,7 @@ const ChartDemo = () => {
       <ChartComponent
         title="Rate of Kuliyapitiya Branch"
         data={data}
-        chartType={ChartType.PIE}
+        chartType={ChartType.BAR}
       />
     </div>
   );
