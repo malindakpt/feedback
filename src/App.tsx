@@ -1,9 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
-import CommentBox from './Componenets/CommentBox';
-import CommentList from './Componenets/CommentList';
+import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
+import CommentBox from './Components/CommentBox';
+import CommentList from './Components/CommentList';
+import AddEmployee from './Components/AddEmployee';
+import EmployeeList from './Components/EmployeeList';
+import PrimarySearchAppBar from './Components/Dashboard';
+import AccountPage from './Components/ImageUploader/Account'; // Ensure correct path
 
 import './App.css';
 
@@ -11,8 +13,10 @@ function App() {
   return (
     <Router>
       <div className="container">
+        {/* Add the AppBar here */}
+        <PrimarySearchAppBar />
         <nav>
-          <ul>            
+          <ul>
             <li>
               <Link to="/">Home</Link>
             </li>
@@ -25,6 +29,15 @@ function App() {
             <li>
               <Link to="/comments">Comments</Link>
             </li>
+            <li>
+              <Link to="/add-employee">Add Employee</Link>
+            </li>
+            <li>
+              <Link to="/employee-list">Employee List</Link>
+            </li>
+            <li>
+              <Link to="/account">Account</Link> {/* Add route to Account */}
+            </li>
           </ul>
         </nav>
         <Routes>
@@ -32,6 +45,10 @@ function App() {
           <Route path="/feedback-list" />
           <Route path="/CommentBox" element={<CommentBox />} />
           <Route path="/comments" element={<CommentList />} />
+          <Route path="/add-employee" element={<AddEmployee />} />
+          <Route path="/employee-list" element={<EmployeeList />} />
+          <Route path="/account" element={<AccountPage />} />
+           {/* Ensure AccountPage route */}
         </Routes>
       </div>
     </Router>
