@@ -4,7 +4,7 @@ import {
   BarChart, Bar,
   PieChart, Pie, Cell
 } from 'recharts';
-import { ChartType } from '../../Enums/chartTypes.enum'; // Enum import
+import { ChartType } from '../../Enums/chartTypes.enum';
 
 type ChartData = {
   x: string;
@@ -14,7 +14,7 @@ type ChartData = {
 export interface ChartProps {
   title: string;
   data: ChartData[];
-  chartType: ChartType; // ChartType comes from the enum
+  chartType: ChartType;
 }
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
@@ -22,7 +22,7 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 const ChartComponent: React.FC<ChartProps> = ({ title, data, chartType }) => {
   return (
     <div>
-      <h2>{title}</h2> {/* Title passed as a prop */}
+      <h2>{title}</h2>
       
       {chartType === ChartType.LINE && (
         <ResponsiveContainer width="100%" height={400}>

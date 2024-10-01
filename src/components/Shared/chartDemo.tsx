@@ -1,6 +1,6 @@
 import React from 'react';
-import ChartComponent from './Charts'; // Adjust the path based on your file structure
-import { ChartType } from '../../Enums/chartTypes.enum'; // Adjust the path based on your file structure
+import ChartComponent from './Charts';
+import { ChartType } from '../../Enums/chartTypes.enum';
 
 const data = [
   { x: '1 Year', y: 5 },
