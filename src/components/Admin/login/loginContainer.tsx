@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import LoginForm from '../login/loginForm';
-import { login } from './AppSlice'; 
-import { AppDispatch } from '../login/store';
+import LoginForm from './loginForm';
+import { login } from './appSlice'; 
+import { AppDispatch } from './store';
 import { useNavigate } from 'react-router-dom';
 
 const LoginContainer: React.FC = () => {

@@ -1,9 +1,8 @@
-// src/state/AppSlice.ts
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../../services/auth/firebase';
-import { User } from '../../../interfaces/User';
-import { AppState } from '../../../interfaces/App';
+import { User } from '../../../interfaces/user';
+import { AppState } from '../../../interfaces/app';
 
 export const initialAuthState: AppState = {
   user: null,
