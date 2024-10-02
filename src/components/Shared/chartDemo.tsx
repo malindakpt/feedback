@@ -1,5 +1,5 @@
 import React from 'react';
-import ChartComponent from './Charts';
+import Charts from './Charts';
 import { ChartType } from '../../Enums/chartTypes.enum';
 
 const data = [
@@ -13,10 +13,10 @@ const data = [
 const ChartDemo = () => {
   return (
     <div>
-      <ChartComponent
+      <Charts
         title="Rate of Kuliyapitiya Branch"
         data={data}
-        chartType={ChartType.BAR}
+        chartType={ChartType.PIE}
       />
     </div>
   );
