@@ -1,10 +1,7 @@
-// src/components/Shared/ChartComponent.tsx
-
 import React from 'react';
 import { Chart as ChartJS, LineElement, BarElement, ArcElement, Tooltip, Legend, LinearScale, CategoryScale, PointElement } from 'chart.js';
 import { Line, Bar, Pie } from 'react-chartjs-2';
 
-// Register necessary Chart.js components
 ChartJS.register(LineElement, BarElement, ArcElement, Tooltip, Legend, LinearScale, CategoryScale, PointElement);
 
 interface ChartjsProps {

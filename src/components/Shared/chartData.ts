@@ -1,6 +1,3 @@
-// src/components/Shared/chartData.ts
-
-// Line Chart Data
 export const lineChartData = {
   labels: ['January', 'February', 'March', 'April', 'May'],
   datasets: [
@@ -9,12 +6,11 @@ export const lineChartData = {
       data: [30, 20, 25, 28, 35],
       borderColor: 'rgba(75,192,192,1)',
       backgroundColor: 'rgba(75,192,192,0.2)',
-      borderWidth: 1, // Ensure to add borderWidth if needed
+      borderWidth: 1,
     },
   ],
 };
 
-// Bar Chart Data
 export const barChartData = {
   labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
   datasets: [
@@ -42,7 +38,6 @@ export const barChartData = {
   ],
 };
 
-// Pie Chart Data
 export const pieChartData = {
   labels: ['Red', 'Blue', 'Yellow'],
   datasets: [
