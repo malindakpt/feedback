@@ -21,9 +21,6 @@ import SingleEmployeeFeedback from '../components/user/employerFeedback';
 import AdminLayout from '../Routes/AdminLayout';
 import UserLayout from '../Routes/UserLayouts';
 
-// CHART COMPONENT
-import Charts from '../components/Shared/Charts';
-
 const AppRoutes: React.FC = () => {
   return (
     <Router>
