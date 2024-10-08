@@ -2,7 +2,6 @@ import React from 'react';
 import { Chart as ChartJS, LineElement, BarElement, ArcElement, Tooltip, Legend, Title, LinearScale, CategoryScale, PointElement } from 'chart.js';
 import { Line, Bar, Pie } from 'react-chartjs-2';
 
-// Register the Title plugin
 ChartJS.register(LineElement, BarElement, ArcElement, Tooltip, Legend, Title, LinearScale, CategoryScale, PointElement);
 
 interface ChartjsProps {
@@ -15,7 +14,7 @@ interface ChartjsProps {
     }[];
   };
   title: string;
-  showTitle?: boolean; // Optional prop to control title display
+  showTitle?: boolean; 
 }
 
 const defaultOptions = (showTitle: boolean, title: string) => ({
@@ -25,8 +24,8 @@ const defaultOptions = (showTitle: boolean, title: string) => ({
       position: 'top' as const,
     },
     title: {
-      display: showTitle,  // Controls title display
-      text: title,  // Title content
+      display: showTitle,
+      text: title,
     },
   },
 });
