@@ -1,25 +1,25 @@
-import React from 'react';
-import Charts from './Charts';
-import { ChartType } from '../../Enums/chartTypes.enum';
-
-const data = [
-  { x: '1 Year', y: 5 },
-  { x: '2 Year', y: 4 },
-  { x: '3 Year', y: 7 },
-  { x: '4 Year', y: 6 },
-  { x: '5 Year', y: 9 },
+// Line Chart Data for Recharts
+export const lineChartData = [
+  { label: 'January', Temperature: 30 },
+  { label: 'February', Temperature: 20 },
+  { label: 'March', Temperature: 25 },
+  { label: 'April', Temperature: 28 },
+  { label: 'May', Temperature: 35 },
 ];
 
-const ChartDemo = () => {
-  return (
-    <div>
-      <Charts
-        title="Rate of Kuliyapitiya Branch"
-        data={data}
-        chartType={ChartType.PIE}
-      />
-    </div>
-  );
-};
+// Bar Chart Data for Recharts
+export const barChartData = [
+  { label: 'Red', Votes: 12 },
+  { label: 'Blue', Votes: 19 },
+  { label: 'Yellow', Votes: 3 },
+  { label: 'Green', Votes: 5 },
+  { label: 'Purple', Votes: 2 },
+  { label: 'Orange', Votes: 3 },
+];
 
-export default ChartDemo;
+// Pie Chart Data for Recharts
+export const pieChartData = [
+  { label: 'Red', value: 300 },
+  { label: 'Blue', value: 50 },
+  { label: 'Yellow', value: 100 },
+];

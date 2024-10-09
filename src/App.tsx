@@ -13,7 +13,7 @@ const App: React.FC = () => {
       <AppRoutes />
       <div>
       <Charts chartType="line" data={lineChartData} title="Temperature Over Months" showTitle={true} />
-      <Charts chartType="bar" data={barChartData} title="Votes Per Color" showTitle={false} />
+      <Charts chartType="pie" data={barChartData} title="Votes Per Color" showTitle={false} />
       <Charts chartType="pie" data={pieChartData} title="Market Share Distribution" showTitle={true} />
     </div>
     </div>

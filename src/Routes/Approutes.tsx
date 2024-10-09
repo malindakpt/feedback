@@ -21,6 +21,13 @@ import SingleEmployeeFeedback from '../components/user/employerFeedback';
 import AdminLayout from '../Routes/AdminLayout';
 import UserLayout from '../Routes/UserLayouts';
 
+//my
+
+import Charts from '../components/Shared/chartSample'; 
+import Charts2 from '../components/Shared/Charts';
+import { lineChartData, barChartData, pieChartData } from '../components/Shared/chartDemo';
+
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -47,6 +54,16 @@ const AppRoutes: React.FC = () => {
           <Route path="employeesList/:id" element={<EmployeeFeedback />} />
           <Route path="employee/:id" element={<SingleEmployeeFeedback />} />
         </Route>
+
+        <Route path="chart" element={<Charts chartType={'line'} />} />
+        <Route 
+          path="rechart" 
+          element={<Charts2 
+            chartType="pie" 
+            data={{ labels: lineChartData.map(d => d.label), datasets: [{ label: 'Temperature', data: lineChartData.map(d => d.Temperature) }] }} 
+            title="Line Chart Example" 
+          />} 
+        />
       </Routes>
     </Router>
   );
