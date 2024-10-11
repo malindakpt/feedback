@@ -1,12 +1,11 @@
-// barChart.tsx
+
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-import { ChartData } from 'chart.js';
 import { commonOptions } from './chartOptions';
 
 interface BarChartProps {
   title: string;
-  data: ChartData<'bar'>;
+  data: any;
   showTitle?: boolean;
 }
 

@@ -1,12 +1,10 @@
-// pieChart.tsx
 import React from 'react';
 import { Pie } from 'react-chartjs-2';
-import { ChartData } from 'chart.js';
 import { commonOptions } from './chartOptions';
 
 interface PieChartProps {
   title: string;
-  data: ChartData<'pie'>;
+  data: any;
   showTitle?: boolean;
 }
 
