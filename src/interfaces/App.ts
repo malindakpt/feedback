@@ -1,10 +1,8 @@
-import { User } from './User';
+import { User } from './user';
 
 export interface AppState {
   user: User | null;
   isAuthenticated: boolean;
-  status: 'idle' | 'loading' | 'failed';
-  error: string | null;
 }
 
 

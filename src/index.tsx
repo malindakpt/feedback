@@ -1,8 +1,8 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';  
 import { Provider } from 'react-redux';  
-import { store } from '../src/components/Admin/login/store';  
-import App from './App';  
+import { store } from './components/admin/login/store';  
+import App from './app';  
 
 // Get the root DOM element
 const container = document.getElementById('root');

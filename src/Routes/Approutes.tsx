@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes,Navigate } from 'react-router-dom';
-import PrivateRoute from '../Routes/Privateroutes';
+import PrivateRoute from './privateRoutes';
 
 // ADMIN
-import RegisterContainer from '../components/Admin/registration/registerContainer';
-import LoginContainer from '../components/Admin/login/loginContainer';
+import RegisterContainer from '../components/admin/registration/registerContainer';
+import LoginContainer from '../components/admin/login/loginContainer';
 import BranchManager from '../components/branch/branchManager';
 import BranchView from '../components/Admin/branchView';
 import CompanyView from '../components/Admin/companyView';
@@ -20,8 +20,8 @@ import EmployeeFeedback from '../components/UsersView/employeesFeedback';
 import SingleEmployeeFeedback from '../components/UsersView/employerFeedback';
 
 // LAYOUTS
-import AdminLayout from '../Routes/AdminLayout';
-import UserLayout from '../Routes/UserLayouts';
+import AdminLayout from './adminLayout';
+import UserLayout from './userLayouts';
 
 const AppRoutes: React.FC = () => {
   return (
