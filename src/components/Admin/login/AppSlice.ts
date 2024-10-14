@@ -1,15 +1,13 @@
-// src/state/AppSlice.ts
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../../services/auth/firebase';
-import { User } from '../../../interfaces/User';
-import { AppState } from '../../../interfaces/App';
+import { User } from '../../../interfaces/user';
+import { AppState } from '../../../interfaces/app';
 
 export const initialAuthState: AppState = {
   user: null,
   isAuthenticated: false,
-  status: 'idle',
-  error: null,
+  
 };
 
 export const login = createAsyncThunk<
@@ -39,25 +37,20 @@ const authSlice = createSlice({
   initialState: initialAuthState,
   reducers: {
     logout: (state) => {
-      state.user = null;
-      state.isAuthenticated = false;
+  
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
-        state.status = 'loading';
-        state.error = null;
+        
       })
       .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
         state.user = action.payload;
-        // state.isAuthenticated = true;
-        state.status = 'idle';
-        state.error = null;
+        
       })
       .addCase(login.rejected, (state, action: PayloadAction<string | undefined>) => {
-        state.status = 'failed';
-        state.error = action.payload || 'Failed to login';
+        
       });
   },
 });

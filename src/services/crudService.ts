@@ -11,7 +11,7 @@ import {
     PartialWithFieldValue,
   } from "firebase/firestore";
   import { db } from "./auth/firebase";
-  import { Collection } from "../Enums/collections.enum";
+  import { Collection } from "../enums/collections.enum";
   
   export const createEntity = async <T extends DocumentData>(
     collectionName: Collection,

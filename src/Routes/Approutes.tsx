@@ -10,7 +10,7 @@ import BranchView from '../components/Admin/branchView';
 import CompanyView from '../components/Admin/companyView';
 import BranchStatView from '../components/Admin/SingleView/branchStatView';
 import EmployeeStatView from '../components/Admin/SingleView/employeeStatView';
-import Dashboard from '../components/Admin/Dashboard';
+// import Dashboard from '../components/Admin/Dashboard';
 
 import FilteredData from '../components/filteredData';
 
@@ -21,7 +21,7 @@ import SingleEmployeeFeedback from '../components/UsersView/employerFeedback';
 
 // LAYOUTS
 import AdminLayout from '../Routes/AdminLayout';
-import UserLayout from '../Routes/UserLayouts';
+import UserLayout from '../Routes/Privateroutes';
 
 const AppRoutes: React.FC = () => {
   return (
@@ -37,7 +37,7 @@ const AppRoutes: React.FC = () => {
           
           {/* Protected Admin Routes */}
           <Route element={<PrivateRoute  />}>
-            <Route path="dashboard" element={<Dashboard />} />
+            {/* <Route path="dashboard" element={<Dashboard />} /> */}
             <Route path="branch-manager" element={<BranchManager />} />
             <Route path="branchView" element={<BranchView />} />
             <Route path="companyView" element={<CompanyView />} />
