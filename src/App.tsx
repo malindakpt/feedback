@@ -1,10 +1,8 @@
 import React from 'react';
 import { BrowserRouter,Router, Route, Routes } from 'react-router-dom';
 import AppRoutes from './routes/appRoutes';
-import BarChart from './components/Shared/barChart';
-import LineChart from './components/Shared/lineChart';
-import PieChart from './components/Shared/pieChart';
-import { barChartData, lineChartData, pieChartData } from './components/Shared/chartData';
+import Chart from './components/Shared/charts';
+import { barChartData, lineChartData, chartData3, pieChartData } from './components/Shared/chartData';
 
 const App: React.FC = () => {
   return (
@@ -13,9 +11,10 @@ const App: React.FC = () => {
     {/* <AppRoutes /> */}
 
 
-      <BarChart title="Bar Chart Example" data={barChartData} showTitle={true} />
-      <LineChart title="Line Chart Example" data={lineChartData} showTitle={false} />
-      <PieChart title="Pie Chart Example" data={pieChartData} showTitle={true} />
+      <Chart  data={barChartData}/>
+      <Chart  data={lineChartData}/>
+      <Chart  data={pieChartData}/>
+      <Chart   data={chartData3}/>
     </div>
 
     

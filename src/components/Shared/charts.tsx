@@ -13,7 +13,6 @@ import {
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
 
-// Register the necessary components from Chart.js
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -25,29 +24,42 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
 interface ChartComponentProps {
-  title: string;
   data: any;
-  showTitle?: boolean;
+  options?: {
+    responsive?: boolean,
+    plugins?: {
+      legend?: {
+        display?: boolean,
+      },
+      title?: {
+        display?: boolean,
+        text?: string,
+      },
+    },
+  };
 }
 
-const commonOptions = (showTitle: boolean, title: string) => ({
+const defaultOptions = {
   responsive: true,
   plugins: {
     legend: {
       display: true,
     },
     title: {
-      display: showTitle,
-      text: title,
+      display: true,
+      text: 'title',
     },
   },
-});
+};
 
-const ChartComponent: React.FC<ChartComponentProps> = ({ title, data, showTitle = true }) => {
+const ChartComponent: React.FC<ChartComponentProps> = ({ data, options }) => {
   const { chartType } = data;
 
-  return <Chart type={chartType} data={data} options={commonOptions(showTitle, title)} />;
+  const chartOptions = options ? {...options , ...defaultOptions } : defaultOptions;
+
+  return <Chart type={chartType} data={data} options={chartOptions} />;
 };
 
 export default ChartComponent;
