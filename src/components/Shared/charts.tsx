@@ -25,7 +25,7 @@ ChartJS.register(
   Legend
 );
 
-interface ChartComponentProps {
+interface ChartProps {
   data: any;
   options?: {
     responsive?: boolean,
@@ -54,7 +54,7 @@ const defaultOptions = {
   },
 };
 
-const ChartComponent: React.FC<ChartComponentProps> = ({ data, options }) => {
+const ChartComponent: React.FC<ChartProps> = ({ data, options }) => {
   const { chartType } = data;
 
   const chartOptions = options ? {...options , ...defaultOptions } : defaultOptions;
