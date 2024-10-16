@@ -54,7 +54,7 @@ const defaultOptions = {
   },
 };
 
-const ChartComponent: React.FC<ChartProps> = ({ data, options }) => {
+const Charts: React.FC<ChartProps> = ({ data, options }) => {
   const { chartType } = data;
 
   const chartOptions = options ? {...options , ...defaultOptions } : defaultOptions;
@@ -62,4 +62,4 @@ const ChartComponent: React.FC<ChartProps> = ({ data, options }) => {
   return <Chart type={chartType} data={data} options={chartOptions} />;
 };
 
-export default ChartComponent;
+export default Charts;
