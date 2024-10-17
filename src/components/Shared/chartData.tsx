@@ -8,20 +8,7 @@ export const barChartData = {
       backgroundColor: 'rgba(75, 192, 192, 0.6)',
     },
   ],
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: true,
-      },
-      title: {
-        display: true,
-        text: 'Bar Chart',
-      },
-    },
-  },
 };
-
 
 export const lineChartData = {
   chartType: 'line',

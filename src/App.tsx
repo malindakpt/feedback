@@ -11,13 +11,20 @@ const App: React.FC = () => {
     {/* <AppRoutes /> */}
 
 
-      <Chart  data={barChartData}/>
-      <Chart  data={lineChartData}/>
-      <Chart  data={pieChartData}/>
-      <Chart   data={chartData3}/>
-    </div>
+    <Chart
+        data={barChartData}
+        options={{
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Monthly Sales Data for 2024',
+            },
+          },
+        }}
+      />
 
-    
+    </div>
   );
 }
     
