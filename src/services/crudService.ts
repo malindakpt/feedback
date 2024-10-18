@@ -92,24 +92,9 @@ import {
   };
   export interface FilterCondition {
     field: string;
-    operator: string;
+    operator: WhereFilterOp;
     value: any;
   }
-  
-  const operatorMap: Record<string, WhereFilterOp> = {
-    "==": "==",
-    ">=": ">=",
-    // Add other operators as needed
-  };
-  
-  const getOperator = (operator: string): WhereFilterOp => {
-    const mappedOperator = operatorMap[operator];
-    if (!mappedOperator) {
-      throw new Error(`Operator ${operator} is not supported.`);
-    }
-    return mappedOperator;
-  };
-  
   export const readFilteredEntity = async <T extends DocumentData>(
     collectionName: Collection,
     filters: FilterCondition[]
@@ -117,7 +102,7 @@ import {
     try {
       const collectionRef = collection(db, collectionName);
       const firebaseFilters: QueryConstraint[] = filters.map((filter) =>
-        where(filter.field, getOperator(filter.operator), filter.value)
+        where(filter.field,(filter.operator), filter.value)
       );
   
       const q = query(collectionRef, ...firebaseFilters);
@@ -141,5 +126,3 @@ import {
       }
     }
   };
-  
-  
