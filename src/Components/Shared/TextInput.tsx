@@ -6,8 +6,11 @@ interface TextInputProps {
   value: string;
   onChange: (value: string) => void;
   name?: string;
-  error?: boolean;
   required?: boolean;
+  type?: string;
+  error?: boolean;
+  helperText?: string;
+  onBlur?: () => void;
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -15,21 +18,30 @@ const TextInput: React.FC<TextInputProps> = ({
   value,
   onChange,
   name,
-  error = false,
   required = false,
+  type = 'text',
+  error = false,
+  helperText = '',
+  onBlur,
+
 }) => {
+  
+
+  
   return (
     <TextField
       label={label}
       value={value}
       onChange={(e) => onChange(e.target.value)}
+      onBlur={onBlur}
       name={name}
       error={error}
+      helperText={helperText}
       required={required}
       variant="outlined"
       fullWidth
       margin="normal"
-      type=''
+      type={type}
     />
   );
 };

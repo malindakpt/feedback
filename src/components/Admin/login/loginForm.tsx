@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField, Button, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -11,6 +11,30 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPassword, handleLogin }) => {
+  
+  
+  //Validation part
+  const [emailError, setEmailError] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<boolean>(false);
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailBlur = () => {
+    if (!email) {
+      setEmailError('Email is required');
+    } else if (!validateEmail(email)) {
+      setEmailError('Please enter a valid email address');
+    } else {
+      setEmailError(''); 
+    }
+  };
+  
+  const handlePasswordBlur = () => setPasswordError(!password);
+
+
   return (
     <Container maxWidth="sm" className="login-form-container">
       <h1>Login</h1>
@@ -21,6 +45,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPas
         margin="normal"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        required
+        onBlur={handleEmailBlur}
+        error={Boolean(emailError)}
+        helperText={emailError }
+        
       />
       <TextField
         label="Password"
@@ -30,6 +59,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPas
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        required
+        onBlur={handlePasswordBlur}
+        error={passwordError}
+        helperText={passwordError ? "Password is required" : ''}
       />
       <Button
         variant="contained"
