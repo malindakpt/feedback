@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField } from '@mui/material';
 
-interface TextInputProps {
+export interface TextInputProps {
   label: string;
   value: string;
   onChange: (value: string) => void;
   name?: string;
   required?: boolean;
   type?: string;
-  error?: boolean;
-  helperText?: string;
-  onBlur?: () => void;
+  validateInput?: (value: string) => string;
+
+  
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -20,28 +20,38 @@ const TextInput: React.FC<TextInputProps> = ({
   name,
   required = false,
   type = 'text',
-  error = false,
-  helperText = '',
-  onBlur,
+  validateInput,
 
 }) => {
+
+  const [errorText, setErrorText] = useState<string>('');
+
+  const handleBlur = () => {
+    if (validateInput) {
+      const error = validateInput(value);
+      setErrorText(error);
+    }
+  }
   
 
   
   return (
+    
     <TextField
       label={label}
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      onBlur={onBlur}
+      onBlur={handleBlur}
       name={name}
-      error={error}
-      helperText={helperText}
       required={required}
       variant="outlined"
       fullWidth
       margin="normal"
       type={type}
+      error={Boolean(errorText)}
+      helperText={errorText || ''}
+      
+      
     />
   );
 };

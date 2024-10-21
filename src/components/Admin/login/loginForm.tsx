@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { TextField, Button, Container } from '@mui/material';
+import React from 'react';
+
+import { Button , Container } from '@mui/material';
 import { Link } from 'react-router-dom';
+import TextInput from '../../Shared/TextInput';
 
 interface LoginFormProps {
   email: string;
@@ -10,35 +12,29 @@ interface LoginFormProps {
   handleLogin: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPassword, handleLogin }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ email, password,setEmail, setPassword,  handleLogin }) => {
   
-  
-  //Validation part
-  const [emailError, setEmailError] = useState<string>('');
-  const [passwordError, setPasswordError] = useState<boolean>(false);
-
-  const validateEmail = (email: string) => {
+  //Validation Logic
+  const validateEmail = (email: string): string => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    if (!email) return 'Email is required';
+    if (!emailRegex.test(email)) return 'Please enter a valid email address';
+    return '';
   };
 
-  const handleEmailBlur = () => {
-    if (!email) {
-      setEmailError('Email is required');
-    } else if (!validateEmail(email)) {
-      setEmailError('Please enter a valid email address');
-    } else {
-      setEmailError(''); 
-    }
-  };
+  const validatePassword = (password: string): string => {
+    if (!password) return 'Password is required'
+    return '';
+  }
   
-  const handlePasswordBlur = () => setPasswordError(!password);
-
+ 
+ 
 
   return (
     <Container maxWidth="sm" className="login-form-container">
       <h1>Login</h1>
-      <TextField
+      
+      {/* <TextField
         label="Email"
         variant="outlined"
         fullWidth
@@ -50,20 +46,31 @@ const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPas
         error={Boolean(emailError)}
         helperText={emailError }
         
-      />
-      <TextField
-        label="Password"
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+      /> */}
+
+      <TextInput
+        label='Email'
+        value={email}
+        onChange={setEmail}
         required
-        onBlur={handlePasswordBlur}
-        error={passwordError}
-        helperText={passwordError ? "Password is required" : ''}
+        validateInput={validateEmail}
+
+      
       />
+
+      <TextInput
+        label="Password"
+        value={password}
+        onChange={setPassword}
+        type='password'
+        required
+        validateInput={validatePassword}
+        
+
+      
+      />
+      
+        
       <Button
         variant="contained"
         color="primary"

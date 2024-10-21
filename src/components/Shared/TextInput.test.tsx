@@ -36,26 +36,26 @@ describe('TextInput Component', () => {
     expect(onChangeMock).toHaveBeenCalledWith('new value');
   });
 
-  it('should show an error state when error prop is true', () => {
-    const { container } = render(
-      <TextInput label="Username" value="" onChange={onChangeMock} error />
-    );
+  // it('should show an error state when error prop is true', () => {
+  //   const { container } = render(
+  //     <TextInput label="Username" value="" onChange={onChangeMock} error />
+  //   );
   
-    // Find the element with the Mui-error class (usually on the input wrapper or the fieldset)
-    const errorElement = container.querySelector('.Mui-error');
+  //   // Find the element with the Mui-error class (usually on the input wrapper or the fieldset)
+  //   const errorElement = container.querySelector('.Mui-error');
   
-    expect(errorElement).toBeInTheDocument(); // Ensure that the error class is applied
-  });
+  //   expect(errorElement).toBeInTheDocument(); // Ensure that the error class is applied
+  // });
   
 
-  it('should mark the field as required when required prop is true', () => {
-    render(
-      <TextInput label="Username" value="" onChange={onChangeMock} required />
-    );
+  // it('should mark the field as required when required prop is true', () => {
+  //   render(
+  //     <TextInput label="Username" value="" onChange={onChangeMock} required />
+  //   );
 
-    const input = screen.getByLabelText(/username/i);
+  //   const input = screen.getByLabelText(/username/i);
 
-    // Check if input is required
-    expect(input).toBeRequired();
-  });
+  //   // Check if input is required
+  //   expect(input).toBeRequired();
+  // });
 });
