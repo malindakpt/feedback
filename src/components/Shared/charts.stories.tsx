@@ -1,112 +1,114 @@
-// Charts.stories.tsx
 import React from 'react';
-import Charts, { ChartProps } from './charts'; // Adjust the import path as needed
-import { ChartData } from 'chart.js';
+import { Meta, StoryObj, StoryFn } from '@storybook/react';
+import Charts, { ChartProps } from './charts';
 
-// Default chart data examples for different chart types
-const barChartData: ChartData<'bar'> = {
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-  datasets: [
-    {
-      label: 'Sales',
-      data: [50, 60, 70, 80, 90],
-      backgroundColor: 'rgba(75, 192, 192, 0.6)',
-    },
-  ],
-};
-
-const lineChartData: ChartData<'line'> = {
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-  datasets: [
-    {
-      label: 'Revenue',
-      data: [100, 200, 300, 400, 500],
-      borderColor: 'rgba(54, 162, 235, 0.6)',
-      fill: false,
-    },
-  ],
-};
-
-const pieChartData: ChartData<'pie'> = {
-  labels: ['Red', 'Blue', 'Yellow'],
-  datasets: [
-    {
-      label: 'Color Distribution',
-      data: [300, 50, 100],
-      backgroundColor: ['rgba(255, 99, 132, 0.6)', 'rgba(54, 162, 235, 0.6)', 'rgba(255, 206, 86, 0.6)'],
-    },
-  ],
-};
-
-// Default options
-const defaultOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: true,
-    },
-    title: {
-      display: true,
-      text: 'Default Title',
-    },
-  },
-};
-
-export default {
+const meta: Meta<typeof Charts> = {
   title: 'Components/Charts',
   component: Charts,
-  argTypes: {
-    // Control for chart type
+};
+export default meta;
+
+type Story = StoryObj<ChartProps>;
+
+const Template: StoryFn<ChartProps> = (args) => <Charts {...args} />;
+
+export const BarChart: Story = {
+  render: Template,
+  args: {
     data: {
-      control: { type: 'object' }, // Chart.js data object
-    },
-    chartType: {
-      control: {
-        type: 'select',
-        options: ['bar', 'line', 'pie'], // Supported chart types
-      },
-      defaultValue: 'bar',
+      chartType: 'bar',
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [
+        {
+          label: 'Sales',
+          data: [30, 50, 70, 45, 85, 60, 40],
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1,
+        },
+      ],
     },
     options: {
-      control: { type: 'object' }, // Allows for changing the options dynamically
-      defaultValue: defaultOptions, // Set default chart options
-    },
-  },
-};
-
-// Template with proper typing for args
-const Template = (args: ChartProps) => <Charts {...args} />;
-
-// Stories with full control over props
-export const BarChart = Template.bind({}) as typeof Template & { args?: ChartProps };
-BarChart.args = {
-  data: { ...barChartData, chartType: 'bar' },
-  options: defaultOptions,
-};
-
-export const LineChart = Template.bind({}) as typeof Template & { args?: ChartProps };
-LineChart.args = {
-  data: { ...lineChartData, chartType: 'line' },
-  options: {
-    ...defaultOptions,
-    plugins: {
-      title: {
-        display: true,
-        text: 'Line Chart Example',
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+        },
+        title: {
+          display: true,
+          text: 'Monthly Sales',
+        },
       },
     },
   },
 };
 
-export const PieChart = Template.bind({}) as typeof Template & { args?: ChartProps };
-PieChart.args = {
-  data: { ...pieChartData, chartType: 'pie' },
-  options: {
-    ...defaultOptions,
-    plugins: {
-      title: {
-        display: true,
-        text: 'Pie Chart Example',
+export const LineChart: Story = {
+  render: Template,
+  args: {
+    data: {
+      chartType: 'line',
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [
+        {
+          label: 'Revenue',
+          data: [20, 40, 60, 35, 75, 50, 30],
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 2,
+        },
+      ],
+      
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+        },
+        title: {
+          display: true,
+          text: 'Monthly Revenue',
+        },
+      },
+    },
+  },
+};
+
+export const PieChart: Story = {
+  render: Template,
+  args: {
+    data: {
+      labels: ['Product A', 'Product B', 'Product C'],
+      datasets: [
+        {
+          label: 'Market Share',
+          data: [55, 25, 20],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+          ],
+          borderWidth: 1,
+        },
+      ],
+      chartType: 'pie', // Pie chart type
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+        },
+        title: {
+          display: true,
+          text: 'Market Share Distribution',
+        },
       },
     },
   },

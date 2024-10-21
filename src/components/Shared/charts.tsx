@@ -25,8 +25,21 @@ ChartJS.register(
   Legend
 );
 
+export interface chartData {
+  chartType: 'bar' | 'line' | 'pie' | 'doughnut' | 'radar' | 'polarArea';
+  labels: string[];
+  datasets: Array<{
+    label?: string;
+    data: number[];
+    backgroundColor?: string|string[];
+    borderColor?: string|string[];
+    borderWidth?: number;
+    fill?: boolean
+  }>;
+}
+
 export interface ChartProps {
-  data: any;
+  data: chartData;
   options?: {
     responsive?: boolean,
     plugins?: {
@@ -49,7 +62,7 @@ const defaultOptions = {
     },
     title: {
       display: true,
-      text: 'title',
+      text: '',
     },
   },
 };
