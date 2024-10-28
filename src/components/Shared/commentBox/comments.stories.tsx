@@ -1,10 +1,8 @@
-// CommentBox.stories.tsx
-
 import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
-import CommentBox from './comments'; // Adjust path as needed
+import CommentBox from './comments';
 import { Provider } from 'react-redux';
-import { store } from './store'; // Adjust path as needed
+import { store } from './store';
 
 export default {
   title: 'Components/CommentBox',
