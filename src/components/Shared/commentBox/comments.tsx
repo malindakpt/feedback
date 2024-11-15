@@ -3,13 +3,14 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { useDispatch } from 'react-redux';
-import { addComment } from './commentSlice';
 
-export default function CommentBox() {
-  const [comment, setComment] = React.useState('');
+interface CommentBoxProps {
+  value: string;
+  onChange: (value: string) => void;
+}
+
+export default function CommentBox({ value, onChange }: CommentBoxProps) {
   const [isDefault, setIsDefault] = React.useState(true);
-  const dispatch = useDispatch();
 
   const predefinedTexts = [
     'Actually the service is very good.',
@@ -27,31 +28,31 @@ export default function CommentBox() {
 
   const handleAddText = (text: string) => {
     if (isDefault) {
-      setComment(text);
+      onChange(text);
       setIsDefault(false);
     } else {
-      setComment((prevComment) => prevComment + ' ' + text);
+      onChange(value + ' ' + text);
     }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const inputValue = e.target.value;
     setIsDefault(false);
-    setComment(value);
+    onChange(inputValue);
   };
 
   const handleFocus = () => {
     if (isDefault) {
-      setComment('');
+      onChange('');
       setIsDefault(false);
     }
   };
 
   const handleAddComment = () => {
-    if (comment.trim() !== '') {
-      dispatch(addComment(comment));
+    if (value.trim() !== '') {
+      // Perform action with the comment (e.g., dispatch to a store or send to a server)
     }
-    setComment('Add your comment here..');
+    onChange('Add your comment here..');
     setIsDefault(true);
   };
 
@@ -70,7 +71,7 @@ export default function CommentBox() {
           label="Comment"
           multiline
           rows={4}
-          value={comment}
+          value={value}
           onChange={handleInputChange}
           onFocus={handleFocus}
         />
