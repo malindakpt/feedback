@@ -1,7 +1,7 @@
 // NumberInput.stories.tsx
 import React, { useState } from 'react';
 import { StoryFn, Meta } from '@storybook/react'; // Use `Story` and `Meta` from Storybook
-import NumberInput, { NumberInputProps } from './NumberInput'; // Import the component and props
+import NumberInput, { NumberInputProps } from './numberInput'; // Import the component and props
 
 export default {
   title: 'Components/NumberInput',

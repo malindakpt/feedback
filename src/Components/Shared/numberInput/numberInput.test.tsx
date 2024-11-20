@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import NumberInput from './NumberInput'; 
+import NumberInput from './numberInput'; 
 
 describe('NumberInput Component', () => {
   const onChangeMock = jest.fn();
