@@ -1,7 +1,8 @@
 import React from 'react';
 import { TextField } from '@mui/material';
 
-interface NumberInputProps {
+
+export interface NumberInputProps {
   label: string;
   value: string;
   onChange: (value: string) => void;

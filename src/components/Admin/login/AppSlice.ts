@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../../services/auth/firebase';
-import { User } from '../../../interfaces/user';
-import { AppState } from '../../../interfaces/app';
+import { User } from '../../../interfaces/User';
+import { AppState } from '../../../interfaces/App';
 
 export const initialAuthState: AppState = {
   user: null,
@@ -37,20 +37,22 @@ const authSlice = createSlice({
   initialState: initialAuthState,
   reducers: {
     logout: (state) => {
-  
+      state.user = null;
+      state.isAuthenticated = false;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
-        
+        state.isAuthenticated = false; // Optional: Set a "loading" state or flag
       })
       .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
         state.user = action.payload;
-        
+        state.isAuthenticated = true;
       })
       .addCase(login.rejected, (state, action: PayloadAction<string | undefined>) => {
-        
+        // Optional: Handle error state, like setting an error message
+        console.error(action.payload);
       });
   },
 });
