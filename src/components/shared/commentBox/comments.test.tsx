@@ -45,12 +45,4 @@ describe('CommentBox Component', () => {
     fireEvent.click(button);
     expect(onChangeMock).toHaveBeenCalledWith('Very satisfied.');
   });
-
-  test('resets to default placeholder text on submit', () => {
-    render(<Comments value="Some comment" onChange={onChangeMock} />);
-    const submitButton = screen.getByText(/submit comment/i);
-
-    fireEvent.click(submitButton);
-    expect(onChangeMock).toHaveBeenCalledWith('Add your comment here..');
-  });
-});
+ });

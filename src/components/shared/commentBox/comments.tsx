@@ -93,9 +93,6 @@ export default function CommentBox({ value, onChange }: CommentBoxProps) {
           </Button>
         ))}
       </Stack>
-      <Button variant="contained" color="primary" onClick={handleAddComment}>
-        Submit Comment
-      </Button>
     </Box>
   );
 }
