@@ -10,7 +10,7 @@ import BranchView from '../components/admin/branchView';
 import CompanyView from '../components/admin/companyView';
 import BranchStatView from '../components/admin/singleView/branchStatView';
 import EmployeeStatView from '../components/admin/singleView/employeeStatView';
-// import Dashboard from '../components/admin/dashboardView';
+import Dashboard from '../components/admin/dashboardView';
 
 // USER
 import BranchFeedback from '../components/usersView/branchFeedback';
@@ -39,6 +39,7 @@ const AppRoutes: React.FC = () => {
             <Route path="companyView" element={<CompanyView />} />
             <Route path="branchStatView/:id" element={<BranchStatView />} />
             <Route path="employeeStatView/:id" element={<EmployeeStatView />} />
+            <Route path="dashboard" element={<Dashboard/>} />
           </Route>
         </Route>
 

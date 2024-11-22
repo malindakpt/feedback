@@ -37,20 +37,25 @@ const authSlice = createSlice({
   initialState: initialAuthState,
   reducers: {
     logout: (state) => {
+      state.user = null;
+      state.isAuthenticated = false;
   
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
-        
+        state.isAuthenticated = false;
       })
       .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
         state.user = action.payload;
+        state.isAuthenticated = true;
         
       })
       .addCase(login.rejected, (state, action: PayloadAction<string | undefined>) => {
-        
+        state.user = null;
+        state.isAuthenticated = false;
+        console.error("Login failed:" , action.payload);
       });
   },
 });
