@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField } from '@mui/material';
 
-interface DateInputProps {
+export interface DateInputProps {
   label: string;
   value: string;
   onChange: (value: string) => void;
