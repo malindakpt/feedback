@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
 import './App.css';
-import { StarReview } from './components/StarReview';
+import { StarReview } from './components/rating/StarReview';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createData, deleteData } from './services/crudService';
 import { Collection } from './Enums/collections.enum';
-import ImageUploader from './components/ImageUploader';
-import RetrieveImages from './components/retrieveImage';
+import ImageUploader from './components/imageUploader/ImageUploader';
+import RetrieveImages from './components/imageUploader/retrieveImage';
 
 function App() {
-  const [data, setData] = useState({
-    name: "manjitha",
-    age: 24,
-    email: "manjitha@gmail.com"
-  });
 
   const [id, setId] = useState("");
 

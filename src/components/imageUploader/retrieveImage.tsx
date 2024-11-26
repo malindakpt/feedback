@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
-import { storage } from '../services/firebase';
+import { storage } from '../../services/firebase';
 import UpdateImage from './updateImage';
 import DeleteImage from './deleteImage';
 

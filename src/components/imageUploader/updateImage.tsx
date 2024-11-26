@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { storage } from '../services/firebase';
+import { storage } from '../../services/firebase';
 
 interface UpdateImageProps {
   folder: string;

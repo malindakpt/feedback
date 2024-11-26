@@ -1,6 +1,6 @@
 import React from 'react';
 import { ref, deleteObject } from 'firebase/storage';
-import { storage } from '../services/firebase';
+import { storage } from '../../services/firebase';
 
 interface DeleteImageProps {
   folder: string;

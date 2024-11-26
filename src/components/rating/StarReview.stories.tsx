@@ -1,0 +1,36 @@
+import React from 'react';
+import { Meta, StoryFn } from '@storybook/react';
+import { StarReview, StarReviewProps } from './StarReview';
+
+export default {
+  title: 'Components/Rating/StarReview',
+  component: StarReview,
+  argTypes: {
+    type: {
+      control: { type: 'radio' },
+      options: ['star', 'face'],
+    },
+    onRatingChange: { action: 'rating changed' },
+  },
+} as Meta;
+
+const Template: StoryFn<StarReviewProps> = (args: StarReviewProps) => (
+  <StarReview
+    {...args}
+    onRatingChange={(value) => {
+      // Logs the selected value (1 to 5) in the Storybook Actions tab
+      console.log(`Selected rating: ${value}`);
+      args.onRatingChange(value);
+    }}
+  />
+);
+
+export const StarRating = Template.bind({});
+StarRating.args = {
+  type: 'star',
+};
+
+export const FaceRating = Template.bind({});
+FaceRating.args = {
+  type: 'face',
+};

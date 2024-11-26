@@ -18,8 +18,10 @@
     },
     "plugins": ["@typescript-eslint", "react"],
     "rules": {
-      "@angular-eslint/component-class-suffix": "off"
-    }
+      "@angular-eslint/component-class-suffix": "off",
+      "react/no-unescaped-entities": 0
+      }
+
     ,
     
     "settings": {
