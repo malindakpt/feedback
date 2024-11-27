@@ -5,8 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
-    "@mui/icons-material": "^6.1.8",
-    "@mui/material": "^6.1.8",
+    "@mui/material": "^5.16.7",
     "@reduxjs/toolkit": "^2.2.7",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -22,7 +21,6 @@
     "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
     "sass": "^1.77.8",
-    "text-encoding": "^0.7.0",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -54,7 +52,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@chromatic-com/storybook": "^1.9.0",
     "@eslint/js": "^9.9.0",
     "@storybook/addon-essentials": "^8.3.3",
