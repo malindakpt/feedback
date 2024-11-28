@@ -27,35 +27,37 @@ describe('AutoCompleteInput Component', () => {
     expect(input).toBeInTheDocument();
   });
 
-  it('should display options when clicked', () => {
+  it('should display options when clicked', async () => {
     render(<AutoCompleteInput {...defaultProps} />);
-
+  
     const input = screen.getByLabelText('Test Autocomplete');
-
+  
     // Simulate click to open options
-    fireEvent.click(input);
-
-    // Check if options are displayed
-    expect(screen.getByText('Option 1')).toBeInTheDocument();
-    expect(screen.getByText('Option 2')).toBeInTheDocument();
-    expect(screen.getByText('Option 3')).toBeInTheDocument();
+    fireEvent.mouseDown(input);
+  
+    // Wait for options to be displayed
+    expect(await screen.findByText('Option 1')).toBeInTheDocument();
+    expect(await screen.findByText('Option 2')).toBeInTheDocument();
+    expect(await screen.findByText('Option 3')).toBeInTheDocument();
   });
-
-  it('should call onChange handler when an option is selected', () => {
+  
+  it('should call onChange handler when an option is selected', async () => {
     render(<AutoCompleteInput {...defaultProps} />);
-
+  
     const input = screen.getByLabelText('Test Autocomplete');
-
+  
     // Simulate click to open options
-    fireEvent.click(input);
-
-    // Simulate selecting an option
-    fireEvent.click(screen.getByText('Option 1'));
-
+    fireEvent.mouseDown(input);
+  
+    // Wait for the option to appear and simulate selection
+    const option = await screen.findByText('Option 1');
+    fireEvent.click(option);
+  
     // Check if onChangeMock is called with the correct value
     expect(onChangeMock).toHaveBeenCalledTimes(1);
     expect(onChangeMock).toHaveBeenCalledWith('Option 1');
   });
+  
 
   it('should display an error message when validation fails', () => {
     const validateInputMock = (value: string) => {
@@ -82,13 +84,13 @@ describe('AutoCompleteInput Component', () => {
 
   it('should be disabled when the disabled prop is true', () => {
     render(<AutoCompleteInput {...defaultProps} disabled={true} />);
-
+  
     const input = screen.getByLabelText('Test Autocomplete');
-
-    // Check if the input is disabled
-    expect(input).toBeDisabled();
+  
+    // Check if the input is effectively disabled
+    expect(input).toHaveAttribute('disabled');
   });
-
+  
   it('should not display any options if options list is empty', () => {
     render(<AutoCompleteInput {...defaultProps} options={[]} />);
 
