@@ -39,14 +39,7 @@ Disabled.args = {
   disabled: true,
 };
 
-// Story with Required Input
-export const Required = Template.bind({});
-Required.args = {
-  label: 'Required Autocomplete',
-  value: '',
-  options: ['Option A', 'Option B', 'Option C'],
-  required: true,
-};
+
 
 // Story with Validation
 export const WithValidation = Template.bind({});
