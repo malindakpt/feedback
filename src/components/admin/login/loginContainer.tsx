@@ -5,6 +5,7 @@ import { login } from './appSlice';
 import { AppDispatch } from './store';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { LocationState } from '../../../interfaces/types';
+import i18n from '../../i18n';
 
 const LoginContainer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -27,7 +28,18 @@ const LoginContainer: React.FC = () => {
     }
   };
 
+  const changeLanguage = (language: string) => {
+    i18n.changeLanguage(language); // Change the language dynamically
+  };
+
   return (
+    <>
+    <div style={{ marginBottom: '1rem' }}>
+        <button onClick={() => changeLanguage('en')}>English</button>
+        <button onClick={() => changeLanguage('si')}>සිංහල</button>
+        <button onClick={() => changeLanguage('ta')}>தமிழ்</button>
+      </div>
+
     <LoginForm
       email={email}
       password={password}
@@ -35,6 +47,7 @@ const LoginContainer: React.FC = () => {
       setPassword={setPassword}
       handleLogin={handleLogin}
     />
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { TextField, Button, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface LoginFormProps {
   email: string;
@@ -11,11 +12,12 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPassword, handleLogin }) => {
+  const { t } = useTranslation();
   return (
     <Container maxWidth="sm" className="login-form-container">
-      <h1>Login</h1>
+      <h1>{t('login.title')}</h1>
       <TextField
-        label="Email"
+        label={t('login.email')}
         variant="outlined"
         fullWidth
         margin="normal"
@@ -23,7 +25,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPas
         onChange={(e) => setEmail(e.target.value)}
       />
       <TextField
-        label="Password"
+        label={t('login.password')}
         variant="outlined"
         fullWidth
         margin="normal"
@@ -36,11 +38,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPas
         color="primary"
         onClick={handleLogin}
       >
-        Login
+        {t('login.submit')}
       </Button>
       <p>
-        Don&apos;t have an account?{' '}
-        <Link to="/admin/register">Register here</Link>.
+      {t('login.noAccount')}{' '}
+        <Link to="/admin/register">{t('login.register')}</Link>.
       </p>
     </Container>
   );
