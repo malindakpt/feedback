@@ -8,11 +8,11 @@ interface PrivateRouteProps {
 }
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ redirectPath = '/login' }) => {
-  const { isAuthenticated } = useSelector((state: RootState) => state.auth); 
+  const user = useSelector((state: RootState) => state.auth.user); // Use user from auth state
   const location = useLocation();
 
-  if (!isAuthenticated) {
-    return <Navigate to={redirectPath} state={{from: location}} />;
+  if (!user) {
+    return <Navigate to={redirectPath} state={{ from: location }} />;
   }
 
   return <Outlet />;
