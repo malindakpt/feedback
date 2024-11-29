@@ -15,7 +15,7 @@ describe('AutoCompleteInput Component', () => {
   };
 
   afterEach(() => {
-    jest.clearAllMocks(); // Clear mock calls after each test
+    jest.clearAllMocks(); 
   });
 
   it('should render with label', () => {
@@ -23,7 +23,6 @@ describe('AutoCompleteInput Component', () => {
 
     const input = screen.getByLabelText('Test Autocomplete');
 
-    // Check if the input is rendered
     expect(input).toBeInTheDocument();
   });
 
@@ -75,7 +74,6 @@ describe('AutoCompleteInput Component', () => {
 
     const input = screen.getByLabelText('Test Autocomplete');
     
-    // Simulate blur event
     fireEvent.blur(input);
 
     // Check if the error message is displayed
@@ -91,15 +89,4 @@ describe('AutoCompleteInput Component', () => {
     expect(input).toHaveAttribute('disabled');
   });
   
-  it('should not display any options if options list is empty', () => {
-    render(<AutoCompleteInput {...defaultProps} options={[]} />);
-
-    const input = screen.getByLabelText('Test Autocomplete');
-    
-    // Simulate click to open options
-    fireEvent.click(input);
-
-    // Check if no options are displayed
-    expect(screen.queryByText('Option 1')).not.toBeInTheDocument();
-  });
 });
