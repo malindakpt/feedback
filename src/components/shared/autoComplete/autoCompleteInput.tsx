@@ -44,6 +44,8 @@ const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
           overflow: 'auto', 
         },
       }}
+      disabled={disabled}
+      
       renderInput={(params) => (
         <TextField
           {...params}
@@ -53,7 +55,7 @@ const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
           error={Boolean(errorText)}
           helperText={errorText || ''}
           margin="normal"
-          disabled={disabled}
+          
         />
       )}
     />
