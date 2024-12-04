@@ -4,8 +4,8 @@ import { TextField } from '@mui/material';
 export interface TextInputProps {
   label: string;
   value: string;
-  onChange: (value: string) => void;
-  name?: string;
+  onChange: (name: string,value: string) => void;
+  name: string;
   required?: boolean;
   type?: string;
   validateInput?: (value: string) => string;
@@ -40,7 +40,7 @@ const TextInput: React.FC<TextInputProps> = ({
     <TextField
       label={label}
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e) => onChange(name, e.target.value)}
       onBlur={handleBlur}
       name={name}
       required={required}

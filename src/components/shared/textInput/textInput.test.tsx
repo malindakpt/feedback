@@ -8,7 +8,7 @@ describe('TextInput Component', () => {
 
   it('should render with label and value', () => {
     render(
-      <TextInput label="Username" value="Nithila" onChange={onChangeMock} />
+      <TextInput label="Username" name="username" value="Nithila" onChange={onChangeMock} />
     );
     
     const input = screen.getByLabelText('Username');
@@ -22,7 +22,7 @@ describe('TextInput Component', () => {
 
   it('should call onChange handler when input changes', () => {
     render(
-      <TextInput label="Username" value="" onChange={onChangeMock} />
+      <TextInput label="Username" value="" name="" onChange={onChangeMock} />
     );
 
     const input = screen.getByLabelText('Username');
