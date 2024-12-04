@@ -12,6 +12,7 @@ import BranchStatView from '../components/admin/singleView/branchStatView';
 import EmployeeStatView from '../components/admin/singleView/employeeStatView';
 import Dashboard from '../components/admin/dashboardView';
 
+
 // USER
 import BranchFeedback from '../components/usersView/branchFeedback';
 import EmployeeFeedback from '../components/usersView/employeesFeedback';
@@ -20,6 +21,7 @@ import SingleEmployeeFeedback from '../components/usersView/employerFeedback';
 // LAYOUTS
 import AdminLayout from './adminLayout';
 import UserLayout from './userLayouts';
+
 
 const AppRoutes: React.FC = () => {
   return (
@@ -40,6 +42,7 @@ const AppRoutes: React.FC = () => {
             <Route path="branchStatView/:id" element={<BranchStatView />} />
             <Route path="employeeStatView/:id" element={<EmployeeStatView />} />
             <Route path="dashboard" element={<Dashboard/>} />
+            
           </Route>
         </Route>
 
