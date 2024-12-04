@@ -4,8 +4,8 @@ import { TextField } from '@mui/material';
 export interface DateInputProps {
   label: string;
   value: string;
-  onChange: (value: string) => void;
-  name?: string;
+  onChange: (name:string,value: string) => void;
+  name: string;
   error?: boolean;
   required?: boolean;
 }
@@ -22,7 +22,7 @@ const DateInput: React.FC<DateInputProps> = ({
     <TextField
       label={label}
       value={value}
-      onChange={(e) => onChange(e.target.value)}
+      onChange={(e) => onChange(name,e.target.value)}
       name={name}
       error={error}
       required={required}

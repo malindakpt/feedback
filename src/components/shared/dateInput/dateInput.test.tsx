@@ -8,7 +8,7 @@ describe('DateInput Component', () => {
 
   it('should render with label and value', () => {
     render(
-      <DateInput label="Start Date" value="2024-01-01" onChange={onChangeMock} />
+      <DateInput label="Start Date" name="name" value="2024-01-01" onChange={onChangeMock} />
     );
 
     const input = screen.getByLabelText('Start Date');
@@ -22,7 +22,7 @@ describe('DateInput Component', () => {
 
   it('should call onChange handler when input changes', () => {
     render(
-      <DateInput label="Start Date" value="" onChange={onChangeMock} />
+      <DateInput label="Start Date" name="name" value="" onChange={onChangeMock} />
     );
 
     const input = screen.getByLabelText('Start Date');

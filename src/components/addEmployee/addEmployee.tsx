@@ -1,124 +1,89 @@
 import React from "react";
-import { Box, Button, Typography } from "@mui/material";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import { Button } from "@mui/material";
 import TextInput from "../shared/textInput/textInput";
 import DateInput from "../shared/dateInput/dateInput";
+import { employeeInitialValues } from "../initialValues/employeeInitialValues";
+import { EmployeeValidationSchema } from "../validationSchemas/employeeValidationSchema";
 import ImageUploader from "../shared/ImageUploader/imageUploader";
-import { createEntity } from "../../services/crudService";
-import { Collection } from "../../enums/collections.enum";
+import { Employee } from "../../interfaces/employee"
 
-const AddEmployee: React.FC = () => {
-  // Validation schema using Yup
-  const validationSchema = Yup.object().shape({
-    company: Yup.string().required("Company is required"),
-    branch: Yup.string().required("Branch is required"),
-    empId: Yup.string().required("Employee ID is required"),
-    name: Yup.string().required("Name is required"),
-    birthday: Yup.string().required("Birthday is required"),
-    nic: Yup.string().required("NIC is required"),
-    employeeImage: Yup.mixed().required("Employee image is required"), // Add validation for image
-  });
+export interface AddEmployeeFormProps {
+  onSave: (values: Employee, helpers: { resetForm: () => void }) => void;
+  onImageChange: (file: File | null) => void;
+}
 
-  const handleSubmit = async (values: any, { resetForm }: any) => {
-    try {
-      const id = await createEntity(Collection.Employee, values);
-      if (id) {
-        alert("Employee added successfully");
-        resetForm();
-      }
-    } catch (error) {
-      console.error("Error adding employee:", error);
-    }
-  };
-
+const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({ onSave, onImageChange }) => {
   return (
-    <Box sx={{ p: 3, maxWidth: 600, mx: "auto" }}>
-      <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
-        Add Employee
-      </Typography>
-      <Formik
-        initialValues={{
-          company: "",
-          branch: "",
-          empId: "",
-          name: "",
-          birthday: "",
-          nic: "",
-          employeeImage: null, // Initialize image state
-        }}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ values, errors, touched, setFieldValue }) => (
-          <Form>
-            <TextInput
-              label="Company"
-              value={values.company}
-              onChange={(value) => setFieldValue("company", value)}
-              required
-            />
-            <TextInput
-              label="Branch"
-              value={values.branch}
-              onChange={(value) => setFieldValue("branch", value)}
-              required
-            />
-            <TextInput
-              label="Employee ID"
-              value={values.empId}
-              onChange={(value) => setFieldValue("empId", value)}
-              required
-            />
-            <TextInput
-              label="Name"
-              value={values.name}
-              onChange={(value) => setFieldValue("name", value)}
-              required
-            />
-            <DateInput
-              label="Birthday"
-              value={values.birthday}
-              onChange={(value) => setFieldValue("birthday", value)}
-              required
-            />
-            <TextInput
-              label="NIC"
-              value={values.nic}
-              onChange={(value) => setFieldValue("nic", value)}
-              required
-            />
+    <Formik
+      initialValues={employeeInitialValues}
+      validationSchema={EmployeeValidationSchema}
+      onSubmit={onSave}
+    >
+      {({ values, errors, touched, setFieldValue }) => (
+        <Form>
+          <TextInput
+            label="Company"
+            name="company"
+            value={values.company}
+            onChange={setFieldValue}
+            required
+          />
+          <TextInput
+            label="Branch"
+            name="branch"
+            value={values.branch}
+            onChange={setFieldValue}
+            required
+          />
+          <TextInput
+            label="Employee ID"
+            name="empId"
+            value={values.empId}
+            onChange={setFieldValue}
+            required
+          />
+          <TextInput
+            label="Name"
+            name="name"
+            value={values.name}
+            onChange={setFieldValue}
+            required
+          />
+          <DateInput
+            label="Birthday"
+            name="birthday"
+            value={values.birthday}
+            onChange={setFieldValue}
+            required
+          />
+          <TextInput
+            label="NIC"
+            name="nic"
+            value={values.nic}
+            onChange={setFieldValue}
+            required
+          />
 
-            {/* Add ImageUploader Field */}
-            <Box sx={{ mt: 2 }}>
-              <Typography variant="body1" sx={{ mb: 1 }}>
-                Employee Image
-              </Typography>
-              <ImageUploader
-                onSelect={(file) => setFieldValue("employeeImage", file)}
-                uploadedUrl={null} // Optional: provide an uploaded URL if editing
-              />
-              {errors.employeeImage && touched.employeeImage && (
-                <Typography color="error" variant="caption">
-                  {errors.employeeImage}
-                </Typography>
-              )}
-            </Box>
+          {/* Image Upload Section */}
+          <ImageUploader
+            onSelect={(file) => onImageChange(file)}  // Store the selected image file
+            uploadedUrl={""}  // You can provide a URL if the employee already has an image
+          />
 
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              fullWidth
-              sx={{ mt: 2 }}
-            >
-              Add Employee
-            </Button>
-          </Form>
-        )}
-      </Formik>
-    </Box>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            sx={{ mt: 2 }}
+          >
+            Add Employee
+          </Button>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
-export default AddEmployee;
+export default AddEmployeeForm;
