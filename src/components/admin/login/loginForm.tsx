@@ -15,7 +15,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPas
   const { t } = useTranslation();
   return (
     <Container maxWidth="sm" className="login-form-container">
-      <h1>{t('login.title')}</h1>
+      <h1 >{t('login.title')}</h1>
       <TextField
         label={t('login.email')}
         variant="outlined"
