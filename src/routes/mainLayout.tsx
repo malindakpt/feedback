@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import AppBarContainer from '../components/appBar/appBarContainer';
+import AppBarContainer from '../components/appBar/appBar.container';
 
 const MainLayout: React.FC = () => {
   return (
