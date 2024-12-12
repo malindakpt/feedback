@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SelectChangeEvent } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import i18n from '../languageSelector/i18n';
-import AppBarForm from './appBar.form';
+import AppBarForm from './appBar';
 
 const AppBarContainer: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
