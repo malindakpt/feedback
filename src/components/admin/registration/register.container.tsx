@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import RegisterForm from './register.form';
+import RegisterForm from './register';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../../services/auth/firebase';
 import { useNavigate } from 'react-router-dom';
