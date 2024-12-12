@@ -8,6 +8,7 @@ export interface DateInputProps {
   name?: string;
   error?: boolean;
   required?: boolean;
+  disabled?: boolean;
 }
 
 const DateInput: React.FC<DateInputProps> = ({
@@ -17,6 +18,7 @@ const DateInput: React.FC<DateInputProps> = ({
   name,
   error = false,
   required = false,
+  disabled = false,
 }) => {
   return (
     <TextField
@@ -29,6 +31,7 @@ const DateInput: React.FC<DateInputProps> = ({
       variant="outlined"
       fullWidth
       margin="normal"
+      disabled={disabled}
       type="date" 
       InputLabelProps={{
         shrink: true, 

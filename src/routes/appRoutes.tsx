@@ -9,14 +9,14 @@ import PrivateRoute from "./privateRoutes";
 import MainLayout from "./mainLayout";
 
 // ADMIN
-import RegisterContainer from "../components/admin/registration/registerContainer";
-import LoginContainer from "../components/admin/login/loginContainer";
-import BranchManager from "../components/branch/branchManager";
-import BranchView from "../components/admin/branchView";
-import CompanyView from "../components/admin/companyView";
-import BranchStatView from "../components/admin/singleView/branchStatView";
-import EmployeeStatView from "../components/admin/singleView/employeeStatView";
-import Dashboard from "../components/admin/dashboardView";
+import RegisterContainer from '../components/admin/registration/register.container';
+import LoginContainer from '../components/admin/login/login.container';
+import BranchManager from '../components/branch/branchManager';
+import BranchView from '../components/admin/branchView';
+import CompanyView from '../components/admin/companyView';
+import BranchStatView from '../components/admin/singleView/branchStatView';
+import EmployeeStatView from '../components/admin/singleView/employeeStatView';
+import Dashboard from '../components/admin/dashboardView';
 
 // USER
 import BranchFeedback from "../components/usersView/branchFeedback";
