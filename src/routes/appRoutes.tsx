@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Routes,Navigate } from 'react-router-do
 import PrivateRoute from './privateRoutes';
 
 // ADMIN
-import RegisterContainer from '../components/admin/registration/registerContainer';
-import LoginContainer from '../components/admin/login/loginContainer';
+import RegisterContainer from '../components/admin/registration/register.container';
+import LoginContainer from '../components/admin/login/login.container';
 import BranchManager from '../components/branch/branchManager';
 import BranchView from '../components/admin/branchView';
 import CompanyView from '../components/admin/companyView';
