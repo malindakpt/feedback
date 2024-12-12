@@ -17,8 +17,8 @@ export default {
       options: ["contained", "outlined", "text"],
       description: "The variant of the button",
     },
-    onButtonClick: {
-      action: "buttonClicked",
+    onClick: {
+      action: "clicked",
       description: "Callback triggered when the button is clicked",
     },
   },
@@ -31,7 +31,6 @@ Primary.args = {
   text: "Primary Button",
   color: "primary",
   variant: "contained",
-  name: "primaryButton",
 };
 
 export const Secondary = Template.bind({});
@@ -39,7 +38,6 @@ Secondary.args = {
   text: "Secondary Button",
   color: "secondary",
   variant: "outlined",
-  name: "secondaryButton",
 };
 
 export const Success = Template.bind({});
@@ -47,7 +45,6 @@ Success.args = {
   text: "Success Button",
   color: "success",
   variant: "contained",
-  name: "successButton",
 };
 
 export const TextButton = Template.bind({});
@@ -55,5 +52,4 @@ TextButton.args = {
   text: "Text Button",
   color: "info",
   variant: "text",
-  name: "textButton",
 };

@@ -1,6 +1,7 @@
-import React from 'react';
-import { TextField, Button, Container } from '@mui/material';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Button, Container } from "@mui/material";
+import { Link } from "react-router-dom";
+import TextInput from "../../shared/textInput/textInput";
 
 interface LoginFormProps {
   email: string;
@@ -8,39 +9,54 @@ interface LoginFormProps {
   setEmail: (email: string) => void;
   setPassword: (password: string) => void;
   handleLogin: () => void;
+  isLoading?: boolean;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPassword, handleLogin }) => {
+const LoginForm: React.FC<LoginFormProps> = ({
+  email,
+  password,
+  setEmail,
+  setPassword,
+  handleLogin,
+  isLoading = false,
+}) => {
   return (
     <Container maxWidth="sm" className="login-form-container">
       <h1>Login</h1>
-      <TextField
+      <TextInput
         label="Email"
-        variant="outlined"
-        fullWidth
-        margin="normal"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={setEmail}
+        type="email"
+        required
+        validateInput={(value) => (!value ? "Email is required" : "")}
       />
-      <TextField
+      <TextInput
         label="Password"
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        type="password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={setPassword}
+        type="password"
+        required
+        validateInput={(value) => (!value ? "Password is required" : "")}
       />
       <Button
         variant="contained"
         color="primary"
         onClick={handleLogin}
+        disabled={isLoading}
+        sx={{ marginTop: 2 }}
       >
         Login
       </Button>
-      <p>
-        Don&apos;t have an account?{' '}
-        <Link to="/admin/register">Register here</Link>.
+      <p style={{ marginTop: 16 }}>
+        Don&apos;t have an account?{" "}
+        <Link
+          to="/admin/register"
+          style={{ textDecoration: "none", color: "#1976d2" }}
+        >
+          Register here
+        </Link>
+        .
       </p>
     </Container>
   );

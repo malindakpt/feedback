@@ -8,26 +8,32 @@ export interface ButtonProps extends MuiButtonProps {
   text?: string;
   color?: "primary" | "secondary" | "success" | "error" | "warning" | "info";
   variant?: "contained" | "outlined" | "text";
-  onButtonClick?: (name: string, value:boolean) => void; // Renamed custom handler
-  name: string;
+  onClick?: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    value?: boolean
+  ) => void; // Keep MouseEvent compatible
 }
 
 const Button: React.FC<ButtonProps> = ({
   text,
   color = "primary",
   variant = "contained",
-  onButtonClick,
-  name,
+  onClick,
   ...props
 }) => {
-  const handleClick = () => {
-    if (onButtonClick) {
-      onButtonClick(name, true); // Simulating a "value" change to `true` on button click
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (onClick) {
+      onClick(event, true); // Pass both the event and the custom value (true)
     }
   };
 
   return (
-    <MuiButton color={color} variant={variant} onClick={handleClick} {...props}>
+    <MuiButton
+      color={color}
+      variant={variant}
+      onClick={handleClick} // Call the wrapped handler
+      {...props}
+    >
       {text}
     </MuiButton>
   );
