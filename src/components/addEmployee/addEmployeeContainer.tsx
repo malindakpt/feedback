@@ -1,34 +1,45 @@
-import React, { useState } from "react";
-import { Box, Typography } from "@mui/material";
+import React, { useState , useEffect } from "react";
+import { Box, Button, Typography } from "@mui/material";
+import { Formik, Form } from "formik";
+import { createEntity } from "../../services/crudService";
+import { Collection } from "../../enums/collections.enum";
+import { uploadImage } from "../../services/imageUploaderService";
 import AddEmployeeForm from "./addEmployee";
-import { useCreateEmployeeMutation, useUploadImageMutation } from "../../services/employeeApi";
 import { Employee } from "../../interfaces/employee";
-import { showPopUp } from '../../services/popup.service';
-import { popupType } from '../../enums/popupType.enum';
+import { readAllEntity } from "../../services/crudService";
 
 const AddEmployeeContainer: React.FC = () => {
   const [employeeImage, setEmployeeImage] = useState<File | null>(null);
-  const [createEmployee] = useCreateEmployeeMutation();
-  const [uploadImage] = useUploadImageMutation();
+  const [companyNames, setCompanyNames] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      const companies = await readAllEntity<{ name: string }>(Collection.Companies);
+      if (companies) {
+        setCompanyNames(companies.map(companies => companies.name));
+      }
+    };
+    fetchCompanies();
+  }, []);
 
   const handleSave = async (values: Employee, { resetForm }: { resetForm: () => void }) => {
     try {
       let imageUrl = "";
 
       if (employeeImage) {
-        const uploadResult = await uploadImage({
-          folder: "employee-images",
-          file: employeeImage,
-        }).unwrap();
-        imageUrl = uploadResult;
+        // Upload the image using the uploadImage function from imageUploaderServices
+        imageUrl = await uploadImage("employee-images", values.empId, employeeImage);
       }
 
+      // Include the image URL in the form data
       const formData = { ...values, image: imageUrl };
-      await createEmployee(formData).unwrap();
 
-      //alert("Employee added successfully");
-      showPopUp('Employee added successfully', popupType.Success)
-      resetForm();
+      // Store the employee data including image URL
+      const id = await createEntity(Collection.Employee, formData);
+      if (id) {
+        alert("Employee added successfully");
+        resetForm();
+      }
     } catch (error) {
       console.error("Error adding employee:", error);
     }
@@ -39,7 +50,7 @@ const AddEmployeeContainer: React.FC = () => {
       <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
         Add Employee
       </Typography>
-      <AddEmployeeForm onSave={handleSave} onImageChange={setEmployeeImage} />
+      <AddEmployeeForm onSave={handleSave} onImageChange={setEmployeeImage} companyNames={companyNames} />
     </Box>
   );
 };

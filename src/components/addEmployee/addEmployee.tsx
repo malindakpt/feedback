@@ -6,13 +6,16 @@ import DateInput from "../shared/dateInput/dateInput";
 import { employeeInitialValues } from "../initialValues/employeeInitialValues";
 import { EmployeeValidationSchema } from "../validationSchemas/employeeValidationSchema";
 import ImageUploader from "../shared/ImageUploader/imageUploader";
-import { Employee } from "../../interfaces/employee"
+import { Employee } from "../../interfaces/employee";
+import AutoCompleteInput from "../shared/autoComplete/autoCompleteInput";
+
 export interface AddEmployeeFormProps {
   onSave: (values: Employee, helpers: { resetForm: () => void }) => void;
   onImageChange: (file: File | null) => void;
+  companyNames: string[];
 }
 
-const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({ onSave, onImageChange }) => {
+const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({ onSave, onImageChange, companyNames }) => {
   return (
     <Formik
       initialValues={employeeInitialValues}
@@ -21,11 +24,11 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({ onSave, onImageChange
     >
       {({ values, errors, touched, setFieldValue }) => (
         <Form>
-          <TextInput
+          <AutoCompleteInput
             label="Company"
-            name="company"
             value={values.company}
-            onChange={setFieldValue}
+            onChange={(newValue) => setFieldValue("company", newValue)}
+            options={companyNames}
             required
           />
           <TextInput
