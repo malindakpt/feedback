@@ -7,7 +7,6 @@ import { employeeInitialValues } from "../initialValues/employeeInitialValues";
 import { EmployeeValidationSchema } from "../validationSchemas/employeeValidationSchema";
 import ImageUploader from "../shared/ImageUploader/imageUploader";
 import { Employee } from "../../interfaces/employee"
-
 export interface AddEmployeeFormProps {
   onSave: (values: Employee, helpers: { resetForm: () => void }) => void;
   onImageChange: (file: File | null) => void;

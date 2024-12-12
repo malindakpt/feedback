@@ -1,33 +1,34 @@
 import React, { useState } from "react";
-import { Box, Button, Typography } from "@mui/material";
-import { Formik, Form } from "formik";
-import { createEntity } from "../../services/crudService";
-import { Collection } from "../../enums/collections.enum";
-import { uploadImage } from "../../services/imageUploaderService";
-import AddEmployeeForm from "./addEmployee"; // Import the form
+import { Box, Typography } from "@mui/material";
+import AddEmployeeForm from "./addEmployee";
+import { useCreateEmployeeMutation, useUploadImageMutation } from "../../services/employeeApi";
 import { Employee } from "../../interfaces/employee";
+import { showPopUp } from '../../services/popup.service';
+import { popupType } from '../../enums/popupType.enum';
 
 const AddEmployeeContainer: React.FC = () => {
-  const [employeeImage, setEmployeeImage] = useState<File | null>(null); // State to store the uploaded image file
+  const [employeeImage, setEmployeeImage] = useState<File | null>(null);
+  const [createEmployee] = useCreateEmployeeMutation();
+  const [uploadImage] = useUploadImageMutation();
 
   const handleSave = async (values: Employee, { resetForm }: { resetForm: () => void }) => {
     try {
       let imageUrl = "";
 
       if (employeeImage) {
-        // Upload the image using the uploadImage function from imageUploaderServices
-        imageUrl = await uploadImage("employee-images", values.empId, employeeImage);
+        const uploadResult = await uploadImage({
+          folder: "employee-images",
+          file: employeeImage,
+        }).unwrap();
+        imageUrl = uploadResult;
       }
 
-      // Include the image URL in the form data
       const formData = { ...values, image: imageUrl };
+      await createEmployee(formData).unwrap();
 
-      // Store the employee data including image URL
-      const id = await createEntity(Collection.Employee, formData);
-      if (id) {
-        alert("Employee added successfully");
-        resetForm();
-      }
+      //alert("Employee added successfully");
+      showPopUp('Employee added successfully', popupType.Success)
+      resetForm();
     } catch (error) {
       console.error("Error adding employee:", error);
     }
