@@ -3,6 +3,8 @@ import RegisterForm from './registerForm';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../../services/auth/firebase';
 import { useNavigate } from 'react-router-dom';
+import { showSnackbar } from '../../../services/snackbar.service';
+import { PopupType } from '../../../enums/popupType.enum';
 
 const RegisterContainer: React.FC = () => {
   const [serviceNu, setServiceNu] = useState('');
@@ -13,7 +15,8 @@ const RegisterContainer: React.FC = () => {
   const handleRegister = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      alert('Registration successful');
+      //alert('Registration successful');
+      showSnackbar('Registration successful', PopupType.SUCCESS);
       navigate('/login'); // Redirect to login page after successful registration
     } catch (error) {
       console.error('Registration error', error);
