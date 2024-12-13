@@ -1,21 +1,18 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { useState } from 'react';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { registerSnackbarHandler } from '../../services/snackbar.service';
 import { PopupType } from '../../enums/popupType.enum';
 
-interface SnackbarContextType {
-  showSnackbar: (message: string, type: PopupType) => void;
-}
+let snackbarHandler: ((text: string, type: PopupType) => void) | null = null;
 
-const SnackbarContext = createContext<SnackbarContextType | undefined>(undefined);
-
-export const SnackbarProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [snackbar, setSnackbar] = useState<{ message: string; type: PopupType } | null>(null);
+const SnackbarComponent: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('');
+  const [type, setType] = useState<PopupType>(PopupType.INFO);
 
-  const showSnackbar = (message: string, type: PopupType) => {
-    setSnackbar({ message, type });
+  const showSnackbar = (text: string, popupType: PopupType) => {
+    setMessage(text);
+    setType(popupType);
     setOpen(true);
   };
 
@@ -23,17 +20,20 @@ export const SnackbarProvider: React.FC<{ children: ReactNode }> = ({ children }
     event?: React.SyntheticEvent | Event,
     reason?: string
   ) => {
-    if (reason === 'clickawy') return;
+    if (reason === 'clickaway') return;
     setOpen(false);
   };
 
+  // Register the snackbar handler
   React.useEffect(() => {
-    registerSnackbarHandler(showSnackbar);
+    snackbarHandler = showSnackbar;
+    return () => {
+      snackbarHandler = null; // Clean up on unmount
+    };
   }, []);
 
   return (
-    <SnackbarContext.Provider value={{ showSnackbar }}>
-      {children}
+    <>
       <Snackbar
         open={open}
         autoHideDuration={4000}
@@ -42,22 +42,24 @@ export const SnackbarProvider: React.FC<{ children: ReactNode }> = ({ children }
       >
         <Alert
           onClose={handleClose}
-          severity={snackbar?.type}
+          severity={type}
           variant="filled"
           sx={{ width: '100%' }}
         >
-          {snackbar?.message}
+          {message}
         </Alert>
       </Snackbar>
-
-    </SnackbarContext.Provider>
+    </>
   );
 };
 
-export const useSnackbar = (): SnackbarContextType => {
-  const context = useContext(SnackbarContext);
-  if (!context) {
-    throw new Error('useSnackbar must be used within a SnackbarProvider');
+// Export the CustomSnackbar component and the showSnackbar function
+export const showSnackbar = (text: string, type: PopupType) => {
+  if (snackbarHandler) {
+    snackbarHandler(text, type);
+  } else {
+    console.error('Snackbar handler is not registered');
   }
-  return context;
 };
+
+export default SnackbarComponent;

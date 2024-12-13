@@ -1,6 +1,5 @@
 import { PopupType } from '../enums/popupType.enum';
-
-let snackbarHandler: ((text: string, type: PopupType) => void) | null = null;
+import { showSnackbar as snackbarHandler } from '../components/util/snackbar';
 
 export const showSnackbar = (text: string, type: PopupType) => {
   if (snackbarHandler) {
@@ -8,10 +7,4 @@ export const showSnackbar = (text: string, type: PopupType) => {
   } else {
     console.error('Snackbar handler is not registered');
   }
-};
-
-export const registerSnackbarHandler = (
-  handler: (text: string, type: PopupType) => void
-) => {
-  snackbarHandler = handler;
 };
