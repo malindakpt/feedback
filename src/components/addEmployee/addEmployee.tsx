@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import TextInput from "../shared/textInput/textInput";
 import DateInput from "../shared/dateInput/dateInput";
 import { employeeInitialValues } from "../initialValues/employeeInitialValues";
-import { EmployeeValidationSchema } from "../validationSchemas/employeeValidationSchema";
+//import { EmployeeValidationSchema } from "../validationSchemas/employeeValidationSchema";
 import ImageUploader from "../shared/ImageUploader/imageUploader";
 import { Employee } from "../../interfaces/employee";
 import AutoCompleteInput from "../shared/autoComplete/autoCompleteInput";
@@ -25,7 +25,7 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
   return (
     <Formik
       initialValues={employeeInitialValues}
-      validationSchema={EmployeeValidationSchema}
+      //validationSchema={EmployeeValidationSchema}
       onSubmit={onSave}
     >
       {({ values, errors, touched, setFieldValue }) => {
@@ -50,7 +50,7 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
               onChange={(newValue) => setFieldValue("branch", newValue)}
               options={branch}
               required
-              disabled={!isCompanySelected} // Disable until company is selected
+              disabled={!isCompanySelected}
             />
             <TextInput
               label="Employee ID"
@@ -58,7 +58,7 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
               value={values.empId}
               onChange={setFieldValue}
               required
-              disabled={!isBranchSelected} // Disable until branch is selected
+              disabled={!isBranchSelected}
             />
             <TextInput
               label="Name"
@@ -66,7 +66,7 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
               value={values.name}
               onChange={setFieldValue}
               required
-              disabled={!isEmployeeIDEntered} // Disable until employee ID is entered
+              disabled={!isEmployeeIDEntered}
             />
             <DateInput
               label="Birthday"
@@ -74,7 +74,7 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
               value={values.birthday}
               onChange={setFieldValue}
               required
-              disabled={!isNameEntered} // Disable until name is entered
+              disabled={!isNameEntered}
             />
             <TextInput
               label="NIC"
@@ -82,7 +82,7 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
               value={values.nic}
               onChange={setFieldValue}
               required
-              disabled={!isBirthdayEntered} // Disable until birthday is entered
+              disabled={!isBirthdayEntered}
             />
             <ImageUploader
               onSelect={(file) => onImageChange(file)}
