@@ -38,7 +38,7 @@ describe('DateInput Component', () => {
 
   it('should not allow changes when input is disabled', () => {
     render(
-      <DateInput label="Start Date" value="2024-01-01" onChange={onChangeMock} disabled />
+      <DateInput label="Start Date" value="2024-01-01" onChange={onChangeMock} disabled name="disabledInput" />
     );
 
     const input = screen.getByLabelText('Start Date');

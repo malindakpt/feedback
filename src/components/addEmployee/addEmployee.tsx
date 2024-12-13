@@ -16,82 +16,90 @@ export interface AddEmployeeFormProps {
   branch: string[];
 }
 
-const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({ onSave, onImageChange, company, branch }) => {
+const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
+  onSave,
+  onImageChange,
+  company,
+  branch,
+}) => {
   return (
     <Formik
       initialValues={employeeInitialValues}
       validationSchema={EmployeeValidationSchema}
       onSubmit={onSave}
     >
-      {({ values, errors, touched, setFieldValue }) => (
-        <Form>
-          <AutoCompleteInput
-            label="Company"
-            value={values.company}
-            onChange={(newValue) => setFieldValue("company", newValue)}
-            options={company}
-            required
-          />
-          <AutoCompleteInput
-            label="Branch"
-            value={values.branch}
-            onChange={(newValue) => setFieldValue("branch", newValue)}
-            options={branch}
-            required
-          />
-          {/* <TextInput
-            label="Branch"
-            name="branch"
-            value={values.branch}
-            onChange={setFieldValue}
-            required
-          /> */}
-          <TextInput
-            label="Employee ID"
-            name="empId"
-            value={values.empId}
-            onChange={setFieldValue}
-            required
-          />
-          <TextInput
-            label="Name"
-            name="name"
-            value={values.name}
-            onChange={setFieldValue}
-            required
-          />
-          <DateInput
-            label="Birthday"
-            name="birthday"
-            value={values.birthday}
-            onChange={setFieldValue}
-            required
-          />
-          <TextInput
-            label="NIC"
-            name="nic"
-            value={values.nic}
-            onChange={setFieldValue}
-            required
-          />
+      {({ values, errors, touched, setFieldValue }) => {
+        const isCompanySelected = !!values.company;
+        const isBranchSelected = !!values.branch;
+        const isEmployeeIDEntered = !!values.empId;
+        const isNameEntered = !!values.name;
+        const isBirthdayEntered = !!values.birthday;
 
-          {/* Image Upload Section */}
-          <ImageUploader
-            onSelect={(file) => onImageChange(file)}  // Store the selected image file
-            uploadedUrl={""}  // You can provide a URL if the employee already has an image
-          />
-
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            sx={{ mt: 2 }}
-          >
-            Add Employee
-          </Button>
-        </Form>
-      )}
+        return (
+          <Form>
+            <AutoCompleteInput
+              label="Company"
+              value={values.company}
+              onChange={(newValue) => setFieldValue("company", newValue)}
+              options={company}
+              required
+            />
+            <AutoCompleteInput
+              label="Branch"
+              value={values.branch}
+              onChange={(newValue) => setFieldValue("branch", newValue)}
+              options={branch}
+              required
+              disabled={!isCompanySelected} // Disable until company is selected
+            />
+            <TextInput
+              label="Employee ID"
+              name="empId"
+              value={values.empId}
+              onChange={setFieldValue}
+              required
+              disabled={!isBranchSelected} // Disable until branch is selected
+            />
+            <TextInput
+              label="Name"
+              name="name"
+              value={values.name}
+              onChange={setFieldValue}
+              required
+              disabled={!isEmployeeIDEntered} // Disable until employee ID is entered
+            />
+            <DateInput
+              label="Birthday"
+              name="birthday"
+              value={values.birthday}
+              onChange={setFieldValue}
+              required
+              disabled={!isNameEntered} // Disable until name is entered
+            />
+            <TextInput
+              label="NIC"
+              name="nic"
+              value={values.nic}
+              onChange={setFieldValue}
+              required
+              disabled={!isBirthdayEntered} // Disable until birthday is entered
+            />
+            <ImageUploader
+              onSelect={(file) => onImageChange(file)}
+              uploadedUrl=""
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ mt: 2 }}
+            >
+              Add Employee
+            </Button>
+          </Form>
+        );
+      }}
     </Formik>
   );
 };

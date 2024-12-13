@@ -38,7 +38,7 @@ describe('TextInput Component', () => {
 
   it('should not allow input when disabled', () => {
     render(
-      <TextInput label="Disabled Input" value="Cannot edit" onChange={onChangeMock} disabled={true} />
+      <TextInput label="Disabled Input"  value="Cannot edit" onChange={onChangeMock} disabled={true} name="disabledInput" />
     );
 
     const input = screen.getByLabelText('Disabled Input');
