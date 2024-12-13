@@ -17,6 +17,7 @@ import CompanyView from '../components/admin/companyView';
 import BranchStatView from '../components/admin/singleView/branchStatView';
 import EmployeeStatView from '../components/admin/singleView/employeeStatView';
 import Dashboard from '../components/admin/dashboardView';
+import ForgotPasswordContainer from "../components/admin/forgotPassword/forgotPassword.container";
 
 // USER
 import BranchFeedback from "../components/usersView/branchFeedback";
@@ -36,6 +37,7 @@ const AppRoutes: React.FC = () => {
 
           {/* ADMIN ROUTES */}
           <Route path="/login" element={<LoginContainer />} />
+          <Route path="/forgotpassword" element={<ForgotPasswordContainer />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="register" element={<RegisterContainer />} />
 

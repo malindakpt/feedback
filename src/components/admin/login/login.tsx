@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Button, Container } from '@mui/material';
+import { TextField, Button, Container, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
@@ -11,11 +11,20 @@ interface LoginFormProps {
   handleLogin: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPassword, handleLogin }) => {
+const LoginForm: React.FC<LoginFormProps> = ({
+  email,
+  password,
+  setEmail,
+  setPassword,
+  handleLogin,
+}) => {
   const { t } = useTranslation();
+
   return (
-    <Container maxWidth="sm" className="login-form-container">
-      <h1 >{t('login.title')}</h1>
+    <Container maxWidth="sm" className="login-form-container" sx={{ textAlign: 'center', mt: 4 }}>
+      <Typography variant="h4" gutterBottom>
+        {t('login.title')}
+      </Typography>
       <TextField
         label={t('login.email')}
         variant="outlined"
@@ -36,14 +45,19 @@ const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPas
       <Button
         variant="contained"
         color="primary"
+        fullWidth
+        sx={{ mt: 2 }}
         onClick={handleLogin}
       >
         {t('login.submit')}
       </Button>
-      <p>
-      {t('login.noAccount')}{' '}
+      <Link to="/forgotpassword" style={{ textDecoration: 'none', marginTop: '1rem', display: 'block' }}>
+        {t('login.forgotPassword')}
+      </Link>
+      <Typography variant="body2" sx={{ mt: 2 }}>
+        {t('login.noAccount')}{' '}
         <Link to="/admin/register">{t('login.register')}</Link>.
-      </p>
+      </Typography>
     </Container>
   );
 };
