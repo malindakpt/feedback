@@ -7,19 +7,42 @@ import { uploadImage } from "../../services/imageUploaderService";
 import AddEmployeeForm from "./addEmployee";
 import { Employee } from "../../interfaces/employee";
 import { readAllEntity } from "../../services/crudService";
+import {Company} from "../../interfaces/company"
+import { Branch } from "../../interfaces/branch";
 
 const AddEmployeeContainer: React.FC = () => {
   const [employeeImage, setEmployeeImage] = useState<File | null>(null);
   const [companyNames, setCompanyNames] = useState<string[]>([]);
+  const [branchNames, setBranchNames] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchCompanies = async () => {
-      const companies = await readAllEntity<{ name: string }>(Collection.Companies);
-      if (companies) {
-        setCompanyNames(companies.map(companies => companies.name));
+      try {
+        const companies = await readAllEntity<Company>(Collection.Companies);
+        if (companies) {
+          setCompanyNames(companies.map((company) => company.name));
+        }
+      } catch (error) {
+        console.error("Error fetching companies:", error);
       }
     };
+
     fetchCompanies();
+  }, []);
+
+  useEffect(() => {
+    const fetchBranches = async () => {
+      try {
+        const branches = await readAllEntity<Branch>(Collection.Branches);
+        if (branches) {
+          setBranchNames(branches.map((branch) => branch.name));
+        }
+      } catch (error) {
+        console.error("Error fetching branches:", error);
+      }
+    };
+
+    fetchBranches();
   }, []);
 
   const handleSave = async (values: Employee, { resetForm }: { resetForm: () => void }) => {
@@ -50,7 +73,7 @@ const AddEmployeeContainer: React.FC = () => {
       <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
         Add Employee
       </Typography>
-      <AddEmployeeForm onSave={handleSave} onImageChange={setEmployeeImage} companyNames={companyNames} />
+      <AddEmployeeForm onSave={handleSave} onImageChange={setEmployeeImage} company={companyNames} branch={branchNames}/>
     </Box>
   );
 };

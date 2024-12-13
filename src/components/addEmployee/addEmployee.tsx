@@ -12,10 +12,11 @@ import AutoCompleteInput from "../shared/autoComplete/autoCompleteInput";
 export interface AddEmployeeFormProps {
   onSave: (values: Employee, helpers: { resetForm: () => void }) => void;
   onImageChange: (file: File | null) => void;
-  companyNames: string[];
+  company: string[];
+  branch: string[];
 }
 
-const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({ onSave, onImageChange, companyNames }) => {
+const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({ onSave, onImageChange, company, branch }) => {
   return (
     <Formik
       initialValues={employeeInitialValues}
@@ -28,16 +29,23 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({ onSave, onImageChange
             label="Company"
             value={values.company}
             onChange={(newValue) => setFieldValue("company", newValue)}
-            options={companyNames}
+            options={company}
             required
           />
-          <TextInput
+          <AutoCompleteInput
+            label="Branch"
+            value={values.branch}
+            onChange={(newValue) => setFieldValue("branch", newValue)}
+            options={branch}
+            required
+          />
+          {/* <TextInput
             label="Branch"
             name="branch"
             value={values.branch}
             onChange={setFieldValue}
             required
-          />
+          /> */}
           <TextInput
             label="Employee ID"
             name="empId"
