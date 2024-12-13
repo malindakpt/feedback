@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import ImageUploader from "./imageUploader";
-import defaultImage from "../../assets/defaultImage.jpg"; // Adjust path to default image if needed
+import defaultImage from "../../resourses/defaultImage.jpg"; // Adjust path to default image if needed
 
 describe("ImageUploader Component", () => {
   test("displays default image when no image is uploaded", () => {
