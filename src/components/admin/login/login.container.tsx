@@ -5,6 +5,8 @@ import { login } from './appSlice';
 import { AppDispatch } from './store';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { LocationState } from '../../../interfaces/types';
+import { showSnackbar } from '../../../services/snackbar.service';
+import { PopupType } from '../../../enums/popupType.enum';
 
 const LoginContainer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -19,11 +21,12 @@ const LoginContainer: React.FC = () => {
   const handleLogin = async () => {
     try {
       await dispatch(login({ email, password })).unwrap();  // Use unwrap to catch errors
-      
+      showSnackbar('Login Successful', PopupType.SUCCESS)
       navigate(from); // Redirect after successful login
     } catch (error) {
       console.error('Login error:', error);
-      alert('Login failed. Please try again.');
+      //alert('Login failed. Please try again.');
+      showSnackbar('Login failed. Please try again.', PopupType.ERROR)
     }
   };
 
