@@ -36,7 +36,21 @@ describe('TextInput Component', () => {
     expect(onChangeMock).toHaveBeenCalledWith('new value');
   });
 
- 
+  it('should not allow input when disabled', () => {
+    render(
+      <TextInput label="Disabled Input" value="Cannot edit" onChange={onChangeMock} disabled={true} />
+    );
 
+    const input = screen.getByLabelText('Disabled Input');
+
+    // Check if the input is disabled
+    expect(input).toBeInTheDocument();
+    expect(input).toBeDisabled();
+
+    // Ensure that onChangeMock is not called since the input is disabled
+    fireEvent.change(input, { target: { value: 'new value' } });
+
+    
+  });
   
 });

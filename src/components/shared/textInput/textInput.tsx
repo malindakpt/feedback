@@ -9,6 +9,7 @@ export interface TextInputProps {
   required?: boolean;
   type?: string;
   validateInput?: (value: string) => string;
+  disabled?: boolean;
 
   
 }
@@ -21,6 +22,7 @@ const TextInput: React.FC<TextInputProps> = ({
   required = false,
   type = 'text',
   validateInput,
+  disabled = false,
 
 }) => {
 
@@ -50,6 +52,7 @@ const TextInput: React.FC<TextInputProps> = ({
       type={type}
       error={Boolean(errorText)}
       helperText={errorText || ''}
+      disabled = {disabled}
       
       
     />

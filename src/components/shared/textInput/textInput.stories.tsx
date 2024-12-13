@@ -41,3 +41,11 @@ WithValidation.args = {
     return '';
   },
 };
+
+// Disabled Input Story
+export const Disabled = Template.bind({});
+Disabled.args = {
+  label: 'Disabled Input',
+  value: 'Cannot edit this field',
+  disabled: true,
+};

@@ -58,3 +58,12 @@ WithValidation.args = {
   value: '',
   required: true, // Validation enabled for this story
 };
+
+// New story for the disabled state
+export const Disabled = Template.bind({});
+Disabled.args = {
+  label: 'Disabled Date Input',
+  value: '',
+  required: false, // No validation applied for this story
+  disabled: true,  // Input is disabled
+};

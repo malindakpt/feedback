@@ -35,4 +35,19 @@ describe('DateInput Component', () => {
     // Check if onChangeMock is called with correct value
     expect(onChangeMock).toHaveBeenCalledWith('2024-02-01');
   });
+
+  it('should not allow changes when input is disabled', () => {
+    render(
+      <DateInput label="Start Date" value="2024-01-01" onChange={onChangeMock} disabled />
+    );
+
+    const input = screen.getByLabelText('Start Date');
+
+    expect(input).toBeDisabled();
+
+    fireEvent.change(input, { target: { value: '2024-02-01' } });
+
+    expect(input).toHaveValue('2024-01-01');
+  });
+
 });
