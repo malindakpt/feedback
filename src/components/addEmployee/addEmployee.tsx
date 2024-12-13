@@ -29,12 +29,7 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
       onSubmit={onSave}
     >
       {({ values, errors, touched, setFieldValue }) => {
-        const isCompanySelected = !!values.company;
-        const isBranchSelected = !!values.branch;
-        const isEmployeeIDEntered = !!values.empId;
-        const isNameEntered = !!values.name;
-        const isBirthdayEntered = !!values.birthday;
-
+        
         return (
           <Form>
             <AutoCompleteInput
@@ -50,7 +45,7 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
               onChange={(newValue) => setFieldValue("branch", newValue)}
               options={branch}
               required
-              disabled={!isCompanySelected}
+              disabled={!values.company}
             />
             <TextInput
               label="Employee ID"
@@ -58,7 +53,7 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
               value={values.empId}
               onChange={setFieldValue}
               required
-              disabled={!isBranchSelected}
+              disabled={!values.branch}
             />
             <TextInput
               label="Name"
@@ -66,7 +61,7 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
               value={values.name}
               onChange={setFieldValue}
               required
-              disabled={!isEmployeeIDEntered}
+              disabled={!values.empId}
             />
             <DateInput
               label="Birthday"
@@ -74,7 +69,7 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
               value={values.birthday}
               onChange={setFieldValue}
               required
-              disabled={!isNameEntered}
+              disabled={!values.name}
             />
             <TextInput
               label="NIC"
@@ -82,7 +77,7 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
               value={values.nic}
               onChange={setFieldValue}
               required
-              disabled={!isBirthdayEntered}
+              disabled={!values.birthday}
             />
             <ImageUploader
               onSelect={(file) => onImageChange(file)}
