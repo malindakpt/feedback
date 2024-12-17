@@ -3,7 +3,10 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { PopupType } from '../../enums/popupType.enum';
 
+
+const AUTO_HIDE_DURATION = 4000
 let snackbarHandler: ((text: string, type: PopupType) => void) | null = null;
+
 
 const SnackbarComponent: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -36,7 +39,7 @@ const SnackbarComponent: React.FC = () => {
     <>
       <Snackbar
         open={open}
-        autoHideDuration={4000}
+        autoHideDuration={AUTO_HIDE_DURATION}
         onClose={handleClose}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
