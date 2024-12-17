@@ -36,8 +36,9 @@ const AppRoutes: React.FC = () => {
 
           {/* ADMIN ROUTES */}
           <Route path="/login" element={<LoginContainer />} />
+          <Route path="register" element={<RegisterContainer />} />
           <Route path="/admin" element={<AdminLayout />}>
-            <Route path="register" element={<RegisterContainer />} />
+            
 
             {/* Protected Admin Routes */}
             <Route element={<PrivateRoute />}>
