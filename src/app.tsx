@@ -3,12 +3,15 @@ import React from 'react';
 import AppRoutes from './routes/appRoutes';
 // import AddEmployee from './components/addEmployee/addEmployee';
 import AddEmployeeContainer from "./components/addEmployee/addEmployeeContainer";
+
+import Example from "../src/hooks/example"
+
 const App: React.FC = () => {
   return (
       
     <div className="App">
-    <AddEmployeeContainer
-    />
+    <AddEmployeeContainer/>
+    {/* <Example/> */}
     </div>
   );
 }

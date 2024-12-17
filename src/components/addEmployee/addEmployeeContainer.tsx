@@ -9,41 +9,45 @@ import { Employee } from "../../interfaces/employee";
 import { readAllEntity } from "../../services/crudService";
 import {Company} from "../../interfaces/company"
 import { Branch } from "../../interfaces/branch";
+import { useFetchCompany } from "../../hooks/useFetchCompanies";
+import { useFetchBranch } from "../../hooks/useFetchBranches";
 
 const AddEmployeeContainer: React.FC = () => {
   const [employeeImage, setEmployeeImage] = useState<File | null>(null);
-  const [companyNames, setCompanyNames] = useState<string[]>([]);
-  const [branchNames, setBranchNames] = useState<string[]>([]);
+  // const [companyNames, setCompanyNames] = useState<string[]>([]);
+  // const [branchNames, setBranchNames] = useState<string[]>([]);
+  const { companies, loading: loadingCompanies, error: errorCompanies } = useFetchCompany();
+  const { branches, loading: loadingBranches, error: errorBranches } = useFetchBranch();
 
-  useEffect(() => {
-    const fetchCompanies = async () => {
-      try {
-        const companies = await readAllEntity<Company>(Collection.Companies);
-        if (companies) {
-          setCompanyNames(companies.map((company) => company.name));
-        }
-      } catch (error) {
-        console.error("Error fetching companies:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchCompanies = async () => {
+  //     try {
+  //       const companies = await readAllEntity<Company>(Collection.Companies);
+  //       if (companies) {
+  //         setCompanyNames(companies.map((company) => company.name));
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching companies:", error);
+  //     }
+  //   };
 
-    fetchCompanies();
-  }, []);
+  //   fetchCompanies();
+  // }, []);
 
-  useEffect(() => {
-    const fetchBranches = async () => {
-      try {
-        const branches = await readAllEntity<Branch>(Collection.Branches);
-        if (branches) {
-          setBranchNames(branches.map((branch) => branch.name));
-        }
-      } catch (error) {
-        console.error("Error fetching branches:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchBranches = async () => {
+  //     try {
+  //       const branches = await readAllEntity<Branch>(Collection.Branches);
+  //       if (branches) {
+  //         setBranchNames(branches.map((branch) => branch.name));
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching branches:", error);
+  //     }
+  //   };
 
-    fetchBranches();
-  }, []);
+  //   fetchBranches();
+  // }, []);
 
   const handleSave = async (values: Employee, { resetForm }: { resetForm: () => void }) => {
     try {
@@ -73,7 +77,10 @@ const AddEmployeeContainer: React.FC = () => {
       <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
         Add Employee
       </Typography>
-      <AddEmployeeForm onSave={handleSave} onImageChange={setEmployeeImage} company={companyNames} branch={branchNames}/>
+      <AddEmployeeForm onSave={handleSave} onImageChange={setEmployeeImage}
+      company={companies.map(company => company.name)}
+      branch={branches.map(branch => branch.name)}
+      />
     </Box>
   );
 };
