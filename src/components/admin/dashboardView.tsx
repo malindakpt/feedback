@@ -13,12 +13,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { Link } from 'react-router-dom';
 import userImage from '../resourses/profile.png'; // Adjust the path accordingly
+import useAuthenticatedUser from '../../hooks/useAuthenticatedUser';
 
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const { isAuthenticated, user } = useAuthenticatedUser();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -106,7 +108,8 @@ export default function PrimarySearchAppBar() {
           <Box sx={{ flexGrow: 1 }} />
           {/* Hardcoded username and avatar */}
           <Typography variant="body1" component="div" sx={{ marginRight: 2 }}>
-            Manjitha
+            {user?.email}
+            {/* Manjitha */}
           </Typography>
           <IconButton size="large" edge="end" aria-label="account of current user" aria-controls={menuId} aria-haspopup="true" onClick={handleProfileMenuOpen} color="inherit">
           <Avatar alt="user img" src={userImage} />

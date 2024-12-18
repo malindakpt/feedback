@@ -10,8 +10,8 @@ const App: React.FC = () => {
   return (
       
     <div className="App">
-    <AddEmployeeContainer/>
-    {/* <Example/> */}
+    <AppRoutes/>
+    <Example/>
     </div>
   );
 }

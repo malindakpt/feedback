@@ -1,21 +1,18 @@
 import React from 'react';
-import { useFetchEmployees } from '../hooks/useFetchEmployees';
+import useAuthenticatedUser from '../hooks/useAuthenticatedUser';
 
-const EmployeeList: React.FC = () => {
-  const { employees } = useFetchEmployees();
+const AuthStatus: React.FC = () => {
+  const { isAuthenticated, user } = useAuthenticatedUser();
 
   return (
     <div>
-      <h2>Employee List</h2>
-      <ul>
-        {employees.map((employee) => (
-          <li key={employee.id}>
-            {employee.id}
-          </li>
-        ))}
-      </ul>
+      {isAuthenticated ? (
+        <p>Welcome, {user?.displayName || user?.email}</p>
+      ) : (
+        <p>User not logged in.</p>
+      )}
     </div>
   );
 };
 
-export default EmployeeList;
+export default AuthStatus;
