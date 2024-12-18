@@ -5,7 +5,13 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
 interface CommentBoxProps {
+  lable: string;
   value: string;
+  name?: string;
+  required?: boolean;
+  type?: string;
+  disabled?: boolean;
+
   onChange: (value: string) => void;
 }
 
