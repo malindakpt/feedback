@@ -1,28 +1,35 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
 interface CommentBoxProps {
-  lable: string;
+  label: string;
   value: string;
   name?: string;
   required?: boolean;
-  type?: string;
   disabled?: boolean;
-
   onChange: (value: string) => void;
+  initialValue?: string;
 }
 
-export default function CommentBox({ value, onChange }: CommentBoxProps) {
-    const [isDefault, setIsDefault] = React.useState(value === 'Add your comment here..');
-  
-    React.useEffect(() => {
-      if (value !== 'Add your comment here..') {
-        setIsDefault(false);
-      }
-    }, [value]);
+const CommentBox: React.FC<CommentBoxProps> = ({
+  label,
+  value,
+  name,
+  required = false,
+  disabled = false,
+  onChange,
+  initialValue = 'Add your comment here..',
+}) => {
+  const [isDefault, setIsDefault] = useState(value === initialValue);
+
+  useEffect(() => {
+    if (value !== initialValue) {
+      setIsDefault(false);
+    }
+  }, [value, initialValue]);
 
   const predefinedTexts = [
     'Actually the service is very good.',
@@ -64,7 +71,7 @@ export default function CommentBox({ value, onChange }: CommentBoxProps) {
     if (value.trim() !== '') {
       // Perform action with the comment (e.g., dispatch to a store or send to a server)
     }
-    onChange('Add your comment here..');
+    onChange(initialValue);
     setIsDefault(true);
   };
 
@@ -80,12 +87,15 @@ export default function CommentBox({ value, onChange }: CommentBoxProps) {
       <div>
         <TextField
           id="outlined-multiline-static"
-          label="Comment"
+          label={label}
+          name={name}
+          required={required}
           multiline
           rows={4}
           value={value}
           onChange={handleInputChange}
           onFocus={handleFocus}
+          disabled={disabled}
         />
       </div>
       <Stack direction="row" spacing={{ xs: 1, sm: 2 }} sx={{ m: 1 }} useFlexGap flexWrap="wrap">
@@ -94,11 +104,19 @@ export default function CommentBox({ value, onChange }: CommentBoxProps) {
             key={index}
             variant="outlined"
             onClick={() => handleAddText(text)}
+            disabled={disabled}
           >
             {text}
           </Button>
         ))}
       </Stack>
+      <Box sx={{ textAlign: 'right', m: 1 }}>
+        <Button variant="contained" onClick={handleAddComment}>
+          Add Comment
+        </Button>
+      </Box>
     </Box>
   );
-}
+};
+
+export default CommentBox;
