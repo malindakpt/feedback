@@ -51,13 +51,15 @@ const LoginForm: React.FC<LoginFormProps> = ({
       >
         {t('login.submit')}
       </Button>
+
       <Link to="/forgotpassword" style={{ textDecoration: 'none', marginTop: '1rem', display: 'block' }}>
         {t('login.forgotPassword')}
       </Link>
-      <Typography variant="body2" sx={{ mt: 2 }}>
-        {t('login.noAccount')}{' '}
-        <Link to="/admin/register">{t('login.register')}</Link>.
-      </Typography>
+      <p>
+      {t('login.noAccount')}{' '}
+        <Link to="/register">{t('login.register')}</Link>.
+      </p>
+
     </Container>
   );
 };
