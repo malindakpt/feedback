@@ -38,18 +38,18 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.user = null;
-      state.isAuthenticated = false; // Reset isAuthenticated on logout
+      state.isAuthenticated = false;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
         state.user = action.payload;
-        state.isAuthenticated = true; // Set isAuthenticated on successful login
+        state.isAuthenticated = true;
       })
-      .addCase(login.rejected, (state) => {
+      .addCase(login.rejected, (state, action: PayloadAction<string | undefined>) => {
         state.user = null;
-        state.isAuthenticated = false; // Reset isAuthenticated on failure
+        state.isAuthenticated = false;
       });
   },
 });
