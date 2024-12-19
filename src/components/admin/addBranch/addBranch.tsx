@@ -1,5 +1,3 @@
-// src/components/branch/addBranchForm.tsx
-
 import React from "react";
 import { Formik, Form } from "formik";
 import { Button, Typography } from "@mui/material";
@@ -8,13 +6,15 @@ import ImageUploader from "../../shared/ImageUploader/imageUploader";
 import { Branch } from "../../../interfaces/branch";
 import { defaultBranch } from "./defaultBranch";
 import { branchValidationSchema } from "../../validationSchema/branchValidationSchema";
+import AutoCompleteInput from "../../shared/autoCompleteInput";
 
-interface AddBranchFormProps {
+export interface AddBranchFormProps {
   onSave: (values: Branch, helpers:{resetForm:() => void}  ) => void;
   onImageChange: (file: File | null) => void;
+  company: string[];
 }
 
-const AddBranchForm: React.FC<AddBranchFormProps> = ({ onSave, onImageChange }) => {
+const AddBranch: React.FC<AddBranchFormProps> = ({ onSave, onImageChange , company }) => {
   
   return (
     <Formik
@@ -22,12 +22,20 @@ const AddBranchForm: React.FC<AddBranchFormProps> = ({ onSave, onImageChange }) 
       validationSchema={branchValidationSchema}
       onSubmit={onSave}
     >
-      {({ values, setFieldValue }) => (
+      {({ values, setFieldValue , isValid , dirty }) => (
         <Form>
-          <TextInput
+          <AutoCompleteInput
             label="Company"
-            name="company"
             value={values.company}
+            onChange={(newValue) => setFieldValue("company", newValue)}
+            options={company}
+            required
+
+          />
+          <TextInput
+            label="Branch ID"
+            name="branchId"
+            value={values.branchId}
             onChange={setFieldValue}
             required
           />
@@ -38,6 +46,7 @@ const AddBranchForm: React.FC<AddBranchFormProps> = ({ onSave, onImageChange }) 
             onChange={setFieldValue}
             required
           />
+          
           <TextInput
             label="Location"
             name="location"
@@ -68,6 +77,7 @@ const AddBranchForm: React.FC<AddBranchFormProps> = ({ onSave, onImageChange }) 
             color="primary"
             fullWidth
             sx={{ mt: 2 }}
+            disabled={!isValid || !dirty}
           >
             Add Branch
           </Button>
@@ -77,4 +87,4 @@ const AddBranchForm: React.FC<AddBranchFormProps> = ({ onSave, onImageChange }) 
   );
 };
 
-export default AddBranchForm;
+export default AddBranch;
