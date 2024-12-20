@@ -17,7 +17,7 @@ import CompanyView from '../components/admin/companyView';
 import BranchStatView from '../components/admin/singleView/branchStatView';
 import EmployeeStatView from '../components/admin/singleView/employeeStatView';
 import Dashboard from '../components/admin/dashboardView';
-import Example from "../hooks/example"
+//import Example from "../hooks/example"
 
 // USER
 import BranchFeedback from "../components/usersView/branchFeedback";
@@ -59,7 +59,7 @@ const AppRoutes: React.FC = () => {
             <Route path="branchFeedback/:id" element={<BranchFeedback />} />
             <Route path="employeesList/:id" element={<EmployeeFeedback />} />
             <Route path="employee/:id" element={<SingleEmployeeFeedback />} />
-            <Route path="isAuthenticated" element={<Example/>} />
+            {/* <Route path="isAuthenticated" element={<Example/>} /> */}
           </Route>
         </Route>
       </Routes>

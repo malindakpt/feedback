@@ -10,8 +10,8 @@ const App: React.FC = () => {
   return (
       
     <div className="App">
-    <AppRoutes/>
-    <Example/>
+    {/* <AddEmployeeContainer/> */}
+    <Example empId={'ASF'}/>
     </div>
   );
 }
