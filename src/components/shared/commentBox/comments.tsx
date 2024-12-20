@@ -69,7 +69,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({
 
   const handleAddComment = () => {
     if (value.trim() !== '') {
-      // Perform action with the comment (e.g., dispatch to a store or send to a server)
+      alert(`Comment added: ${value}`);
     }
     onChange(initialValue);
     setIsDefault(true);
