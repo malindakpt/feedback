@@ -4,14 +4,14 @@ import AppRoutes from './routes/appRoutes';
 // import AddEmployee from './components/addEmployee/addEmployee';
 import AddEmployeeContainer from "./components/addEmployee/addEmployeeContainer";
 
-import Example from "../src/hooks/example"
+import EmployeeReviewPage from "./hooks/employeeReview"
 
 const App: React.FC = () => {
   return (
       
     <div className="App">
     {/* <AddEmployeeContainer/> */}
-    <Example empId={'ASF'}/>
+    <EmployeeReviewPage/>
     </div>
   );
 }

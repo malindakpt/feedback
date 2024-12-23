@@ -33,6 +33,7 @@ const Button: React.FC<ButtonProps> = ({
       variant={variant}
       onClick={handleClick} // Call the wrapped handler
       {...props}
+      disabled={props.disabled}
     >
       {text}
     </MuiButton>
