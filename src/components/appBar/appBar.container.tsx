@@ -1,31 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SelectChangeEvent } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../../services/auth/firebase';
 import i18n from '../languageSelector/i18n';
 import AppBarForm from './appBar';
 
 const AppBarContainer: React.FC = () => {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [language, setLanguage] = useState('en'); // Default language
+  const [userName, setUserName] = useState('');
+  const [userAvatar, setUserAvatar] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // Retrieve current language from URL or default to 'en'
   const location = useLocation();
   const navigate = useNavigate();
   const currentParams = new URLSearchParams(location.search);
-  const currentLanguage = currentParams.get('lang') || 'en';
 
-  const [language, setLanguage] = useState(currentLanguage);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDoc = await getDoc(userDocRef);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          setUserName(userData.name || '');
+          setUserAvatar(userData.profilePhoto || '');
+        }
+      } else {
+        setIsLoggedIn(false);
+        setUserName('');
+        setUserAvatar('');
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -35,21 +51,25 @@ const AppBarContainer: React.FC = () => {
   const handleLanguageChange = (event: SelectChangeEvent) => {
     const selectedLanguage = event.target.value;
     setLanguage(selectedLanguage);
-    i18n.changeLanguage(selectedLanguage); // Change the language globally
+    i18n.changeLanguage(selectedLanguage);
 
-    // Update the `lang` query parameter in the URL
     currentParams.set('lang', selectedLanguage);
     navigate(`${location.pathname}?${currentParams.toString()}`);
   };
 
+  const handleLogin = () => {
+    navigate('/login'); // Redirect to login page
+  };
+
   return (
     <AppBarForm
-      anchorElNav={anchorElNav}
-      anchorElUser={anchorElUser}
       language={language}
-      onOpenNavMenu={handleOpenNavMenu}
+      userName={userName}
+      userAvatar={userAvatar}
+      isLoggedIn={isLoggedIn}
+      onLogin={handleLogin}
+      anchorElUser={anchorElUser}
       onOpenUserMenu={handleOpenUserMenu}
-      onCloseNavMenu={handleCloseNavMenu}
       onCloseUserMenu={handleCloseUserMenu}
       onLanguageChange={handleLanguageChange}
     />
