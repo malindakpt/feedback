@@ -79,7 +79,7 @@ const CommentBox: React.FC<CommentBoxProps> = ({
     <Box
       component="form"
       sx={{
-        '& .MuiTextField-root': { m: 1, width: '90ch' },
+        '& .MuiTextField-root': { m: 1, width: '100%' },
       }}
       noValidate
       autoComplete="off"
@@ -110,11 +110,6 @@ const CommentBox: React.FC<CommentBoxProps> = ({
           </Button>
         ))}
       </Stack>
-      <Box sx={{ textAlign: 'right', m: 1 }}>
-        <Button variant="contained" onClick={handleAddComment}>
-          Add Comment
-        </Button>
-      </Box>
     </Box>
   );
 };
