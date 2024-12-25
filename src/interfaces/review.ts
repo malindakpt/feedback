@@ -1,11 +1,11 @@
 interface Review {
-    companyID: string;
-    branchID?: string;
-    employeeID?: string;
+    companyId: string;
+    branchId?: string;
+    employeeId?: string;
     reviewerName: string | null;
     rating: number;
     comment: string;
     date: string;
-    imageURL?: string
+    imageUrl?: string
   }
   
