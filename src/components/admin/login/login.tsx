@@ -42,7 +42,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPas
       </Button>
       <p>
       {t('login.noAccount')}{' '}
-        <Link to="/admin/register">{t('login.register')}</Link>.
+        <Link to="/register">{t('login.register')}</Link>.
       </p>
     </Container>
   );
