@@ -38,20 +38,20 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.user = null;
-      state.isAuthenticated = false;
+      
   
     },
   },
   extraReducers: (builder) => {
     builder
-    .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
-      state.user = action.payload;
-      state.isAuthenticated = true;
+      // .addCase(login.pending, (state) => {
+      // })
+      .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
+        state.user = action.payload;
       })
-    .addCase(login.rejected, (state, action: PayloadAction<string | undefined>) => {
-      state.user = null;
-      state.isAuthenticated = false;
-    });
+      // .addCase(login.rejected, (state, action: PayloadAction<string | undefined>) => {
+      //   state.user = null;
+      // });
   },
 });
 
