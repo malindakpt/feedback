@@ -1,4 +1,4 @@
-interface Review {
+export interface Review {
     companyId: string;
     branchId?: string;
     employeeId?: string;

@@ -1,19 +1,22 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import { useEmployeeByEmpId } from "./useEmployeeByEmpId";
 import { StarReview } from "../components/shared/rating/starReview";
 import CommentBox from "../components/shared/comments";
-import TextInput from "../components/shared/textInput/textInput";
 import Button from "../components/shared/button/button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
+import { createEntity } from "../services/crudService";
+import { Collection } from "../enums/collections.enum";
+import { Review } from "../interfaces/review";
+import dayjs from "dayjs";
 
 const EmployeeReviewPage: React.FC = () => {
-  const [empId, setEmpId] = useState<string>("");
-  const [searchEmpId, setSearchEmpId] = useState<string>("");
+  const { empID } = useParams<{ empID: string }>();
   const [rating, setRating] = useState<number | null>(null);
   const [comment, setComment] = useState<string>("");
-  const { employee, loading, error } = useEmployeeByEmpId(searchEmpId); // Fetch employee based on searchEmpId
+  const { employee, loading, error } = useEmployeeByEmpId(empID || "");
 
   const handleRatingChange = (value: number | null) => {
     setRating(value);
@@ -23,25 +26,33 @@ const EmployeeReviewPage: React.FC = () => {
     setComment(value);
   };
 
-  const handleSubmit = () => {
-    console.log({
-      employeeId: empId,
+  const handleSubmit = async () => {
+    if (!rating || !empID) {
+      alert("Please provide a rating and ensure employee details are loaded.");
+      return;
+    }
+
+    const review: Review = {
+      companyId: employee?.company || "",
+      branchId: employee?.branch || "",
+      employeeId: empID,
+      reviewerName: "Anonymous",
       rating,
       comment,
-    });
-    alert("Review submitted successfully!");
-    setRating(null);
-    setComment("");
-  };
+      date: dayjs().format("YYYY-MM-DD"),
+    };
 
-  const handleInputChange = (name: string, value: string) => {
-    if (name === "empId") {
-      setEmpId(value);
+    try {
+      const reviewId = await createEntity<Review>(Collection.Reviews, review);
+      if (reviewId) {
+        alert("Review submitted successfully!");
+        setRating(null);
+        setComment("");
+      }
+    } catch (error) {
+      console.error("Error submitting review:", error);
+      alert("Failed to submit the review. Please try again.");
     }
-  };
-
-  const handleSearch = () => {
-    setSearchEmpId(empId);
   };
 
   return (
@@ -49,21 +60,6 @@ const EmployeeReviewPage: React.FC = () => {
       <Typography variant="h4" gutterBottom>
         Employee Review Page
       </Typography>
-
-      {/* Employee Search Section */}
-      <TextInput
-        label="Enter Employee ID"
-        name="empId"
-        value={empId}
-        onChange={handleInputChange}
-        required
-      />
-      <Button
-        text="Search"
-        color="primary"
-        variant="contained"
-        onClick={handleSearch}
-      />
 
       {/* Loading, Error, or Employee Details */}
       {loading && <Typography>Loading...</Typography>}
@@ -87,7 +83,7 @@ const EmployeeReviewPage: React.FC = () => {
               sx={{
                 width: 100,
                 height: 100,
-                borderRadius: 0, // Makes the Avatar square
+                borderRadius: 0,
                 border: "1px solid #ccc",
               }}
             />

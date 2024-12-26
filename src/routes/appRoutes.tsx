@@ -24,6 +24,8 @@ import BranchFeedback from "../components/usersView/branchFeedback";
 import EmployeeFeedback from "../components/usersView/employeesFeedback";
 import SingleEmployeeFeedback from "../components/usersView/employerFeedback";
 
+import EmployeeReviewPage from "../hooks/employeeReview";
+
 // LAYOUTS
 import AdminLayout from "./adminLayout";
 import UserLayout from "./userLayouts";
@@ -61,6 +63,9 @@ const AppRoutes: React.FC = () => {
             <Route path="employeesList/:id" element={<EmployeeFeedback />} />
             <Route path="employee/:id" element={<SingleEmployeeFeedback />} />
             {/* <Route path="isAuthenticated" element={<Example/>} /> */}
+
+            {/* EMPLOYEE REVIEW ROUTE */}
+          <Route path="/employeeReview/:empID" element={<EmployeeReviewPage />} />
           </Route>
         </Route>
       </Routes>

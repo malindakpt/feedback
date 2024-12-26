@@ -11,7 +11,7 @@ const App: React.FC = () => {
       
     <div className="App">
     {/* <AddEmployeeContainer/> */}
-    <EmployeeReviewPage/>
+    <AppRoutes/>
     </div>
   );
 }
