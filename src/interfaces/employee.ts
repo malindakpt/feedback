@@ -1,7 +1,7 @@
 export interface Employee {
     id?: string;
-    company: string;
-    branch: string;
+    companyId: string;
+    branchId: string;
     empId: string;
     name: string;
     birthday: string;
