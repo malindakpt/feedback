@@ -1,48 +1,54 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TextField } from '@mui/material';
+import {  useFormikContext } from 'formik';
 
 export interface TextInputProps {
   label: string;
-  value: string;
-  onChange: (value: string) => void;
-  name?: string;
+  name: string;
   required?: boolean;
   type?: string;
-  validateInput?: (value: string) => string;
+  errorText?: string | false;
   disabled?: boolean;
 
-  
+
 }
 
 const TextInput: React.FC<TextInputProps> = ({
   label,
-  value,
-  onChange,
   name,
   required = false,
   type = 'text',
-  validateInput,
+  errorText,
   disabled = false,
 
 }) => {
 
-  const [errorText, setErrorText] = useState<string>('');
+  
+  const formikProps = useFormikContext<any>()
+  
+  
 
-  const handleBlur = () => {
-    if (validateInput) {
-      const error = validateInput(value);
-      setErrorText(error);
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (formikProps && formikProps.handleBlur) {
+      formikProps.handleBlur(e);
     }
-  }
-  
-
-  
-  return (
     
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (formikProps && formikProps.setFieldValue) {
+      formikProps.setFieldValue(name, e.target.value);
+    }
+  };
+
+  const fieldValue = formikProps?  formikProps.values[name] : '';
+
+  return (
+
     <TextField
       label={label}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
+      value={fieldValue}
+      onChange={handleChange}
       onBlur={handleBlur}
       name={name}
       required={required}
@@ -53,8 +59,8 @@ const TextInput: React.FC<TextInputProps> = ({
       error={Boolean(errorText)}
       helperText={errorText || ''}
       disabled = {disabled}
-      
-      
+
+
     />
   );
 };
