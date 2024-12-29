@@ -8,11 +8,15 @@ import { defaultBranch } from "./defaultBranch";
 import { branchValidationSchema } from "../../validationSchema/branchValidationSchema";
 import AutoCompleteInput from "../../shared/autoCompleteInput";
 
+
+
 export interface AddBranchFormProps {
   onSave: (values: Branch, helpers:{resetForm:() => void}  ) => void;
   onImageChange: (file: File | null) => void;
   company: string[];
 }
+
+
 
 const AddBranch: React.FC<AddBranchFormProps> = ({ onSave, onImageChange , company }) => {
   
@@ -21,45 +25,47 @@ const AddBranch: React.FC<AddBranchFormProps> = ({ onSave, onImageChange , compa
       initialValues={defaultBranch}
       validationSchema={branchValidationSchema}
       onSubmit={onSave}
+      validateOnBlur
+      validateOnChange
+      
     >
-      {({ values, setFieldValue , isValid , dirty }) => (
+      {({ values, setFieldValue , isValid , dirty , errors , touched }) => (
         <Form>
           <AutoCompleteInput
-            label="Company"
-            value={values.company}
-            onChange={(newValue) => setFieldValue("company", newValue)}
-            options={company}
-            required
-
-          />
+              label="Company"
+              value={values.company}
+              onChange={(newValue) => setFieldValue("company", newValue)}
+              options={company}
+              required
+            />
           <TextInput
             label="Branch ID"
             name="branchId"
-            value={values.branchId}
-            onChange={setFieldValue}
-            required
+            
+            errorText={errors.branchId && touched.branchId ? errors.branchId : ""}
+  
           />
           <TextInput
             label="Branch Name"
             name="branchName"
-            value={values.branchName}
-            onChange={setFieldValue}
-            required
+            
+            errorText={ errors.branchId && touched.branchName ? errors.branchName : ""}
+            
           />
           
           <TextInput
             label="Location"
             name="location"
-            value={values.location}
-            onChange={setFieldValue}
-            required
+            
+            errorText={errors.location && touched.location ? errors.location : ""}
+            
           />
           <TextInput
             label="Contact Number"
             name="contactNumber"
-            value={values.contactNumber}
-            onChange={setFieldValue}
-            required
+            
+            errorText={errors.contactNumber && touched.contactNumber ? errors.contactNumber : "" }
+            
           />
 
           {/* Image Upload Section */}

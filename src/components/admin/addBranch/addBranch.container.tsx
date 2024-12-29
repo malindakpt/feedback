@@ -1,33 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { Box, Typography } from "@mui/material";
 import AddBranchForm from "./addBranch";
 import { Branch } from "../../../interfaces/branch";
 import { useCreateBranchMutation, useUploadImageMutation } from "../../../services/api/branchApi";
-import { readAllEntity } from "../../../services/crudService";
-import { Company } from "../../../interfaces/company";
-import { Collection } from "../../../enums/collections.enum";
+// import { readAllEntity } from "../../../services/crudService";
+// import { Company } from "../../../interfaces/company";
+// import { Collection } from "../../../enums/collections.enum";
+import { useFetchCompany } from "../../../hooks/useFetchCompanies";
 
 const AddBranchContainer: React.FC = () => {
+  const { companies } = useFetchCompany();
   const [branchImage, setBranchImage] = useState<File | null>(null);
-  const [companyNames, setCompanyNames] = useState<string[]>([]);
+  // const [companyNames, setCompanyNames] = useState<string[]>([]);
   const [createBranch] = useCreateBranchMutation();
   const [uploadImage] = useUploadImageMutation();
 
-    // Fetch company names
-    useEffect(() => {
-      const fetchCompanies = async () => {
-        try {
-          const companies = await readAllEntity<Company>(Collection.Companies);
-          if (companies) {
-            setCompanyNames(companies.map((company) => company.name));
-          }
-        } catch (error) {
-          console.error("Error fetching companies:", error);
-        }
-      };
+    //  // Fetch company names
+    //  useEffect(() => {
+    //   const fetchCompanies = async () => {
+    //     try {
+    //       const companies = await readAllEntity<Company>(Collection.Companies);
+    //       if (companies) {
+    //         setCompanyNames(companies.map((company) => company.name));
+    //       }
+    //     } catch (error) {
+    //       console.error("Error fetching companies:", error);
+    //     }
+    //   };
   
-      fetchCompanies();
-    }, []);
+    //   fetchCompanies();
+    // }, []);
 
   const handleSave = async (
     values: Branch,
@@ -61,7 +63,8 @@ const AddBranchContainer: React.FC = () => {
       <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
         Add Branch
       </Typography>
-      <AddBranchForm onSave={handleSave} onImageChange={setBranchImage} company={companyNames} />
+      <AddBranchForm onSave={handleSave} onImageChange={setBranchImage}  company={companies.map((company) => company.name)} />
+      
     </Box>
   );
 };
