@@ -1,8 +1,7 @@
 export interface Employee {
-    id?: string;
     companyId: string;
     branchId: string;
-    empId: string;
+    employeeId: string;
     name: string;
     birthday: string;
     nic: string;

@@ -1,30 +1,45 @@
-import { useState, useEffect } from 'react';
-import { readAllEntity } from '../services/crudService';
-import { Collection } from "../enums/collections.enum";
+import { useState, useEffect } from "react";
+import { readAllEntity } from "../services/crudService";
 import { Employee } from "../interfaces/employee";
+import { Collection } from "../enums/collections.enum";
 
-export const useFetchEmployees = () => {
+export const useFetchEmployee = (employeeId?: string) => {
   const [employees, setEmployees] = useState<Employee[]>([]);
+  const [employee, setEmployee] = useState<Employee | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchEmployees = async () => {
+    const fetchData = async () => {
       try {
-        const employeeData = await readAllEntity<Employee>(Collection.Employee);
-        if (employeeData) {
-          setEmployees(employeeData);
+        setLoading(true);
+        setError(null);
+
+        const data = await readAllEntity<Employee>(Collection.Employee);
+
+        if (data) {
+          setEmployees(data);
+
+          if (employeeId) {
+            const foundEmployee = data.find((employee) => employee.employeeId === employeeId);
+            if (foundEmployee) {
+              setEmployee(foundEmployee);
+            } else {
+              console.log("No matching employee found!");
+              setEmployee(null);
+            }
+          }
         }
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching employees:", error);
         setError("Failed to fetch employees.");
+      } finally {
         setLoading(false);
       }
     };
 
-    fetchEmployees();
-  }, []);
+    fetchData();
+  }, [employeeId]);
 
-  return { employees, loading, error };
+  return { employees, employee, loading, error };
 };

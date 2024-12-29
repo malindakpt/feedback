@@ -1,30 +1,45 @@
 import { useEffect, useState } from "react";
 import { readAllEntity } from "../services/crudService";
-import { Collection } from "../enums/collections.enum";
 import { Branch } from "../interfaces/branch";
+import { Collection } from "../enums/collections.enum";
 
-export const useFetchBranch = () => {
+export const useFetchBranch = (branchId?: string) => {
   const [branches, setBranches] = useState<Branch[]>([]);
+  const [branch, setBranch] = useState<Branch | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchBranches = async () => {
+    const fetchData = async () => {
       try {
-        const branchData = await readAllEntity<Branch>(Collection.Branches);
-        if (branchData) {
-          setBranches(branchData);
+        setLoading(true);
+        setError(null);
+
+        const data = await readAllEntity<Branch>(Collection.Branches);
+
+        if (data) {
+          setBranches(data);
+
+          if (branchId) {
+            const foundEmployee = data.find((branch) => branch.branchId === branchId);
+            if (foundEmployee) {
+              setBranch(foundEmployee);
+            } else {
+              console.log("No matching branch found!");
+              setBranch(null);
+            }
+          }
         }
-      } catch (err) {
-        console.error("Error fetching branches:", err);
+      } catch (error) {
+        console.error("Error fetching branches:", error);
         setError("Failed to fetch branches.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchBranches();
-  }, []);
+    fetchData();
+  }, [branchId]);
 
-  return { branches, loading, error };
+  return { branches, branch, loading, error };
 };
