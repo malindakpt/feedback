@@ -99,8 +99,8 @@ const AddEmployeeContainer: React.FC = () => {
       <AddEmployeeForm
         onSave={handleSave}
         onImageChange={setEmployeeImage}
-        company={companies.map((company) => company.name)}
-        branch={branches.map((branch) => branch.name)}
+        company={companies.map((company) => company.companyId)}
+        branch={branches.map((branch) => branch.branchId)}
       />
     </Box>
   );

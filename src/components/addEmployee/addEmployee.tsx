@@ -34,18 +34,18 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
           <Form>
             <AutoCompleteInput
               label="Company"
-              value={values.company}
-              onChange={(newValue) => setFieldValue("company", newValue)}
+              value={values.companyId}
+              onChange={(newValue) => setFieldValue("companyId", newValue)}
               options={company}
               required
             />
             <AutoCompleteInput
               label="Branch"
-              value={values.branch}
-              onChange={(newValue) => setFieldValue("branch", newValue)}
+              value={values.branchId}
+              onChange={(newValue) => setFieldValue("branchId", newValue)}
               options={branch}
               required
-              disabled={!values.company}
+              disabled={!values.companyId}
             />
             <TextInput
               label="Employee ID"
@@ -53,7 +53,7 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
               value={values.empId}
               onChange={setFieldValue}
               required
-              disabled={!values.branch}
+              disabled={!values.branchId}
             />
             <TextInput
               label="Name"

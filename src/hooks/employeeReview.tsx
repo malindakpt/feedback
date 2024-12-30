@@ -11,12 +11,14 @@ import { createEntity } from "../services/crudService";
 import { Collection } from "../enums/collections.enum";
 import { Review } from "../interfaces/review";
 import dayjs from "dayjs";
+import useAuthenticatedUser from './useAuthenticatedUser';
 
 const EmployeeReviewPage: React.FC = () => {
   const { empID } = useParams<{ empID: string }>();
   const [rating, setRating] = useState<number | null>(null);
   const [comment, setComment] = useState<string>("");
   const { employee, loading, error } = useEmployeeByEmpId(empID || "");
+  const { isAuthenticated, user } = useAuthenticatedUser();
 
   const handleRatingChange = (value: number | null) => {
     setRating(value);
@@ -33,13 +35,13 @@ const EmployeeReviewPage: React.FC = () => {
     }
 
     const review: Review = {
-      companyId: employee?.company || "",
-      branchId: employee?.branch || "",
+      companyId: employee?.companyId || "",
+      branchId: employee?.branchId || "",
       employeeId: empID,
-      reviewerName: "Anonymous",
+      reviewerId: user?.email || "Anonymous",
       rating,
       comment,
-      date: dayjs().format("YYYY-MM-DD"),
+      date: dayjs().format("YYYY-MM-DD HH:mm:ss"), 
     };
 
     try {
@@ -89,8 +91,8 @@ const EmployeeReviewPage: React.FC = () => {
             />
             <Box>
               <Typography>Name: {employee.name}</Typography>
-              <Typography>Company: {employee.company}</Typography>
-              <Typography>Branch: {employee.branch}</Typography>
+              <Typography>Company ID: {employee.companyId}</Typography>
+              <Typography>Branch ID: {employee.branchId}</Typography>
               <Typography>NIC: {employee.nic}</Typography>
               <Typography>Birthday: {employee.birthday}</Typography>
             </Box>

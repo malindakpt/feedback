@@ -1,6 +1,6 @@
 export const employeeInitialValues = {
-    company: "",
-    branch: "",
+    companyId: "",
+    branchId: "",
     empId: "",
     name: "",
     birthday: "",
