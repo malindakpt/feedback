@@ -1,13 +1,14 @@
 import React from 'react';
 import { TextField } from '@mui/material';
 
-interface DateInputProps {
+export interface DateInputProps {
   label: string;
   value: string;
   onChange: (value: string) => void;
   name?: string;
   error?: boolean;
   required?: boolean;
+  disabled?: boolean;
 }
 
 const DateInput: React.FC<DateInputProps> = ({
@@ -17,6 +18,7 @@ const DateInput: React.FC<DateInputProps> = ({
   name,
   error = false,
   required = false,
+  disabled = false,
 }) => {
   return (
     <TextField
@@ -29,6 +31,7 @@ const DateInput: React.FC<DateInputProps> = ({
       variant="outlined"
       fullWidth
       margin="normal"
+      disabled={disabled}
       type="date" 
       InputLabelProps={{
         shrink: true, 
