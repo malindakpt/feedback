@@ -1,32 +1,64 @@
 import React from 'react';
-import { Meta, StoryFn } from '@storybook/react';
-import { StarReview, StarReviewProps } from './starReview';
+import { StoryFn, Meta } from '@storybook/react';
+import { StarReview, StarReviewProps } from './starReview'; // Adjust the import based on your project structure
+import { Formik, Form } from 'formik'; // Import Formik components
 
 export default {
-  title: 'Components/Rating/StarReview',
+  title: 'Components/StarReview',
   component: StarReview,
   argTypes: {
-    type: {
-      control: { type: 'radio' },
-      options: ['star', 'face'],
+    name: {
+      control: 'text',
+      description: 'The name of the field for formik context',
     },
-    onRatingChange: { action: 'rating changed' },
+    type: {
+      control: { type: 'select', options: ['star', 'face'] },
+      description: 'The type of rating (star or face)',
+    },
+    errorText: {
+      control: 'text',
+      description: 'Error text to display below the rating component',
+    },
   },
 } as Meta;
 
-const Template: StoryFn<StarReviewProps> = (args: StarReviewProps) => (
-  <StarReview
-    {...args}
-    onRatingChange={(value) => {
-      console.log(`Selected rating: ${value}`);
-      args.onRatingChange(value);
+const Template: StoryFn<StarReviewProps> = (args) => (
+  <Formik
+    initialValues={{ rating: '' }} // Provide initial values for Formik
+    onSubmit={(values) => {
+      console.log(values);
     }}
-  />
+  >
+    <Form>
+      <StarReview {...args} />
+    </Form>
+  </Formik>
 );
 
-export const StarRating = Template.bind({});
-StarRating.args = {
+export const Default = Template.bind({});
+Default.args = {
+  name: 'rating',
   type: 'star',
+  errorText: '',
 };
 
+export const WithErrorText = Template.bind({});
+WithErrorText.args = {
+  name: 'rating',
+  type: 'star',
+  errorText: 'This field is required',
+};
 
+export const FaceRating = Template.bind({});
+FaceRating.args = {
+  name: 'rating',
+  type: 'face',
+  errorText: '',
+};
+
+export const FaceRatingWithError = Template.bind({});
+FaceRatingWithError.args = {
+  name: 'rating',
+  type: 'face',
+  errorText: 'Please rate using stars',
+};

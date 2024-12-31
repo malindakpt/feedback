@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import { Stack, Rating } from '@mui/material';
+import React from 'react';
+import { Stack, Rating, FormHelperText } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
 import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import { useFormikContext } from 'formik';
 
 export interface StarReviewProps {
-  onRatingChange: (value: number | null) => void;
+  name: string;
   type?: 'star' | 'face';
+  errorText?: string | false; // New prop for error text
 }
 
 export const customIcons: { [index: number]: { icon: React.ReactElement } } = {
@@ -46,12 +48,13 @@ function IconContainer(props: { value: number; selectedValue: number | null }) {
   );
 }
 
-export const StarReview: React.FC<StarReviewProps> = ({ onRatingChange, type = 'star' }) => {
-  const [value, setValue] = useState<number | null>(null);
+export const StarReview: React.FC<StarReviewProps> = ({ name, type = 'star', errorText }) => {
+  const { values, setFieldValue } = useFormikContext<any>();
+
+  const value = values[name] || null;
 
   const handleChange = (_event: React.ChangeEvent<unknown>, newValue: number | null) => {
-    setValue(newValue);
-    onRatingChange(newValue);
+    setFieldValue(name, newValue);
   };
 
   return (
@@ -60,20 +63,21 @@ export const StarReview: React.FC<StarReviewProps> = ({ onRatingChange, type = '
         <Rating
           value={value}
           onChange={handleChange}
-          precision={0.5}
-          size="large"
-          emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-          data-testid="face-rating"
+          IconContainerComponent={(props) => <IconContainer {...props} selectedValue={value} />}
+          highlightSelectedOnly
+          data-testid="star-rating"
         />
       ) : (
         <Rating
           value={value}
           onChange={handleChange}
-          IconContainerComponent={(props) => <IconContainer {...props} selectedValue={value} />}
-          highlightSelectedOnly
-          data-testid="star-rating"
+          precision={0.5}
+          size="large"
+          emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+          data-testid="face-rating"
         />
       )}
+      {errorText && <FormHelperText error>{errorText}</FormHelperText>}
     </Stack>
   );
 };
