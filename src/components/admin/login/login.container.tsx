@@ -10,16 +10,14 @@ const LoginContainer: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
-  const dispatch: AppDispatch = useDispatch(); // Use AppDispatch for type-safe dispatch
+  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const from = (location.state as LocationState)?.from?.pathname || '/admin/dashboard';
-  // const { isAuthenticated, status, error } = useSelector((state: RootState) => state.auth);
 
-  const handleLogin = async () => {
+  const handleLogin = async (email: string, password: string) => {
     try {
       await dispatch(login({ email, password })).unwrap();  // Use unwrap to catch errors
-      
       navigate(from); // Redirect after successful login
     } catch (error) {
       console.error('Login error:', error);
