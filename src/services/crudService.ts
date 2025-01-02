@@ -9,6 +9,11 @@ import {
     updateDoc,
     WithFieldValue,
     PartialWithFieldValue,
+    query,
+    QueryConstraint,
+    where,
+    WhereFilterOp,
+    FirestoreError
   } from "firebase/firestore";
   import { db } from "./auth/firebase";
   import { Collection } from "../enums/collections.enum";
@@ -83,5 +88,41 @@ import {
       return dataList;
     } catch (error) {
       console.error("Error reading documents: ", error);
+    }
+  };
+  export interface FilterCondition {
+    field: string;
+    operator: WhereFilterOp;
+    value: any;
+  }
+  export const readFilteredEntity = async <T extends DocumentData>(
+    collectionName: Collection,
+    filters: FilterCondition[]
+  ): Promise<T[] | undefined> => {
+    try {
+      const collectionRef = collection(db, collectionName);
+      const firebaseFilters: QueryConstraint[] = filters.map((filter) =>
+        where(filter.field,(filter.operator), filter.value)
+      );
+  
+      const q = query(collectionRef, ...firebaseFilters);
+      const snapshot = await getDocs(q);
+  
+      const dataList = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as unknown as T[];
+  
+      return dataList;
+    } catch (error) {
+      if (error instanceof FirestoreError) {
+        if (error.code === 'failed-precondition') {
+          console.error("This query requires an index. Please create the necessary index in the Firebase Console. See more details here:", error.message);
+        } else {
+          console.error("Error reading filtered documents: ", error);
+        }
+      } else {
+        console.error("Unexpected error:", error);
+      }
     }
   };

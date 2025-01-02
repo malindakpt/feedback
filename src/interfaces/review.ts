@@ -1,8 +1,8 @@
-interface Review {
+export interface Review {
     companyId: string;
     branchId?: string;
     employeeId?: string;
-    reviewerName: string | null;
+    reviewerId: string | null;
     rating: number;
     comment: string;
     date: string;
