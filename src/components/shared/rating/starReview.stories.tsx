@@ -60,5 +60,5 @@ export const FaceRatingWithError = Template.bind({});
 FaceRatingWithError.args = {
   name: 'rating',
   type: 'face',
-  errorText: 'Please rate using stars',
+  errorText: 'Please rate using faces',
 };
