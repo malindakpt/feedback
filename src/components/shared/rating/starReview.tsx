@@ -11,7 +11,7 @@ import { useFormikContext } from 'formik';
 export interface StarReviewProps {
   name: string;
   type?: 'star' | 'face';
-  errorText?: string | false; // New prop for error text
+  errorText?: string | false;
 }
 
 export const customIcons: { [index: number]: { icon: React.ReactElement } } = {
