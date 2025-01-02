@@ -1,53 +1,57 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import DateInput from './dateInput'; 
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { Formik, Form } from "formik";
+import DateInput, { DateInputProps } from "./dateInput";
 
-describe('DateInput Component', () => {
-  const onChangeMock = jest.fn();
+describe("DateInput Component with Formik", () => {
+  const initialValues = { startDate: "" };
 
-  it('should render with label and value', () => {
+  const renderWithFormik = (props: DateInputProps) =>
     render(
-      <DateInput label="Start Date" value="2024-01-01" onChange={onChangeMock} />
+      <Formik
+        initialValues={initialValues}
+        validate={(values) => {
+          const errors: { startDate?: string } = {};
+          if (!values.startDate) {
+            errors.startDate = "Date is required";
+          }
+          return errors;
+        }}
+        onSubmit={() => {}}
+      >
+        <Form>
+          <DateInput {...props} />
+        </Form>
+      </Formik>
     );
 
-    const input = screen.getByLabelText('Start Date');
+  it("should render with label and name", () => {
+    renderWithFormik({ label: "Start Date", name: "startDate" });
 
-    // Check if the input is rendered
+    const input = screen.getByLabelText("Start Date");
+
     expect(input).toBeInTheDocument();
-
-    // Check if the input has the correct value
-    expect(input).toHaveValue('2024-01-01');
+    expect(input).toHaveValue(""); // Initial value from Formik
   });
 
-  it('should call onChange handler when input changes', () => {
-    render(
-      <DateInput label="Start Date" value="" onChange={onChangeMock} />
-    );
+  it("should reflect changes in Formik state", () => {
+    renderWithFormik({ label: "Start Date", name: "startDate" });
 
-    const input = screen.getByLabelText('Start Date');
+    const input = screen.getByLabelText("Start Date");
 
-    fireEvent.change(input, { target: { value: '2024-02-01' } });
+    fireEvent.change(input, { target: { value: "2024-02-01" } });
 
-    // Check if onChangeMock is called
-    expect(onChangeMock).toHaveBeenCalledTimes(1);
-
-    // Check if onChangeMock is called with correct value
-    expect(onChangeMock).toHaveBeenCalledWith('2024-02-01');
+    expect(input).toHaveValue("2024-02-01");
   });
 
-  it('should not allow changes when input is disabled', () => {
-    render(
-      <DateInput label="Start Date" value="2024-01-01" onChange={onChangeMock} disabled />
-    );
+  it("should show validation error", async () => {
+    renderWithFormik({ label: "Start Date", name: "startDate" });
 
-    const input = screen.getByLabelText('Start Date');
+    const input = screen.getByLabelText("Start Date");
 
-    expect(input).toBeDisabled();
+    fireEvent.blur(input); // Trigger validation
 
-    fireEvent.change(input, { target: { value: '2024-02-01' } });
-
-    expect(input).toHaveValue('2024-01-01');
+    const errorMessage = await screen.findByText("Date is required");
+    expect(errorMessage).toBeInTheDocument();
   });
-
 });

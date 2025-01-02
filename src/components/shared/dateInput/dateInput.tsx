@@ -1,43 +1,40 @@
-import React from 'react';
-import { TextField } from '@mui/material';
+import React from "react";
+import { TextField } from "@mui/material";
+import { useField } from "formik";
 
 export interface DateInputProps {
   label: string;
-  value: string;
-  onChange: (value: string) => void;
-  name?: string;
-  error?: boolean;
+  name: string; // Required for Formik integration
   required?: boolean;
   disabled?: boolean;
 }
 
-const DateInput: React.FC<DateInputProps> = ({
+const DateInput = ({
   label,
-  value,
-  onChange,
   name,
-  error = false,
   required = false,
   disabled = false,
-}) => {
+}: DateInputProps) => {
+  const [field, meta] = useField(name);
+
   return (
     <TextField
+      {...field}
       label={label}
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      name={name}
-      error={error}
       required={required}
+      disabled={disabled}
       variant="outlined"
       fullWidth
       margin="normal"
-      disabled={disabled}
-      type="date" 
+      type="date"
       InputLabelProps={{
-        shrink: true, 
+        shrink: true,
       }}
+      error={!!meta.error && meta.touched}
+      helperText={meta.touched && meta.error ? meta.error : ""}
     />
   );
 };
 
 export default DateInput;
+
