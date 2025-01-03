@@ -33,6 +33,14 @@ WithValidation.args = {
   required: true,
 };
 
+export const WithCustomErrorText = Template.bind({});
+WithCustomErrorText.args = {
+  label: "Select a Date",
+  name: "date",
+  required: true,
+  errorText: "Custom error message",
+};
+
 export const Disabled = Template.bind({});
 Disabled.args = {
   label: "Disabled Date Input",

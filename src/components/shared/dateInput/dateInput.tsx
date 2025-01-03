@@ -4,9 +4,10 @@ import { useField } from "formik";
 
 export interface DateInputProps {
   label: string;
-  name: string; // Required for Formik integration
+  name: string;
   required?: boolean;
   disabled?: boolean;
+  errorText?: string | false; 
 }
 
 const DateInput = ({
@@ -14,8 +15,12 @@ const DateInput = ({
   name,
   required = false,
   disabled = false,
+  errorText,
 }: DateInputProps) => {
   const [field, meta] = useField(name);
+
+  const showError = !!meta.error && meta.touched;
+  const helperText = errorText || (showError ? meta.error : "");
 
   return (
     <TextField
@@ -30,11 +35,10 @@ const DateInput = ({
       InputLabelProps={{
         shrink: true,
       }}
-      error={!!meta.error && meta.touched}
-      helperText={meta.touched && meta.error ? meta.error : ""}
+      error={!!helperText}
+      helperText={helperText}
     />
   );
 };
 
 export default DateInput;
-
