@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { Stack, Rating } from '@mui/material';
-import StarIcon from '@mui/icons-material/Star';
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
-import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
-import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
-import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import React from "react";
+import { Stack, Rating } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
+import SentimentDissatisfiedIcon from "@mui/icons-material/SentimentDissatisfied";
+import SentimentSatisfiedIcon from "@mui/icons-material/SentimentSatisfied";
+import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAltOutlined";
+import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
 
 export interface StarReviewProps {
   onRatingChange: (value: number | null) => void;
-  type?: 'star' | 'face';
+  type?: "star" | "face";
+  value?: number | null; 
 }
 
 export const customIcons: { [index: number]: { icon: React.ReactElement } } = {
@@ -20,17 +21,20 @@ export const customIcons: { [index: number]: { icon: React.ReactElement } } = {
   5: { icon: <SentimentVerySatisfiedIcon /> },
 };
 
-function IconContainer(props: { value: number; selectedValue: number | null }) {
-  const { value, selectedValue, ...other } = props;
+interface IconContainerProps {
+  value: number;
+  selectedValue: number | null;
+}
 
+function IconContainer({ value, selectedValue, ...other }: IconContainerProps) {
   const iconColor =
     selectedValue === value
       ? value <= 2
-        ? 'red'
+        ? "red"
         : value === 3
-        ? 'yellow'
-        : '#02e11d'
-      : 'gray';
+        ? "yellow"
+        : "#02e11d"
+      : "gray";
 
   return (
     <span
@@ -38,7 +42,7 @@ function IconContainer(props: { value: number; selectedValue: number | null }) {
       data-testid={`icon-container-${value}`}
       style={{
         color: iconColor,
-        transition: 'color 0.3s',
+        transition: "color 0.3s",
       }}
     >
       {customIcons[value].icon}
@@ -46,19 +50,23 @@ function IconContainer(props: { value: number; selectedValue: number | null }) {
   );
 }
 
-export const StarReview: React.FC<StarReviewProps> = ({ onRatingChange, type = 'star' }) => {
-  const [value, setValue] = useState<number | null>(null);
-
-  const handleChange = (_event: React.ChangeEvent<unknown>, newValue: number | null) => {
-    setValue(newValue);
+export const StarReview: React.FC<StarReviewProps> = ({
+  onRatingChange,
+  type = "star",
+  value,
+}) => {
+  const handleChange = (
+    _event: React.ChangeEvent<unknown>,
+    newValue: number | null
+  ) => {
     onRatingChange(newValue);
   };
 
   return (
     <Stack spacing={2}>
-      {type === 'face' ? (
+      {type === "face" ? (
         <Rating
-          value={value}
+          value={value || 0} // Controlled value with fallback
           onChange={handleChange}
           precision={0.5}
           size="large"
@@ -67,9 +75,11 @@ export const StarReview: React.FC<StarReviewProps> = ({ onRatingChange, type = '
         />
       ) : (
         <Rating
-          value={value}
+          value={value || 0} // Controlled value with fallback
           onChange={handleChange}
-          IconContainerComponent={(props) => <IconContainer {...props} selectedValue={value} />}
+          IconContainerComponent={(props) => (
+            <IconContainer {...props} selectedValue={value || null} />
+          )}
           highlightSelectedOnly
           data-testid="star-rating"
         />

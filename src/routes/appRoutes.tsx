@@ -23,9 +23,13 @@ import BranchFeedback from "../components/usersView/branchFeedback";
 import EmployeeFeedback from "../components/usersView/employeesFeedback";
 import SingleEmployeeFeedback from "../components/usersView/employerFeedback";
 
+// REVIEW PAGE
+import ReviewCompanyContainer from "../components/reviewCompany/reviewCompany.container";
+
 // LAYOUTS
 import AdminLayout from "./adminLayout";
 import UserLayout from "./userLayouts";
+
 
 const AppRoutes: React.FC = () => {
   return (
@@ -38,8 +42,6 @@ const AppRoutes: React.FC = () => {
           <Route path="/login" element={<LoginContainer />} />
           <Route path="register" element={<RegisterContainer />} />
           <Route path="/admin" element={<AdminLayout />}>
-            
-
             {/* Protected Admin Routes */}
             <Route element={<PrivateRoute />}>
               <Route path="branch-manager" element={<BranchManager />} />
@@ -60,6 +62,9 @@ const AppRoutes: React.FC = () => {
             <Route path="employeesList/:id" element={<EmployeeFeedback />} />
             <Route path="employee/:id" element={<SingleEmployeeFeedback />} />
           </Route>
+
+          {/* REVIEW COMPANY PAGE */}
+          <Route path="/review-company/:companyId"element={<ReviewCompanyContainer />} />
         </Route>
       </Routes>
     </Router>

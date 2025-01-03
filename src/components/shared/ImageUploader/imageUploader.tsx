@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, IconButton } from "@mui/material";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto"; // Replace the camera icon
-import { retrieveImage, deleteImage } from "../../../services/imageUploaderService"; // Ensure these services exist and are correct
+import { retrieveImage} from "../../../services/imageUploaderService"; // Ensure these services exist and are correct
 import defaultImage from "../../resourses/defaultImage.jpg"; // Import the default image
 
 interface ImageUploaderProps {
