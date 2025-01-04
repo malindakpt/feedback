@@ -1,5 +1,13 @@
 # Getting Started with Create React App
 
+To get started with this app, follow these steps:
+
+1. **Rename the `.env.sample` file**  
+   Copy or rename the `.env.sample` file to `.env` in the root directory.
+
+2. **Fill in the Firebase Configuration**  
+   Populate the `.env` file with your Firebase project configuration values.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
