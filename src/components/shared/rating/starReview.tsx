@@ -12,6 +12,7 @@ export interface StarReviewProps {
   name: string;
   type?: 'star' | 'face';
   errorText?: string | false;
+  disabled?: boolean;
 }
 
 export const customIcons: { [index: number]: { icon: React.ReactElement } } = {
@@ -48,13 +49,15 @@ function IconContainer(props: { value: number; selectedValue: number | null }) {
   );
 }
 
-export const StarReview: React.FC<StarReviewProps> = ({ name, type = 'star', errorText }) => {
+export const StarReview: React.FC<StarReviewProps> = ({ name, type = 'star', errorText , disabled = false }) => {
   const { values, setFieldValue } = useFormikContext<any>();
 
   const value = values[name] || null;
 
   const handleChange = (_event: React.ChangeEvent<unknown>, newValue: number | null) => {
-    setFieldValue(name, newValue);
+    if (!disabled) {
+      setFieldValue(name, newValue);
+    }
   };
 
   return (
@@ -66,6 +69,7 @@ export const StarReview: React.FC<StarReviewProps> = ({ name, type = 'star', err
           IconContainerComponent={(props) => <IconContainer {...props} selectedValue={value} />}
           highlightSelectedOnly
           data-testid="star-rating"
+          disabled={disabled}
         />
       ) : (
         <Rating
@@ -75,6 +79,7 @@ export const StarReview: React.FC<StarReviewProps> = ({ name, type = 'star', err
           size="large"
           emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
           data-testid="face-rating"
+          disabled={disabled}
         />
       )}
       {errorText && <FormHelperText error>{errorText}</FormHelperText>}

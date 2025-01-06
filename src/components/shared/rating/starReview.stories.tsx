@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { StarReview, StarReviewProps } from './starReview'; // Adjust the import based on your project structure
-import { Formik, Form } from 'formik'; // Import Formik components
+import { StarReview, StarReviewProps } from './starReview';
+import { Formik, Form } from 'formik';
 
 export default {
   title: 'Components/StarReview',
@@ -19,12 +19,16 @@ export default {
       control: 'text',
       description: 'Error text to display below the rating component',
     },
+    disabled: {
+      control: 'boolean',
+      description: 'Whether the rating component is disabled',
+    },
   },
 } as Meta;
 
 const Template: StoryFn<StarReviewProps> = (args) => (
   <Formik
-    initialValues={{ rating: '' }} // Provide initial values for Formik
+    initialValues={{ rating: '' }}
     onSubmit={(values) => {
       console.log(values);
     }}
@@ -40,6 +44,7 @@ Default.args = {
   name: 'rating',
   type: 'star',
   errorText: '',
+  disabled: false,
 };
 
 export const WithErrorText = Template.bind({});
@@ -47,6 +52,7 @@ WithErrorText.args = {
   name: 'rating',
   type: 'star',
   errorText: 'This field is required',
+  disabled: false,
 };
 
 export const FaceRating = Template.bind({});
@@ -54,6 +60,7 @@ FaceRating.args = {
   name: 'rating',
   type: 'face',
   errorText: '',
+  disabled: false,
 };
 
 export const FaceRatingWithError = Template.bind({});
@@ -61,4 +68,21 @@ FaceRatingWithError.args = {
   name: 'rating',
   type: 'face',
   errorText: 'Please rate using faces',
+  disabled: false,
+};
+
+export const DisabledRating = Template.bind({});
+DisabledRating.args = {
+  name: 'rating',
+  type: 'star',
+  errorText: '',
+  disabled: true,
+};
+
+export const DisabledFaceRating = Template.bind({});
+DisabledFaceRating.args = {
+  name: 'rating',
+  type: 'face',
+  errorText: '',
+  disabled: true,
 };
