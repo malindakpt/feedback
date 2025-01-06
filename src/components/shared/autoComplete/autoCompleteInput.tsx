@@ -7,7 +7,7 @@ export interface AutoCompleteInputProps {
   label: string;
   name: string;
   options: AutoCompleteOption[];
-  onChange?: (value: string) => void;
+  onChange?: (name: string, newValue: string) => void;
   required?: boolean;
   validateInput?: (value: string) => string;
   disabled?: boolean;
@@ -20,7 +20,7 @@ const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
   required = false,
   validateInput,
   disabled = false,
-  onChange, // Ensure the prop is destructured
+  onChange, 
 }) => {
   const { values, setFieldValue, errors, touched, handleBlur } = useFormikContext<any>();
   const selectedOption = options.find((option) => option.id === values[name]) || null;
@@ -31,7 +31,7 @@ const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
       const error = validateInput(values[name]);
       setErrorText(error);
     }
-    handleBlur({ target: { name } }); // Ensures Formik's `handleBlur` is triggered
+    handleBlur({ target: { name } }); 
   };
 
   return (
@@ -41,7 +41,7 @@ const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
         const newValueId = newValue?.id || '';
         setFieldValue(name, newValueId);
         if (onChange) {
-          onChange(newValueId); // Call the passed onChange prop
+          onChange(name, newValueId); 
         }
       }}
       onBlur={handleFieldBlur}
@@ -68,6 +68,5 @@ const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
     />
   );
 };
-
 
 export default AutoCompleteInput;
