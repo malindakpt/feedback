@@ -1,61 +1,68 @@
 import React, { useState } from 'react';
 import { Autocomplete, TextField } from '@mui/material';
+import { AutoCompleteOption } from '../../../interfaces/autoCompleteOptions';
+import { useFormikContext } from 'formik';
 
 export interface AutoCompleteInputProps {
-  label: string; 
-  value: string; 
-  onChange: (value: string) => void; 
-  options: string[]; 
-  required?: boolean; 
-  validateInput?: (value: string) => string; 
+  label: string;
+  name: string;
+  options: AutoCompleteOption[];
+  onChange?: (name: string, newValue: string) => void;
+  required?: boolean;
+  validateInput?: (value: string) => string;
   disabled?: boolean;
 }
 
 const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
   label,
-  value,
-  onChange,
+  name,
   options,
   required = false,
   validateInput,
   disabled = false,
+  onChange, 
 }) => {
+  const { values, setFieldValue, errors, touched, handleBlur } = useFormikContext<any>();
+  const selectedOption = options.find((option) => option.id === values[name]) || null;
   const [errorText, setErrorText] = useState<string>('');
 
-  const handleBlur = () => {
+  const handleFieldBlur = () => {
     if (validateInput) {
-      const error = validateInput(value);
+      const error = validateInput(values[name]);
       setErrorText(error);
     }
+    handleBlur({ target: { name } }); 
   };
 
   return (
     <Autocomplete
-      value={value}
+      value={selectedOption}
       onChange={(_, newValue) => {
-        onChange(newValue || '');
+        const newValueId = newValue?.id || '';
+        setFieldValue(name, newValueId);
+        if (onChange) {
+          onChange(name, newValueId); 
+        }
       }}
-      onBlur={handleBlur}
+      onBlur={handleFieldBlur}
       options={options}
       fullWidth
       ListboxProps={{
         style: {
-          maxHeight: '140px', 
-          overflow: 'auto', 
+          maxHeight: '140px',
+          overflow: 'auto',
         },
       }}
       disabled={disabled}
-      
       renderInput={(params) => (
         <TextField
           {...params}
           label={label}
           variant="outlined"
           required={required}
-          error={Boolean(errorText)}
+          error={Boolean(errors[name] && touched[name]) || Boolean(errorText)}
           helperText={errorText || ''}
           margin="normal"
-          
         />
       )}
     />
