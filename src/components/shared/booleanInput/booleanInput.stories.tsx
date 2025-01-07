@@ -1,37 +1,51 @@
-import React, { useState } from "react";
-import { Meta, StoryFn } from "@storybook/react";
-import BooleanInput, { BooleanInputProps } from "./booleanInput";
+import React from 'react';
+import { StoryFn, Meta } from '@storybook/react';
+import BooleanInput, { BooleanInputProps } from './booleanInput';
+import { Formik } from 'formik';
 
+// Storybook metadata
 export default {
-  title: "Shared/BooleanInput",
+  title: 'Components/BooleanInput',
   component: BooleanInput,
   argTypes: {
-    onChange: { action: "changed" },
-    disabled: { control: "boolean" },
+    name: { control: 'text' },
+    errorText: { control: 'text' },
+    disabled: { control: 'boolean' },
   },
 } as Meta;
 
-const Template: StoryFn<BooleanInputProps> = (args) => {
-  const [state, setState] = useState<boolean>(args.value || false);
+// Template for rendering the BooleanInput component
+const Template: StoryFn<BooleanInputProps> = (args) => (
+  <Formik
+    initialValues={{ [args.name]: false }} // Initialize form with default false value
+    onSubmit={() => console.log('Form submitted')}
+  >
+    {() => <BooleanInput {...args} />}
+  </Formik>
+);
 
-  const handleChange = (name: string, newValue: boolean) => {
-    setState(newValue);
-    args.onChange?.(name, newValue);
-  };
-
-  return <BooleanInput {...args} value={state} onChange={handleChange} />;
-};
-
+// Default story: controlling all props
 export const Default = Template.bind({});
 Default.args = {
-  value: false,
-  name: "defaultSwitch",
+  name: 'enableFeature',
+  errorText: '',
   disabled: false,
 };
 
+// Story with error message
+export const WithError = Template.bind({});
+WithError.args = {
+  name: 'enableFeatureWithError',
+  errorText: 'This field is required',
+  disabled: false,
+};
+
+// Story with disabled switch
 export const Disabled = Template.bind({});
 Disabled.args = {
-  value: true,
-  name: "disabledSwitch",
+  name: 'disabledFeature',
+  errorText: '',
   disabled: true,
 };
+
+
