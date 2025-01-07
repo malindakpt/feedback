@@ -1,35 +1,76 @@
 import React, { useState } from 'react';
-import RegisterForm from './register';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../../../services/auth/firebase';
 import { useNavigate } from 'react-router-dom';
+import { auth } from '../../../services/auth/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import RegisterForm from './register';
+import { createEntity } from '../../../services/crudService';
+import { Collection } from '../../../enums/collections.enum';
+import { useFetchCompany } from '../../../hooks/useFetchCompanies';
+import { uploadImage } from '../../../services/imageUploaderService';
 
 const RegisterContainer: React.FC = () => {
-  const [serviceNu, setServiceNu] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Use useNavigate from react-router-dom
+  const navigate = useNavigate();
+  const { companies } = useFetchCompany();
+  const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
 
-  const handleRegister = async () => {
+  const handleRegister = async (values: any) => {
+    const { email, password, firstName, lastName, company, branch, position } = values;
+  
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert('Registration successful');
-      navigate('/login'); // Redirect to login page after successful registration
-    } catch (error) {
-      console.error('Registration error', error);
-      alert('Unsuccessful registration. Please try again.');
+      // Step 1: Authenticate user and get UID
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const uid = userCredential.user.uid;
+  
+      let profileImageUrl = '';
+  
+      // Step 2: Upload the image using UID as the file name
+      if (profileImageFile) {
+        const uniqueFileName = `${uid}.jpg`; // Use UID as file name
+        profileImageUrl = await uploadImage('profile-images', uniqueFileName, profileImageFile);
+      }
+  
+      // Step 3: Save user data to Firestore
+      const userData = {
+        fullName: `${firstName} ${lastName}`,
+        email,
+        company,
+        branch,
+        position,
+        profileImage: profileImageUrl, // Include profile image URL
+        status: 'pending',
+        uid,
+        createdAt: new Date().toISOString(),
+      };
+  
+      const userId = await createEntity(Collection.Users, userData);
+  
+      if (userId) {
+        alert('Registration successful');
+        navigate('/login');
+      } else {
+        throw new Error('Failed to save user data to Firestore');
+      }
+    } catch (error: any) {
+      console.error('Registration error:', error.message || error);
+      alert(`Unsuccessful registration. Please try again. Error: ${error.message || error}`);
     }
   };
+  
+
+  const handleImageChange = (file: File | null) => {
+    setProfileImageFile(file);
+  };
+
+  const companyOptions = companies.map((company) => ({
+    id: company.id, // assuming company has an `id` field
+    label: company.name, // assuming company has a `name` field
+  }));
 
   return (
     <RegisterForm
-      serviceNu={serviceNu}
-      email={email}
-      password={password}
-      setserviceNu={setServiceNu}
-      setEmail={setEmail}
-      setPassword={setPassword}
       handleRegister={handleRegister}
+      companyOptions={companyOptions}
+      onImageChange={handleImageChange}
     />
   );
 };
