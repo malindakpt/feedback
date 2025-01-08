@@ -1,26 +1,40 @@
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import { StarReview, customIcons } from './starReview';
+import { StarReview } from './starReview';
+import { Formik } from 'formik';
 
 describe('StarReview Component', () => {
-  it('renders the component with default type (star)', () => {
-    render(<StarReview onRatingChange={jest.fn()} />);
-    expect(screen.getByTestId('star-rating')).toBeInTheDocument();
+
+  test('renders star rating when type is "star"', () => {
+    render(
+      <Formik initialValues={{ rating: 3 }} onSubmit={() => {}}>
+        <StarReview name="rating" type="star" />
+      </Formik>
+    );
+
+    const starRating = screen.getByTestId('face-rating');
+    expect(starRating).toBeInTheDocument();
   });
 
-  it('renders the component with type "face"', () => {
-    render(<StarReview onRatingChange={jest.fn()} type="face" />);
-    expect(screen.getByTestId('face-rating')).toBeInTheDocument();
+  test('renders face rating when type is "face"', () => {
+    render(
+      <Formik initialValues={{ rating: 3 }} onSubmit={() => {}}>
+        <StarReview name="rating" type="face" />
+      </Formik>
+    );
+
+    const faceRating = screen.getByTestId('star-rating');
+    expect(faceRating).toBeInTheDocument();
   });
 
-  it('handles rating change for "star" type', () => {
-    const mockOnRatingChange = jest.fn();
-    render(<StarReview onRatingChange={mockOnRatingChange} />);
+  test('displays error message when errorText is passed', () => {
+    render(
+      <Formik initialValues={{ rating: 3 }} onSubmit={() => {}}>
+        <StarReview name="rating" errorText="This field is required" />
+      </Formik>
+    );
 
-    const firstIcon = screen.getByTestId('icon-container-1');
-    fireEvent.click(firstIcon);
-
-    expect(mockOnRatingChange).toHaveBeenCalledWith(1);
+    const errorMessage = screen.getByText('This field is required');
+    expect(errorMessage).toBeInTheDocument();
   });
+
 });

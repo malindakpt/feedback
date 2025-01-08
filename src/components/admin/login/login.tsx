@@ -1,49 +1,67 @@
 import React from 'react';
-import { TextField, Button, Container } from '@mui/material';
+import { Button, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Formik, Form } from 'formik';
+import { loginValidationSchema } from '../../../validationSchema/loginValidationSchema'; 
+import TextInput from '../../shared/textInput/textInput'; 
 
 interface LoginFormProps {
   email: string;
   password: string;
   setEmail: (email: string) => void;
   setPassword: (password: string) => void;
-  handleLogin: () => void;
+  handleLogin: (email: string, password: string) => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ email, password, setEmail, setPassword, handleLogin }) => {
+const LoginForm: React.FC<LoginFormProps> = ({ handleLogin }) => {
   const { t } = useTranslation();
+
   return (
     <Container maxWidth="sm" className="login-form-container">
-      <h1 >{t('login.title')}</h1>
-      <TextField
-        label={t('login.email')}
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <TextField
-        label={t('login.password')}
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleLogin}
+      <h1>{t('login.title')}</h1>
+
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        validationSchema={loginValidationSchema} 
+        onSubmit={(values) => {
+          handleLogin(values.email, values.password);
+        }}
       >
-        {t('login.submit')}
-      </Button>
-      <p>
-      {t('login.noAccount')}{' '}
-        <Link to="/register">{t('login.register')}</Link>.
-      </p>
+        {({  isSubmitting , touched , errors}) => (
+          <Form>
+            <TextInput
+              label={t('login.email')}
+              name="email"
+              errorText={errors.email && touched.email ? errors.email : "" }
+              required
+            />
+
+            <TextInput
+              label={t('login.password')}
+              name="password"
+              type="password"
+              errorText={errors.password && touched.password ? errors.password : ""}
+              required
+            />
+
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              disabled={isSubmitting}
+            >
+              {t('login.submit')}
+            </Button>
+
+            <p>
+              {t('login.noAccount')}{' '}
+              <Link to="/register">{t('login.register')}</Link>.
+            </p>
+          </Form>
+        )}
+      </Formik>
     </Container>
   );
 };

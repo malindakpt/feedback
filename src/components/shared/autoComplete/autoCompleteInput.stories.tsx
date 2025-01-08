@@ -1,56 +1,52 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Meta, StoryFn } from '@storybook/react';
+import { Formik } from 'formik';
 import AutoCompleteInput, { AutoCompleteInputProps } from './autoCompleteInput';
 
 export default {
-  title: 'Shared/AutoCompleteInput', 
-  component: AutoCompleteInput,      
+  title: 'Shared/AutoCompleteInput',
+  component: AutoCompleteInput,
 } as Meta;
 
+const Template: StoryFn<AutoCompleteInputProps> = (args) => (
+  <Formik initialValues={{ [args.name]: '' }} onSubmit={() => {}}>
+    <AutoCompleteInput {...args} />
+  </Formik>
+);
 
-const Template: StoryFn<AutoCompleteInputProps> = (args) => {
-  const [value, setValue] = useState<string>(args.value || '');
-
-  return (
-    <AutoCompleteInput
-      {...args}
-      value={value}
-      onChange={(val) => setValue(val)}
-    />
-  );
-};
-
-// Default Story
 export const Default = Template.bind({});
 Default.args = {
   label: 'Select an Option',
-  value: '',
-  options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+  name: 'defaultAutocomplete',
+  options: [
+    { id: '1', label: 'Option 1' },
+    { id: '2', label: 'Option 2' },
+    { id: '3', label: 'Option 3' },
+  ],
   required: false,
   disabled: false,
 };
 
-// Story with Disabled Input
 export const Disabled = Template.bind({});
 Disabled.args = {
   label: 'Disabled Autocomplete',
-  value: '',
-  options: ['options'],
+  name: 'disabledAutocomplete',
+  options: [{ id: '1', label: 'Option 1' }],
   disabled: true,
 };
 
-
-
-// Story with Validation
 export const WithValidation = Template.bind({});
 WithValidation.args = {
   label: 'With Validation',
-  value: '',
-  options: ['Valid1', 'Valid2', 'Valid3'],
+  name: 'validationAutocomplete',
+  options: [
+    { id: '1', label: 'Valid1' },
+    { id: '2', label: 'Valid2' },
+    { id: '3', label: 'Valid3' },
+  ],
   validateInput: (value: string) => {
     if (!value) return 'This field is required';
-    if (!['Valid1', 'Valid2', 'Valid3'].includes(value))
-      return 'Invalid option';
+    if (!['1', '2', '3'].includes(value)) return 'Invalid option';
     return '';
   },
 };

@@ -1,10 +1,10 @@
 import React from "react";
 import { styled, Switch } from "@mui/material";
+import { useFormikContext } from "formik";
 
 export interface BooleanInputProps {
-  value: boolean;
-  onChange: (name: string, value: boolean) => void;
   name: string;
+  errorText?: string | false;
   disabled?: boolean;
 }
 
@@ -41,24 +41,31 @@ const StyledSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const BooleanInput: React.FC<BooleanInputProps> = ({
-  value,
-  onChange,
   name,
+  errorText,
   disabled = false,
 }) => {
+  const formikProps = useFormikContext<Record<string, any>>();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (disabled) return;
-    onChange(name, e.target.checked);
+    if (formikProps?.setFieldValue) {
+      formikProps.setFieldValue(name, e.target.checked);
+    }
   };
+
+  const fieldValue = formikProps?.values[name] ?? false;
 
   return (
     <div style={{ textAlign: "center", marginTop: "20px" }}>
       <StyledSwitch
-        checked={value}
+        checked={fieldValue}
         onChange={handleChange}
         name={name}
         disabled={disabled}
       />
+      {errorText && (
+        <div style={{ color: "red", marginTop: "8px" }}>{errorText}</div>
+      )}
     </div>
   );
 };
