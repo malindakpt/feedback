@@ -52,6 +52,8 @@ const QrCodePopup: React.FC<QrCodePopupProps> = ({
               img {
                 margin-top: 20px;
               }
+
+              
             </style>
           </head>
           <body>
@@ -82,7 +84,7 @@ const QrCodePopup: React.FC<QrCodePopupProps> = ({
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         <Box sx={{ textAlign: "center", mt: 2 }}>
-          <Typography variant="h6">{heading}</Typography>
+          <Typography variant="h6"  sx={{ fontSize: { xs: "16px", sm: "20px" } }}>{heading}</Typography>
           <Typography variant="body1" sx={{ mb: 2 }}>
             {subheading}
           </Typography>
@@ -94,7 +96,10 @@ const QrCodePopup: React.FC<QrCodePopupProps> = ({
               <img
                 src={imageUrl}
                 alt="Retrieved Image"
-                style={{ maxWidth: "100%", height: "auto" }}
+                style={{ width: "100%",
+                  maxWidth: "200px",
+                  height: "auto",
+                  objectFit: "cover", }}
               />
             </Box>
           )}
