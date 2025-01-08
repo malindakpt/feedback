@@ -17,6 +17,7 @@ interface QrCodePopupProps {
   title?: string;
   heading?: string;
   subheading?: string;
+  imageUrl?: string;
 }
 
 const QrCodePopup: React.FC<QrCodePopupProps> = ({
@@ -26,8 +27,12 @@ const QrCodePopup: React.FC<QrCodePopupProps> = ({
   title = "",
   heading = "",
   subheading = "",
+  imageUrl,
 }) => {
   const printPopupContent = () => {
+    const qrCodeCanvas = document.querySelector("canvas")?.toDataURL();
+
+
     const popupWindow = window.open("", "_blank");
     if (popupWindow) {
       popupWindow.document.open();
@@ -54,8 +59,10 @@ const QrCodePopup: React.FC<QrCodePopupProps> = ({
             <h2>${heading}</h2>
             <p>${subheading}</p>
             <p><strong>QR Value:</strong> ${qrValue}</p>
+            ${imageUrl ? `<img src="${imageUrl}" alt="Retrieved Image" width="200" height="200"/>` : "" }
+
             <div>
-              <img src="${document.querySelector("canvas")?.toDataURL()}" alt="QR Code" width="150" height="150" />
+               ${qrCodeCanvas ? `<img src="${qrCodeCanvas}" alt="QR Code" width="150" height="150" />` : ""}
             </div>
             <script>
               window.onload = function() {
@@ -82,6 +89,15 @@ const QrCodePopup: React.FC<QrCodePopupProps> = ({
           <Typography variant="body2" sx={{ mb: 2 }}>
             QR Value: {qrValue}
           </Typography>
+          {imageUrl && (
+            <Box sx={{ mt: 2 }}>
+              <img
+                src={imageUrl}
+                alt="Retrieved Image"
+                style={{ maxWidth: "100%", height: "auto" }}
+              />
+            </Box>
+          )}
           <Box sx={{ mt: 2 }}>
             <QRCodeCanvas value={qrValue} size={150} />
           </Box>
