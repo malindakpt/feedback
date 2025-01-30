@@ -50,7 +50,7 @@ const AppRoutes: React.FC = () => {
                 path="employeeStatView/:id"
                 element={<EmployeeStatView />}
               />
-              <Route path="dashboard" element={<Dashboard />} />
+              {/* <Route path="dashboard" element={<Dashboard />} /> */}
             </Route>
           </Route>
 
