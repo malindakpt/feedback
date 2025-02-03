@@ -25,7 +25,7 @@ export const useFetchCompany = (companyId?: string) => {
             if (foundCompany) {
               setCompany(foundCompany);
             } else {
-              console.log("No matching employee found!");
+              console.log("No matching company found!");
               setCompany(null);
             }
           }

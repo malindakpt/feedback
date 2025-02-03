@@ -1,26 +1,42 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { Formik, Form } from "formik";
 import ImageUploader from "./imageUploader";
-import defaultImage from "../../resourses/defaultImage.jpg"; // Adjust path to default image if needed
+import defaultImage from "../../resourses/defaultImage.jpg"; // Adjust path if necessary
+
+// Helper function to wrap ImageUploader with Formik
+const renderWithFormik = (props: any) => {
+  return render(
+    <Formik
+      initialValues={{ profileImage: null }}
+      onSubmit={jest.fn()}
+    >
+      <Form>
+        <ImageUploader {...props} />
+      </Form>
+    </Formik>
+  );
+};
 
 describe("ImageUploader Component", () => {
   test("displays default image when no image is uploaded", () => {
-    render(<ImageUploader onSelect={() => {}} uploadedUrl={null} />);
+    renderWithFormik({ onSelect: jest.fn(), uploadedUrl: null });
     const image = screen.getByAltText("Profile");
     expect(image).toHaveAttribute("src", defaultImage);
   });
 
   test("displays uploaded image when uploadedUrl is provided", () => {
-    const mockUploadedUrl = "https://firebasestorage.googleapis.com/v0/b/feedback-system-fd636.appspot.com/o/profile-images%2Fprofile.png?alt=media";
-    render(<ImageUploader onSelect={() => {}} uploadedUrl={mockUploadedUrl} />);
+    const mockUploadedUrl =
+      "https://firebasestorage.googleapis.com/v0/b/feedback-system-fd636.appspot.com/o/profile-images%2Fprofile.png?alt=media";
+    renderWithFormik({ onSelect: jest.fn(), uploadedUrl: mockUploadedUrl });
     const image = screen.getByAltText("Profile");
     expect(image).toHaveAttribute("src", mockUploadedUrl);
   });
 
   test("opens preview dialog on file selection", async () => {
     const mockFile = new File(["dummy content"], "example.png", { type: "image/png" });
-    render(<ImageUploader onSelect={() => {}} uploadedUrl={null} />);
+    renderWithFormik({ onSelect: jest.fn(), uploadedUrl: null });
 
     const fileInput = screen.getByLabelText(/icon-button-file/i);
     await userEvent.upload(fileInput, mockFile);
@@ -32,7 +48,7 @@ describe("ImageUploader Component", () => {
   test("calls onSelect with the selected file on clicking Select button", async () => {
     const mockFile = new File(["dummy content"], "example.png", { type: "image/png" });
     const onSelectMock = jest.fn();
-    render(<ImageUploader onSelect={onSelectMock} uploadedUrl={null} />);
+    renderWithFormik({ onSelect: onSelectMock, uploadedUrl: null });
 
     const fileInput = screen.getByLabelText(/icon-button-file/i);
     await userEvent.upload(fileInput, mockFile);
@@ -46,7 +62,7 @@ describe("ImageUploader Component", () => {
   test("resets preview and does not call onSelect on clicking Cancel button", async () => {
     const mockFile = new File(["dummy content"], "example.png", { type: "image/png" });
     const onSelectMock = jest.fn();
-    render(<ImageUploader onSelect={onSelectMock} uploadedUrl={null} />);
+    renderWithFormik({ onSelect: onSelectMock, uploadedUrl: null });
 
     const fileInput = screen.getByLabelText(/icon-button-file/i);
     await userEvent.upload(fileInput, mockFile);
