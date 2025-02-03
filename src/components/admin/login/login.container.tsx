@@ -13,7 +13,7 @@ const LoginContainer: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = (location.state as LocationState)?.from?.pathname || '/admin/dashboard';
+  const from = (location.state as LocationState)?.from?.pathname || '/admin';
 
   const handleLogin = async (email: string, password: string) => {
     try {
@@ -21,7 +21,7 @@ const LoginContainer: React.FC = () => {
       navigate(from); // Redirect after successful login
     } catch (error) {
       console.error('Login error:', error);
-      alert('Login failed. Please try again.');
+      alert('Invalid username or password');
     }
   };
 
