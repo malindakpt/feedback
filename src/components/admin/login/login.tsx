@@ -24,11 +24,15 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleLogin }) => {
       <Formik
         initialValues={{ email: '', password: '' }}
         validationSchema={loginValidationSchema} 
-        onSubmit={(values) => {
-          handleLogin(values.email, values.password);
+        onSubmit={async (values, { setSubmitting}) => {
+          try {
+            await handleLogin(values.email, values.password);
+          } catch (error) {
+            setSubmitting(false);
         }}
+        }
       >
-        {({  isSubmitting , touched , errors}) => (
+        {({  isSubmitting , touched , errors, isValid}) => (
           <Form>
             <TextInput
               label={t('login.email')}
@@ -50,7 +54,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleLogin }) => {
               variant="contained"
               color="primary"
               fullWidth
-              disabled={isSubmitting}
+              disabled={isSubmitting || !isValid}
             >
               {t('login.submit')}
             </Button>
