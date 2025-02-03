@@ -21,7 +21,7 @@ const LoginContainer: React.FC = () => {
       navigate(from); // Redirect after successful login
     } catch (error) {
       console.error('Login error:', error);
-      alert('Login failed. Please try again.');
+      alert('Invalid username or password');
     }
   };
 
