@@ -16,7 +16,6 @@ import BranchView from '../components/admin/branchView';
 import CompanyView from '../components/admin/companyView';
 import BranchStatView from '../components/admin/singleView/branchStatView';
 import EmployeeStatView from '../components/admin/singleView/employeeStatView';
-import Dashboard from '../components/admin/dashboardView';
 
 // USER
 import BranchFeedback from "../components/usersView/branchFeedback";
