@@ -1,5 +1,6 @@
 export interface Company {
-    id :string,
+    id : string,
+    companyId :string,
     name :string,
     location :string
 }
