@@ -23,7 +23,7 @@ const AddEmployeeContainer: React.FC = () => {
     setIsSaving(true);
     try {
       const existingEmployees = await readAllEntity<Employee>(Collection.Employee);
-      if (existingEmployees?.some((employee) => employee.employeeId === values.employeeId)) {
+      if (existingEmployees?.some((employee) => employee.uid === values.uid)) {
         alert("Employee ID already exists. Please use a unique ID.");
         setIsSaving(false);
         return;
@@ -84,8 +84,8 @@ const AddEmployeeContainer: React.FC = () => {
         <AddEmployeeForm
           onSave={handleSave}
           onImageChange={setEmployeeImage}
-          companyOptions={companies.map((c) => ({ id: c.companyId, label: c.name }))}
-          branchOptions={branches.map((b) => ({ id: b.branchId, label: b.name }))}
+          companyOptions={companies.map((c) => ({ id: c.id, label: c.name }))}
+          branchOptions={branches.map((b) => ({ id: b.id, label: b.name }))}
           onCompanyChange={setSelectedCompany}
           disabled={isSaving} 
         />

@@ -29,6 +29,24 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
     <Formik initialValues={employeeInitialValues} onSubmit={onSave}>
       {({ values, setFieldValue }) => (
         <Form>
+          <TextInput
+            label="User Id"
+            name="uid" // Ensure this matches your initial values
+            required
+            disabled={!values.branchId || disabled}
+          />
+          <TextInput
+            label="First Name"
+            name="firstName" // Ensure this matches your initial values
+            required
+            disabled={!values.branchId || disabled}
+          />
+          <TextInput
+            label="Last Name"
+            name="lastName" // Ensure this matches your initial values
+            required
+            disabled={!values.branchId || disabled}
+          />
           <AutoCompleteInput
             label="Company"
             name="companyId"
@@ -50,16 +68,10 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
             onChange={(name, newValue) => setFieldValue(name, newValue)}
           />
           <TextInput
-            label="Employee ID"
-            name="employeeId" // Ensure this matches your initial values
+            label="Position"
+            name="position"
             required
-            disabled={!values.branchId || disabled}
-          />
-          <TextInput
-            label="Name"
-            name="name"
-            required
-            disabled={!values.employeeId || disabled}
+            disabled={!values.uid || disabled}
           />
           <DateInput
             label="Birthday"
@@ -78,6 +90,12 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
             uploadedUrl="" // You can set this to the URL of the uploaded image if applicable
             disabled={disabled}
             name="employeeImage" // Optional: name for the input
+          />
+          <TextInput
+            label="Email"
+            name="email"
+            required
+            disabled={!values.birthday || disabled}
           />
           <Button
             type="submit"

@@ -1,6 +1,5 @@
 export interface Employee {
   uid: string,
-  employeeId: string;
   firstName: string,
   lastName: string,
   companyId: string;
@@ -10,5 +9,5 @@ export interface Employee {
   nic: string;
   image?: string;
   email: string,
-  password: string,
+  password?: string,
 }

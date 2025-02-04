@@ -1,4 +1,5 @@
 export const employeeInitialValues = {
+    uid:"",
     companyId: "",
     branchId: "",
     employeeId: "",
@@ -9,5 +10,4 @@ export const employeeInitialValues = {
     lastName: "",
     position: "",
     email: "",
-    password: "",
 }
