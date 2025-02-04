@@ -25,6 +25,7 @@ import SingleEmployeeFeedback from "../components/usersView/employerFeedback";
 // LAYOUTS
 import AdminLayout from "./adminLayout";
 import UserLayout from "./userLayouts";
+import AddEmployeeContainer from "../components/admin/addEmployee/addEmployeeContainer";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -51,6 +52,7 @@ const AppRoutes: React.FC = () => {
               />
               {/* <Route path="dashboard" element={<Dashboard />} /> */}
             </Route>
+            <Route path="add-employee" element={<AddEmployeeContainer />} />
           </Route>
 
           {/* USER ROUTES */}

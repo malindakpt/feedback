@@ -33,31 +33,31 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
             label="User Id"
             name="uid" // Ensure this matches your initial values
             required
-            disabled={!values.branchId || disabled}
           />
           <TextInput
             label="First Name"
             name="firstName" // Ensure this matches your initial values
             required
-            disabled={!values.branchId || disabled}
+            disabled={!values.uid || disabled}
           />
           <TextInput
             label="Last Name"
             name="lastName" // Ensure this matches your initial values
             required
-            disabled={!values.branchId || disabled}
+            disabled={!values.firstName || disabled}
           />
           <AutoCompleteInput
             label="Company"
             name="companyId"
             options={companyOptions}
             required
-            disabled={disabled}
+            disabled={!values.lastName || disabled}
             onChange={(name, newValue) => {
               setFieldValue(name, newValue);
               setFieldValue("branchId", ""); // Reset branchId when company changes
               onCompanyChange(newValue);
-            }}
+            }
+          }
           />
           <AutoCompleteInput
             label="Branch"
@@ -71,13 +71,13 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
             label="Position"
             name="position"
             required
-            disabled={!values.uid || disabled}
+            disabled={!values.branchId || disabled}
           />
           <DateInput
             label="Birthday"
             name="birthday"
             required
-            disabled={!values.firstName || disabled}
+            disabled={!values.position || disabled}
           />
           <TextInput
             label="NIC"
@@ -85,18 +85,19 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
             required
             disabled={!values.birthday || disabled}
           />
+          <TextInput
+            label="Email"
+            name="email"
+            required
+            disabled={!values.nic || disabled}
+          />
           <ImageUploader
             onChange={onImageChange} // Pass the onImageChange prop
             uploadedUrl="" // You can set this to the URL of the uploaded image if applicable
             disabled={disabled}
             name="employeeImage" // Optional: name for the input
           />
-          <TextInput
-            label="Email"
-            name="email"
-            required
-            disabled={!values.birthday || disabled}
-          />
+          
           <Button
             type="submit"
             variant="contained"

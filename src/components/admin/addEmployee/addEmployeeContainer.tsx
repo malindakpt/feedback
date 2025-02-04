@@ -32,7 +32,7 @@ const AddEmployeeContainer: React.FC = () => {
       let imageUrl = "";
       if (employeeImage) {
         const uploadedImage = await uploadImage({
-          folder: "branch-images",
+          folder: "employee-images",
           file: employeeImage,
         }).unwrap();
         imageUrl = uploadedImage;
