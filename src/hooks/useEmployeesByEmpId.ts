@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { readAllEntity } from "../services/crudService";
-import { Employee } from "../interfaces/employee";
+import { Employee } from "../interfaces/entities/employee";
 import { Collection } from "../enums/collections.enum";
 
 export const useEmployeeByEmpId = (empId: string) => {
@@ -19,7 +19,7 @@ export const useEmployeeByEmpId = (empId: string) => {
 
         if (employees) {
           // Find the employee by empId
-          const foundEmployee = employees.find((emp) => emp.employeeId === empId);
+          const foundEmployee = employees.find((emp) => emp.uid === empId);
           if (foundEmployee) {
             setEmployee(foundEmployee);
           } else {

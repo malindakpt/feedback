@@ -1,12 +1,16 @@
-import { Register } from "../../../interfaces/register";
+import { Employee } from "../../../interfaces/entities/employee";
 
-export const defaultRegister: Register = {
+export const defaultRegister: Employee = {
+    uid: "",
     firstName: "",
     lastName: "",
+    birthday: "",
+    nic: "",
     email: "",
     password: "",
-    company: "",
-    branch: "",
+    companyId: "",
+    branchId: "",
     position: "",
-    profileImage: "",
+    image: "",
 }
+

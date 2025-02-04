@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { readAllEntity } from "../services/crudService";
-import { Company } from "../interfaces/company";
+import { Company } from "../interfaces/entities/company";
 import { Collection } from "../enums/collections.enum";
 
 export const useFetchCompany = (companyId?: string) => {
@@ -21,7 +21,7 @@ export const useFetchCompany = (companyId?: string) => {
           setCompanies(data);
 
           if (companyId) {
-            const foundCompany = data.find((companies) => companies.companyId === companyId);
+            const foundCompany = data.find((companies) => companies.id === companyId);
             if (foundCompany) {
               setCompany(foundCompany);
             } else {

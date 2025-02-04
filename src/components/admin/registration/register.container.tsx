@@ -14,7 +14,7 @@ const RegisterContainer: React.FC = () => {
   const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
 
   const handleRegister = async (values: any) => {
-    const { email, password, firstName, lastName, company, branch, position } = values;
+    const { email, password, firstName, lastName, nic, birthday, companyId, branchId, position } = values;
   
     try {
       // Step 1: Authenticate user and get UID
@@ -32,11 +32,13 @@ const RegisterContainer: React.FC = () => {
       // Step 3: Save user data to Firestore
       const userData = {
         fullName: `${firstName} ${lastName}`,
+        nic,
+        birthday,
         email,
-        company,
-        branch,
+        companyId,
+        branchId,
         position,
-        profileImage: profileImageUrl, 
+        image: profileImageUrl, 
         status: 'pending',
         uid,
         createdAt: new Date().toISOString(),

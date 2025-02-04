@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../../services/auth/firebase';
-import { User } from '../../../interfaces/user';
+import { User } from '../../../interfaces/entities/authUser';
 import { AppState } from '../../../interfaces/app';
 
 export const initialAuthState: AppState = {
