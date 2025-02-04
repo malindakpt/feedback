@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { readAllEntity } from "../services/crudService";
-import { Branch } from "../interfaces/branch";
+import { Branch } from "../interfaces/entities/branch";
 import { Collection } from "../enums/collections.enum";
 
 export const useFetchBranch = (branchId?: string) => {
@@ -21,7 +21,7 @@ export const useFetchBranch = (branchId?: string) => {
           setBranches(data);
 
           if (branchId) {
-            const foundEmployee = data.find((branch) => branch.branchId === branchId);
+            const foundEmployee = data.find((branch) => branch.id === branchId);
             if (foundEmployee) {
               setBranch(foundEmployee);
             } else {

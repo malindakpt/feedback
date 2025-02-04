@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { readFilteredEntity, FilterCondition } from "../services/crudService";
-import { Employee } from "../interfaces/employee";
+import { Employee } from "../interfaces/entities/employee";
 import { Collection } from "../enums/collections.enum";
 
 export const useEmployeesByBranchId = (branchId: string | null) => {

@@ -7,6 +7,7 @@ import { registerValidationSchema } from '../../../validationSchema/registerVali
 import { defaultRegister } from './defaultRegister';
 import ImageUploader from '../../shared/ImageUploader/imageUploader'; // Import ImageUploader
 import { positionOptions } from '../../utils/employeePosition';
+import DateInput from '../../shared/dateInput/dateInput';
 
 interface RegisterFormProps {
   handleRegister: (values: any) => Promise<void>;
@@ -21,15 +22,18 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister , companyOpt
     { id: '3', label: 'Branch 3' }
   ];
 
-  return (
+ return (
     <Container maxWidth="sm" className="register-form-container">
       <h1 className="h1-part">Register Here</h1>
       <Formik
-        initialValues={{ ...defaultRegister, profileImage: '' }} // Add profileImage to initialValues
+        initialValues={{ ...defaultRegister, image: '' }} // Add profileImage to initialValues
         validationSchema={registerValidationSchema}
         onSubmit={handleRegister}
       >
-        {({ values, setFieldValue, isValid, errors , touched }) => (
+      {({ values, setFieldValue, isValid, errors , touched }) => {
+        console.log(values); 
+
+return (
           <Form>
             <TextInput
               label="First Name"
@@ -40,6 +44,17 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister , companyOpt
               label="Last Name"
               name="lastName"
               errorText={errors.lastName && touched.lastName ? errors.lastName : ""}
+            />
+            <TextInput
+              label="NIC"
+              name="nic"
+              errorText={errors.nic && touched.nic ? errors.nic : ""}
+            />
+            <DateInput
+              label="Date of Birth"
+              name="birthday"
+              errorText={errors.birthday && touched.birthday ? errors.birthday : ""}
+              required
             />
             <TextInput
               label="Email"
@@ -60,28 +75,30 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister , companyOpt
               onChange={setFieldValue}
               options={companyOptions}
               required 
-              name={'company'}            />
+              name={'companyId'}
+            />
             <AutoCompleteInput
               label="Branch"
               onChange={setFieldValue}
               options={branchOptions}
               required
-              disabled={!values.company} 
-              name={'branch'}            />
+              disabled={!values.companyId}  
+              name={'branchId'} 
+            />
             <AutoCompleteInput
               label="Position"
               onChange={setFieldValue}
               options={positionOptions}
               required
-              disabled={!values.company} 
+              disabled={!values.companyId} 
               name="position" 
             />            
             <Typography variant="subtitle1" sx={{ mt: 2 }}>
               Profile Image
             </Typography>
             <ImageUploader
-             name="profileImage"
-             uploadedUrl={values.profileImage}
+             name="image"
+             uploadedUrl={values.image}
              onChange={onImageChange} 
             />
             <Button
@@ -95,7 +112,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister , companyOpt
               Register
             </Button>
           </Form>
-        )}
+        )}}
       </Formik>
     </Container>
   );

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+
 import { useDispatch } from 'react-redux';
 import LoginForm from './login';
 import { login } from './appSlice'; 
 import { AppDispatch } from './store';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { LocationState } from '../../../interfaces/types';
+import { LocationState } from '../../../interfaces/locationState';
 
 const LoginContainer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ const LoginContainer: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = (location.state as LocationState)?.from?.pathname || '/admin';
+  const from = (location.state as LocationState)?.from?.pathname || '/admin/dashboard';
 
   const handleLogin = async (email: string, password: string) => {
     try {
