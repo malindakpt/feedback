@@ -8,6 +8,7 @@ import { defaultRegister } from './defaultRegister';
 import ImageUploader from '../../shared/ImageUploader/imageUploader'; // Import ImageUploader
 import { positionOptions } from '../../utils/employeePosition';
 import DateInput from '../../shared/dateInput/dateInput';
+import BranchSelector from '../../shared/branchSelector/branchSelector';
 
 interface RegisterFormProps {
   handleRegister: (values: any) => Promise<void>;
@@ -16,11 +17,6 @@ interface RegisterFormProps {
 }
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister , companyOptions ,onImageChange }) => {
-  const branchOptions = [
-    { id: '1', label: 'Branch 1' },
-    { id: '2', label: 'Branch 2' },
-    { id: '3', label: 'Branch 3' }
-  ];
 
  return (
     <Container maxWidth="sm" className="register-form-container">
@@ -77,13 +73,11 @@ return (
               required 
               name={'companyId'}
             />
-            <AutoCompleteInput
-              label="Branch"
-              onChange={setFieldValue}
-              options={branchOptions}
-              required
-              disabled={!values.companyId}  
-              name={'branchId'} 
+            <BranchSelector
+             companyId={values.companyId}
+             onChange={setFieldValue}
+             required
+             disabled={!values.companyId}
             />
             <AutoCompleteInput
               label="Position"
