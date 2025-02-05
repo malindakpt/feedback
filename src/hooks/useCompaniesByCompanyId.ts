@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { readAllEntity, readFilteredEntity } from "../services/crudService";
+import { FilterCondition, readFilteredEntity } from "../services/crudService";
 import { Company } from "../interfaces/entities/company";
 import { Collection } from "../enums/collections.enum";
 
 export const useCompanyByCompanyID = (companyId: string) => {
-  const [company, setcompany] = useState<Company | null>(null);
+  const [company, setCompany] = useState<Company | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -15,17 +15,14 @@ export const useCompanyByCompanyID = (companyId: string) => {
         setError(null);
 
         // Retrieve the company for the relevant ID from the collection
-        const company = await readFilteredEntity<Company>(Collection.Companies, []);
-        
-        if (company) {
-          // Find the companies by companyId
-          const foundCompany = company.find((company) => company.id === companyId);
-          if (foundCompany) {
-            setcompany(foundCompany);
-          } else {
-            console.log("No matching company found!");
-            setcompany(null);
-          }
+        const filters: FilterCondition[] = [{ field: "id", operator: "==", value: companyId }];
+        const result = await readFilteredEntity<Company>(Collection.Companies, filters);
+
+        if (result && result.length > 0) {
+          setCompany(result[0]); 
+        } else {
+          console.log("No matching company found!");
+          setCompany(null);
         }
       } catch (error) {
         console.error("Error fetching company: ", error);
@@ -33,6 +30,7 @@ export const useCompanyByCompanyID = (companyId: string) => {
       } finally {
         setLoading(false);
       }
+  
     };
 
     if (companyId) {
