@@ -29,11 +29,19 @@ const AppBarContainer: React.FC = () => {
           const userData = userDoc.data();
           setUserName(userData.name || '');
           setUserAvatar(userData.profilePhoto || '');
+
+        console.log("User logged in:", userData);
+        console.log("User Name:", userData.name);
+        console.log("User Profile Photo:", userData.profilePhoto);
+
         }
       } else {
         setIsLoggedIn(false);
         setUserName('');
         setUserAvatar('');
+
+        console.log("User not logged in or session expired.");
+        
       }
     });
 

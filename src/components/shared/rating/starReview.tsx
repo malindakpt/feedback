@@ -13,6 +13,7 @@ export interface StarReviewProps {
   type?: 'star' | 'face';
   errorText?: string | false;
   disabled?: boolean;
+  
 }
 
 export const customIcons: { [index: number]: { icon: React.ReactElement } } = {

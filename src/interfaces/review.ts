@@ -3,9 +3,10 @@ export interface Review {
     branchId?: string;
     employeeId?: string;
     reviewerId: string | null;
+    reviewerName: string;
     rating: number;
     comment: string;
-    date: string;
+    // date: string;
     imageUrl?: string
   }
   
