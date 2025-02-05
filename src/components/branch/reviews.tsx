@@ -12,7 +12,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { createEntity } from "../../services/crudService";
 import { Collection } from "../../enums/collections.enum";
-import { Review } from "../../interfaces/review";
+import { Review } from "../../interfaces/entities/review";
 
 interface FormValues {
   rating: number | null;
@@ -58,6 +58,7 @@ const BranchReviewPage: React.FC = () => {
       reviewerName: values.reviewerName,
       rating: values.rating!,
       comment: values.comment,
+      date: ""
     };
 
     try {
