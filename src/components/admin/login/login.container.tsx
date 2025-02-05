@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+
 import { useDispatch } from 'react-redux';
 import LoginForm from './login';
 import { login } from './appSlice'; 
 import { AppDispatch } from './store';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { LocationState } from '../../../interfaces/types';
+import { LocationState } from '../../../interfaces/locationState';
 
 const LoginContainer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -21,7 +22,7 @@ const LoginContainer: React.FC = () => {
       navigate(from); // Redirect after successful login
     } catch (error) {
       console.error('Login error:', error);
-      alert('Login failed. Please try again.');
+      alert('Invalid username or password');
     }
   };
 

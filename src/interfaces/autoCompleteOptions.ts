@@ -1,4 +1,4 @@
-export interface AutoCompleteOption{
-    id : string;
-    label : String;
+export interface AutoCompleteOption {
+    id: string;
+    label: String;
 }
