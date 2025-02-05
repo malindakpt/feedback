@@ -1,0 +1,44 @@
+import { useState, useEffect } from "react";
+import { readAllEntity } from "../services/crudService";
+import { Company } from "../interfaces/entities/company";
+import { Collection } from "../enums/collections.enum";
+
+export const useCompanyByCompanyID = (companyId: string) => {
+  const [company, setcompany] = useState<Company | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCompany = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Retrieve all companies from the collection
+        const company = await readAllEntity<Company>(Collection.Companies);
+
+        if (company) {
+          // Find the companies by companyId
+          const foundCompany = company.find((company) => company.id === companyId);
+          if (foundCompany) {
+            setcompany(foundCompany);
+          } else {
+            console.log("No matching company found!");
+            setcompany(null);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching company: ", error);
+        setError("Failed to fetch company.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (companyId) {
+      fetchCompany();
+    }
+  }, [companyId]);
+
+  return { company, loading, error };
+};
