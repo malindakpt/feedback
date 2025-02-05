@@ -1,5 +1,7 @@
 export interface Company {
     id :string,
     name :string,
-    location :string
+    number :string,
+    address :string,
+    image? :string,
 }
