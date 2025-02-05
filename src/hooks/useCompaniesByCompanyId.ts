@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { readAllEntity } from "../services/crudService";
+import { readAllEntity, readFilteredEntity } from "../services/crudService";
 import { Company } from "../interfaces/entities/company";
 import { Collection } from "../enums/collections.enum";
 
@@ -14,9 +14,9 @@ export const useCompanyByCompanyID = (companyId: string) => {
         setLoading(true);
         setError(null);
 
-        // Retrieve all companies from the collection
-        const company = await readAllEntity<Company>(Collection.Companies);
-
+        // Retrieve the company for the relevant ID from the collection
+        const company = await readFilteredEntity<Company>(Collection.Companies, []);
+        
         if (company) {
           // Find the companies by companyId
           const foundCompany = company.find((company) => company.id === companyId);

@@ -49,7 +49,7 @@ const AppRoutes: React.FC = () => {
               <Route path="branchStatView/:id" element={<BranchStatView />} />
               <Route path="employeeStatView/:id" element={<EmployeeStatView />}/>
               <Route path="company" element={<AddCompanyContainer />} />
-              <Route path= "editCompany/:id" element={<EditCompanyContainer />} />
+              <Route path= "company/:id" element={<EditCompanyContainer />} />
             </Route>
           </Route>
 
