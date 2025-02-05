@@ -7,7 +7,7 @@ import defaultImage from "../../resourses/defaultImage.jpg";
 interface ImageUploaderProps {
   disabled?: boolean;
   onChange: (file: File | null) => void;
-  uploadedUrl: string | null;
+  uploadedUrl: string | undefined;
   name?: string;
 }
 

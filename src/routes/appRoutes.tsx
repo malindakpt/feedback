@@ -16,7 +16,8 @@ import BranchView from '../components/admin/branchView';
 import CompanyView from '../components/admin/companyView';
 import BranchStatView from '../components/admin/singleView/branchStatView';
 import EmployeeStatView from '../components/admin/singleView/employeeStatView';
-import AddCompanyContainer from "../components/admin/addCompany/addCompanyContainer";
+import AddCompanyContainer from "../components/admin/comapany/addCompanyContainer";
+import EditCompanyContainer from "../components/admin/comapany/editCompanyContainer";
 
 // USER
 import BranchFeedback from "../components/usersView/branchFeedback";
@@ -47,8 +48,8 @@ const AppRoutes: React.FC = () => {
               <Route path="companyView" element={<CompanyView />} />
               <Route path="branchStatView/:id" element={<BranchStatView />} />
               <Route path="employeeStatView/:id" element={<EmployeeStatView />}/>
-              <Route path="addCompany" element={<AddCompanyContainer />} />
-              {/* <Route path="dashboard" element={<Dashboard />} /> */}
+              <Route path="company" element={<AddCompanyContainer />} />
+              <Route path= "company/:id" element={<EditCompanyContainer />} />
             </Route>
           </Route>
 

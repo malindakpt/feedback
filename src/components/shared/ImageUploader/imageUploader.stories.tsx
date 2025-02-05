@@ -17,7 +17,7 @@ const Template: StoryFn<typeof ImageUploader> = (args) => <ImageUploader {...arg
 export const Default = Template.bind({});
 Default.args = {
   name: "profileImage",
-  uploadedUrl: null,
+  uploadedUrl: undefined,
   disabled: false,
 };
 

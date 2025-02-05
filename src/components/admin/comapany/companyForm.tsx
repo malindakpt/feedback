@@ -1,29 +1,27 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { Box, Button, Container, Typography } from '@mui/material';
-import TextInput from '../../shared/textInput/textInput';  
-import ImageUploader from '../../shared/ImageUploader/imageUploader'; 
-import { defaultCompany } from './defaultCompany';
+import { Button, Container, Typography } from '@mui/material';
+import TextInput from '../../shared/textInput/textInput';
+import ImageUploader from '../../shared/ImageUploader/imageUploader';
 import { CompanyValidationSchema } from '../../../validationSchema/companyValidationSchema';
+import { Company } from '../../../interfaces/entities/company';
 
-interface AddCompanyFormProps {
-    onSubmit: (values: any) => Promise<void>;
-    onImageChange: (file: File | null) => void;
+interface CompanyFormProps {
+  initialValues: Company;
+  onSubmit: (values: any) => Promise<void>;
+  onImageChange: (file: File | null) => void;
 }
 
-const AddCompanyForm: React.FC<AddCompanyFormProps> = ({ onSubmit ,onImageChange }) => {
-
+const CompanyForm: React.FC<CompanyFormProps> = ({ initialValues, onSubmit, onImageChange }) => {
   return (
-    <Container maxWidth="sm" className="register-form-container">
-      <h1 className="h1-part">Add Company</h1>
+    <Container maxWidth="sm" className="company-form-container">
+      <h1 className="h1-part">Company Form</h1>
       <Formik
-        initialValues={{ ...defaultCompany, image: '' }} // Add profileImage to initialValues
+        initialValues={initialValues}
         validationSchema={CompanyValidationSchema}
         onSubmit={onSubmit}
       >
-      {({ values, isValid, errors , touched }) => {
-
-        return (
+        {({ values, isValid, errors, touched }) => (
           <Form>
             <TextInput
               label="Company Name"
@@ -39,14 +37,14 @@ const AddCompanyForm: React.FC<AddCompanyFormProps> = ({ onSubmit ,onImageChange
               label="Address"
               name="address"
               errorText={errors.address && touched.address ? errors.address : ""}
-            />           
+            />
             <Typography variant="subtitle1" sx={{ mt: 2 }}>
               Company Image
             </Typography>
             <ImageUploader
               name="image"
               uploadedUrl={values.image}
-              onChange={onImageChange} 
+              onChange={onImageChange}
             />
             <Button
               type="submit"
@@ -59,10 +57,10 @@ const AddCompanyForm: React.FC<AddCompanyFormProps> = ({ onSubmit ,onImageChange
               Submit
             </Button>
           </Form>
-        )}}
+        )}
       </Formik>
     </Container>
   );
 };
 
-export default AddCompanyForm;
+export default CompanyForm;
