@@ -7,6 +7,7 @@ import { employeeInitialValues } from "../../initialValues/employeeInitialValues
 import ImageUploader from "../../shared/ImageUploader/imageUploader";
 import { Employee } from "../../../interfaces/entities/employee";
 import AutoCompleteInput from "../../shared/autoComplete/autoCompleteInput";
+import { employeeValidationSchema } from "./validationSchema"; // Import validation schema
 
 export interface AddEmployeeFormProps {
   onSave: (values: Employee, helpers: { resetForm: () => void }) => void;
@@ -26,25 +27,32 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
   disabled = false,
 }) => {
   return (
-    <Formik initialValues={employeeInitialValues} onSubmit={onSave}>
-      {({ values, setFieldValue }) => (
+    <Formik
+      initialValues={employeeInitialValues}
+      validationSchema={employeeValidationSchema} // Apply validation schema
+      onSubmit={onSave}
+    >
+      {({ values, setFieldValue, errors, touched }) => (
         <Form>
           <TextInput
             label="User Id"
-            name="uid" // Ensure this matches your initial values
+            name="uid"
             required
+            errorText={touched.uid && errors.uid ? errors.uid : ""}
           />
           <TextInput
             label="First Name"
-            name="firstName" // Ensure this matches your initial values
+            name="firstName"
             required
             disabled={!values.uid || disabled}
+            errorText={touched.firstName && errors.firstName ? errors.firstName : ""}
           />
           <TextInput
             label="Last Name"
-            name="lastName" // Ensure this matches your initial values
+            name="lastName"
             required
             disabled={!values.firstName || disabled}
+            errorText={touched.lastName && errors.lastName ? errors.lastName : ""}
           />
           <AutoCompleteInput
             label="Company"
@@ -56,8 +64,7 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
               setFieldValue(name, newValue);
               setFieldValue("branchId", ""); // Reset branchId when company changes
               onCompanyChange(newValue);
-            }
-          }
+            }}
           />
           <AutoCompleteInput
             label="Branch"
@@ -72,32 +79,37 @@ const AddEmployeeForm: React.FC<AddEmployeeFormProps> = ({
             name="position"
             required
             disabled={!values.branchId || disabled}
+            errorText={touched.position && errors.position ? errors.position : ""}
           />
           <DateInput
             label="Birthday"
             name="birthday"
             required
             disabled={!values.position || disabled}
+            errorText={touched.birthday && errors.birthday ? errors.birthday : ""}
           />
           <TextInput
             label="NIC"
             name="nic"
             required
             disabled={!values.birthday || disabled}
+            errorText={touched.nic && errors.nic ? errors.nic : ""}
           />
           <TextInput
             label="Email"
             name="email"
             required
             disabled={!values.nic || disabled}
-          />
-          <ImageUploader
-            onChange={onImageChange} // Pass the onImageChange prop
-            uploadedUrl="" // You can set this to the URL of the uploaded image if applicable
-            disabled={disabled}
-            name="employeeImage" // Optional: name for the input
+            errorText={touched.email && errors.email ? errors.email : ""}
           />
           
+          <ImageUploader
+            onChange={onImageChange}
+            uploadedUrl=""
+            disabled={disabled}
+            name="employeeImage"
+          />
+
           <Button
             type="submit"
             variant="contained"
