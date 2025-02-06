@@ -3,7 +3,7 @@ import { FilterCondition, readFilteredEntity } from "../services/crudService";
 import { User } from "../interfaces/entities/user";
 import { Collection } from "../enums/collections.enum";
 
-export const useUserByUId = (uId: string) => {
+export const useUserByUId = (id: string) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -15,7 +15,7 @@ export const useUserByUId = (uId: string) => {
         setError(null);
 
         // Retrieve the company for the relevant ID from the collection
-                const filters: FilterCondition[] = [{ field: "uId", operator: "==", value: uId }];
+                const filters: FilterCondition[] = [{ field: "id", operator: "==", value: id }];
                 const result = await readFilteredEntity<User>(Collection.Users, filters);
         
                 if (result && result.length > 0) {
@@ -33,10 +33,10 @@ export const useUserByUId = (uId: string) => {
           
             };
 
-    if (uId) {
+    if (id) {
       fetchUser();
     }
-  }, [uId]);
+  }, [id]);
 
   return { user, loading, error };
 };
