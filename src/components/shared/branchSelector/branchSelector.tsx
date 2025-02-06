@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import { Autocomplete, TextField, CircularProgress } from "@mui/material";
 import { useFetchBranches } from "../../../hooks/useBranchesByComapnyId";
 import { Branch } from "../../../interfaces/entities/branch";
 import AutoCompleteInput from "../autoComplete/autoCompleteInput";
