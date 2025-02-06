@@ -16,9 +16,6 @@ import EditCompanyContainer from "../components/admin/comapany/editCompanyContai
 // USER
 import RegisterContainer from '../components/registration/addUserContainer';
 import LoginContainer from '../components/login/login.container';
-import BranchFeedback from "../components/usersView/branchFeedback";
-import EmployeeFeedback from "../components/usersView/employeesFeedback";
-import SingleEmployeeFeedback from "../components/usersView/employerFeedback";
 
 // LAYOUTS
 import UserLayout from "./userLayouts";
@@ -45,9 +42,7 @@ const AppRoutes: React.FC = () => {
           
           {/* USER ROUTES */}
           <Route path="/" element={<UserLayout />}>
-            <Route path="branchFeedback/:id" element={<BranchFeedback />} />
-            <Route path="employeesList/:id" element={<EmployeeFeedback />} />
-            <Route path="employee/:id" element={<SingleEmployeeFeedback />} />
+            
           </Route>
         </Route>
       </Routes>
