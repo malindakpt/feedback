@@ -1,7 +1,7 @@
-import { Employee } from "../../../interfaces/entities/employee";
+import { User } from "../interfaces/entities/user";
 
-export const defaultRegister: Employee = {
-    uid: "",
+export const defaultUser: User = {
+    id: "",
     firstName: "",
     lastName: "",
     birthday: "",

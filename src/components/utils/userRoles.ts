@@ -1,4 +1,4 @@
-export const positionOptions = [
+export const userRoles = [
     { id: '1', label: 'Manager' },
     { id: '2', label: 'Associate' },
     { id: '3', label: 'Admin' },

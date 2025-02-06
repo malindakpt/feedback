@@ -3,9 +3,8 @@ import { readAllEntity } from "../services/crudService";
 import { Branch } from "../interfaces/entities/branch";
 import { Collection } from "../enums/collections.enum";
 
-export const useFetchBranch = (branchId?: string) => {
+export const useBranches = () => {
   const [branches, setBranches] = useState<Branch[]>([]);
-  const [branch, setBranch] = useState<Branch | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -16,19 +15,8 @@ export const useFetchBranch = (branchId?: string) => {
         setError(null);
 
         const data = await readAllEntity<Branch>(Collection.Branches);
-
         if (data) {
           setBranches(data);
-
-          if (branchId) {
-            const foundEmployee = data.find((branch) => branch.id === branchId);
-            if (foundEmployee) {
-              setBranch(foundEmployee);
-            } else {
-              console.log("No matching branch found!");
-              setBranch(null);
-            }
-          }
         }
       } catch (error) {
         console.error("Error fetching branches:", error);
@@ -39,7 +27,7 @@ export const useFetchBranch = (branchId?: string) => {
     };
 
     fetchData();
-  }, [branchId]);
+  }, []);
 
-  return { branches, branch, loading, error };
+  return { branches, loading, error };
 };

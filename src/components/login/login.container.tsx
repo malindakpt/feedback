@@ -5,7 +5,7 @@ import LoginForm from './login';
 import { login } from './appSlice'; 
 import { AppDispatch } from './store';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { LocationState } from '../../../interfaces/locationState';
+import { LocationState } from '../../interfaces/locationState';
 
 const LoginContainer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -14,7 +14,7 @@ const LoginContainer: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = (location.state as LocationState)?.from?.pathname || '/admin/dashboard';
+  const from = (location.state as LocationState)?.from?.pathname || '/branch-manager';
 
   const handleLogin = async (email: string, password: string) => {
     try {

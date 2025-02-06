@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet, useLocation, useSearchParams } from 'react-router-dom';
-import { RootState } from '../components/admin/login/store'; // Correct path to store
+import { RootState } from '../components/login/store'; // Correct path to store
 
 interface PrivateRouteProps {
   redirectPath?: string;

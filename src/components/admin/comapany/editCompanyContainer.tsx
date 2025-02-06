@@ -6,7 +6,8 @@ import { Collection } from '../../../enums/collections.enum';
 import { uploadImage } from '../../../services/imageUploaderService';
 import { useParams } from 'react-router-dom';
 import CompanyForm from './companyForm';
-import { useCompanyByCompanyID } from '../../../hooks/useCompaniesByCompanyId';
+import { useCompanyByCompanyID } from '../../../hooks/useCompanyByCompanyId';
+import { defaultCompany } from '../../../defaultValues/defaultCompany';
 
 const EditCompanyContainer: React.FC = () => {
     const { id } = useParams<{ id?: string }>(); // Mark id as optional
@@ -14,13 +15,7 @@ const EditCompanyContainer: React.FC = () => {
     const [companyImage, setCompanyImage] = useState<File | null>(null);
     const { company, loading, error } = useCompanyByCompanyID(companyId);
 
-    const initialValues: Company = company || {
-        id: '',
-        name: '',
-        number: '',
-        address: '',
-        image: ''
-    };
+    const initialValues: Company = {...defaultCompany,...(company)};
 
     const handleImageChange = (file: File | null) => {
         setCompanyImage(file);
