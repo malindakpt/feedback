@@ -3,7 +3,7 @@ import { readAllEntity } from "../services/crudService";
 import { Branch } from "../interfaces/entities/branch";
 import { Collection } from "../enums/collections.enum";
 
-export const useFetchBranch = () => {
+export const useBranches = () => {
   const [branches, setBranches] = useState<Branch[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);

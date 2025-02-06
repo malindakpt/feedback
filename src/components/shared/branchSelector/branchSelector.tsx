@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useFetchBranches } from "../../../hooks/useBranchesByComapnyId";
+import { useBranchByCompanyId } from "../../../hooks/useBranchByComapnyId";
 import { Branch } from "../../../interfaces/entities/branch";
 import AutoCompleteInput from "../autoComplete/autoCompleteInput";
 interface BranchSelectorProps {
@@ -15,7 +15,7 @@ const BranchSelector: React.FC<BranchSelectorProps> = ({
     required = false,
     disabled = false,
 }) => {
-    const { branches, loading } = useFetchBranches(companyId);
+    const { branches, loading } = useBranchByCompanyId(companyId);
 
     const branchOptions = useMemo(
         () =>
