@@ -21,9 +21,9 @@ export const useFetchBranch = (branchId?: string) => {
           setBranches(data);
 
           if (branchId) {
-            const foundEmployee = data.find((branch) => branch.id === branchId);
-            if (foundEmployee) {
-              setBranch(foundEmployee);
+            const foundUser = data.find((branch) => branch.id === branchId);
+            if (foundUser) {
+              setBranch(foundUser);
             } else {
               console.log("No matching branch found!");
               setBranch(null);

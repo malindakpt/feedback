@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { readAllEntity } from "../services/crudService";
-import { Employee } from "../interfaces/entities/employee";
+import { User } from "../interfaces/entities/user";
 import { Collection } from "../enums/collections.enum";
 
-export const useFetchEmployee = (employeeId?: string) => {
-  const [employees, setEmployees] = useState<Employee[]>([]);
-  const [employee, setEmployee] = useState<Employee | null>(null);
+export const useFetchUser = (userId?: string) => {
+  const [users, setUsers] = useState<User[]>([]);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -15,31 +15,31 @@ export const useFetchEmployee = (employeeId?: string) => {
         setLoading(true);
         setError(null);
 
-        const data = await readAllEntity<Employee>(Collection.Employee);
+        const data = await readAllEntity<User>(Collection.Users);
 
         if (data) {
-          setEmployees(data);
+          setUsers(data);
 
-          if (employeeId) {
-            const foundEmployee = data.find((employee) => employee.uid === employeeId);
-            if (foundEmployee) {
-              setEmployee(foundEmployee);
+          if (userId) {
+            const foundUser = data.find((user) => user.id === userId);
+            if (foundUser) {
+              setUser(foundUser);
             } else {
-              console.log("No matching employee found!");
-              setEmployee(null);
+              console.log("No matching user found!");
+              setUser(null);
             }
           }
         }
       } catch (error) {
-        console.error("Error fetching employees:", error);
-        setError("Failed to fetch employees.");
+        console.error("Error fetching user:", error);
+        setError("Failed to fetch user.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, [employeeId]);
+  }, [userId]);
 
-  return { employees, employee, loading, error };
+  return { users, user, loading, error };
 };

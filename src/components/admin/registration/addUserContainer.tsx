@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../services/auth/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import RegisterForm from './register';
+import RegisterForm from './userForm';
 import { createEntity } from '../../../services/crudService';
 import { Collection } from '../../../enums/collections.enum';
 import { useFetchCompany } from '../../../hooks/useFetchCompanies';
 import { uploadImage } from '../../../services/imageUploaderService';
+import { defaultUser } from './defaultUser';
 
 const RegisterContainer: React.FC = () => {
   const navigate = useNavigate();
@@ -19,19 +20,20 @@ const RegisterContainer: React.FC = () => {
     try {
       // Step 1: Authenticate user and get UID
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const uid = userCredential.user.uid;
+      const id = userCredential.user.uid;
   
       let profileImageUrl = '';
   
       // Step 2: Upload the image using UID as the file name
       if (profileImageFile) {
-        const uniqueFileName = `${uid}.jpg`; // Use UID as file name
+        const uniqueFileName = `${id}.jpg`; // Use UID as file name
         profileImageUrl = await uploadImage('profile-images', uniqueFileName, profileImageFile);
       }
   
       // Step 3: Save user data to Firestore
       const userData = {
-        fullName: `${firstName} ${lastName}`,
+        firstName,
+        lastName,
         nic,
         birthday,
         email,
@@ -40,7 +42,7 @@ const RegisterContainer: React.FC = () => {
         position,
         image: profileImageUrl, 
         status: 'pending',
-        uid,
+        id,
         createdAt: new Date().toISOString(),
       };
   
@@ -73,6 +75,7 @@ const RegisterContainer: React.FC = () => {
       handleRegister={handleRegister}
       companyOptions={companyOptions}
       onImageChange={handleImageChange}
+      initialValues={defaultUser}
     />
   );
 };

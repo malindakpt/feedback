@@ -4,30 +4,31 @@ import AutoCompleteInput from '../../shared/autoComplete/autoCompleteInput';
 import TextInput from '../../shared/textInput/textInput';
 import { Button, Container, Typography } from '@mui/material';
 import { registerValidationSchema } from '../../../validationSchema/registerValidationSchema';
-import { defaultRegister } from './defaultRegister';
 import ImageUploader from '../../shared/ImageUploader/imageUploader'; // Import ImageUploader
-import { positionOptions } from '../../utils/employeePosition';
+import { userRoles } from '../../utils/userRoles';
 import DateInput from '../../shared/dateInput/dateInput';
 import BranchSelector from '../../shared/branchSelector/branchSelector';
+import { User } from '../../../interfaces/entities/user';
 
 interface RegisterFormProps {
   handleRegister: (values: any) => Promise<void>;
   onImageChange: (file: File | null) => void;
   companyOptions: { id: string; label: string }[];
+  initialValues: User;
 }
 
-const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister , companyOptions ,onImageChange }) => {
+const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister , companyOptions ,onImageChange ,initialValues }) => {
 
  return (
     <Container maxWidth="sm" className="register-form-container">
       <h1 className="h1-part">Register Here</h1>
       <Formik
-        initialValues={{ ...defaultRegister, image: '' }} // Add profileImage to initialValues
+        initialValues={initialValues} 
+        enableReinitialize
         validationSchema={registerValidationSchema}
         onSubmit={handleRegister}
       >
       {({ values, setFieldValue, isValid, errors , touched }) => {
-        console.log(values); 
 
 return (
           <Form>
@@ -82,7 +83,7 @@ return (
             <AutoCompleteInput
               label="Position"
               onChange={setFieldValue}
-              options={positionOptions}
+              options={userRoles}
               required
               disabled={!values.companyId} 
               name="position" 
