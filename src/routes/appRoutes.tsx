@@ -9,12 +9,7 @@ import PrivateRoute from "./privateRoutes";
 import MainLayout from "./mainLayout";
 
 // ADMIN
-
 import BranchManager from '../components/branch/branchManager';
-import BranchView from '../components/admin/branchView';
-import CompanyView from '../components/admin/companyView';
-import BranchStatView from '../components/admin/singleView/branchStatView';
-import EmployeeStatView from '../components/admin/singleView/employeeStatView';
 import AddCompanyContainer from "../components/admin/comapany/addCompanyContainer";
 import EditCompanyContainer from "../components/admin/comapany/editCompanyContainer";
 
@@ -40,21 +35,14 @@ const AppRoutes: React.FC = () => {
           <Route path="/login" element={<LoginContainer />} />
           <Route path="register" element={<RegisterContainer />} />
           
-            
-
             {/* Protected Admin Routes */}
             <Route element={<PrivateRoute />}>
               <Route path="branch-manager" element={<BranchManager />} />
-              <Route path="branchView" element={<BranchView />} />
-              <Route path="companyView" element={<CompanyView />} />
-              <Route path="branchStatView/:id" element={<BranchStatView />} />
-              <Route path="employeeStatView/:id" element={<EmployeeStatView />}/>
               <Route path="company" element={<AddCompanyContainer />} />
               <Route path= "company/:id" element={<EditCompanyContainer />} />
               <Route path= "user/:id" element={<EditUserContainer />} />
             </Route>
           
-
           {/* USER ROUTES */}
           <Route path="/" element={<UserLayout />}>
             <Route path="branchFeedback/:id" element={<BranchFeedback />} />
