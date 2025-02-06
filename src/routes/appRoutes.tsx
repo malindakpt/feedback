@@ -9,7 +9,7 @@ import PrivateRoute from "./privateRoutes";
 import MainLayout from "./mainLayout";
 
 // ADMIN
-import RegisterContainer from '../components/admin/registration/register.container';
+import RegisterContainer from '../components/admin/registration/addUserContainer';
 import LoginContainer from '../components/admin/login/login.container';
 import BranchManager from '../components/branch/branchManager';
 import BranchView from '../components/admin/branchView';
@@ -27,6 +27,7 @@ import SingleEmployeeFeedback from "../components/usersView/employerFeedback";
 // LAYOUTS
 import AdminLayout from "./adminLayout";
 import UserLayout from "./userLayouts";
+import EditUserContainer from "../components/admin/registration/editUserConatainer";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -50,6 +51,7 @@ const AppRoutes: React.FC = () => {
               <Route path="employeeStatView/:id" element={<EmployeeStatView />}/>
               <Route path="company" element={<AddCompanyContainer />} />
               <Route path= "company/:id" element={<EditCompanyContainer />} />
+              <Route path= "user/:id" element={<EditUserContainer />} />
             </Route>
           </Route>
 

@@ -1,8 +1,8 @@
-export interface User {
-    uid: string;
+export interface AuthUser {
+    id: string;
     email: string | null;
     displayName?: string;
   }
   
-  export const initialUserState: User | null = null;
+  export const initialUserState: AuthUser | null = null;
   

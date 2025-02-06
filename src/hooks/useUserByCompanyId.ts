@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { readFilteredEntity, FilterCondition } from "../services/crudService";
-import { Employee } from "../interfaces/entities/employee";
+import { User } from "../interfaces/entities/user";
 import { Collection } from "../enums/collections.enum";
 
-export const useEmployeesByBranchId = (companyId: string | null) => {
-  const [employees, setEmployees] = useState<Employee[]>([]);
+export const useUserByBranchId = (companyId: string | null) => {
+  const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchEmployees = async () => {
+    const fetchUsers = async () => {
       if (!companyId) {
-        setEmployees([]);
+        setUsers([]);
         setLoading(false);
         return;
       }
@@ -22,18 +22,18 @@ export const useEmployeesByBranchId = (companyId: string | null) => {
           { field: "companyId", operator: "==", value: companyId },
         ];
 
-        const employeeData = await readFilteredEntity<Employee>(Collection.Employee, filters);
-        setEmployees(employeeData || []);
+        const userData = await readFilteredEntity<User>(Collection.Users, filters);
+        setUsers(userData || []);
       } catch (err) {
-        console.error("Error fetching employees:", err);
-        setError("Failed to fetch employees.");
+        console.error("Error fetching users:", err);
+        setError("Failed to fetch users.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchEmployees();
+    fetchUsers();
   }, [companyId]);
 
-  return { employees, loading, error };
+  return { users, loading, error };
 };
