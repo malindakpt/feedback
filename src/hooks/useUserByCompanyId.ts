@@ -3,7 +3,7 @@ import { readFilteredEntity, FilterCondition } from "../services/crudService";
 import { User } from "../interfaces/entities/user";
 import { Collection } from "../enums/collections.enum";
 
-export const useUsersByBranchId = (companyId: string | null) => {
+export const useUserByBranchId = (companyId: string | null) => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);

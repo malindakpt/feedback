@@ -6,7 +6,7 @@ import { Collection } from '../../../enums/collections.enum';
 import { uploadImage } from '../../../services/imageUploaderService';
 import { useParams } from 'react-router-dom';
 import CompanyForm from './companyForm';
-import { useCompanyByCompanyID } from '../../../hooks/useCompaniesByCompanyId';
+import { useCompanyByCompanyID } from '../../../hooks/useCompanyByCompanyId';
 
 const EditCompanyContainer: React.FC = () => {
     const { id } = useParams<{ id?: string }>(); // Mark id as optional
