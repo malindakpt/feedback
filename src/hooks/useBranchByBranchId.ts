@@ -16,7 +16,7 @@ export const useBranchByBranchID = (branchId: string) => {
 
         // Retrieve the branch for the relevant ID from the collection
         const filters: FilterCondition[] = [{ field: "id", operator: "==", value: branchId }];
-        const result = await readFilteredEntity<Branch>(Collection.Companies, filters);
+        const result = await readFilteredEntity<Branch>(Collection.Branches, filters);
 
         if (result && result.length > 0) {
           setBranch(result[0]); 

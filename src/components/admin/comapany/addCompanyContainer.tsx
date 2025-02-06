@@ -4,7 +4,7 @@ import { createEntity, updateEntity } from '../../../services/crudService';
 import { Company } from '../../../interfaces/entities/company';
 import { Collection } from '../../../enums/collections.enum';
 import { uploadImage } from '../../../services/imageUploaderService';
-import { defaultCompany } from './defaultCompany';
+import { defaultCompany } from '../../../defaultValues/defaultCompany';
 import CompanyForm from './companyForm';
 
 const AddCompanyContainer: React.FC = () => {

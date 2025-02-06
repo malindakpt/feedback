@@ -14,12 +14,14 @@ import AddCompanyContainer from "../components/admin/comapany/addCompanyContaine
 import EditCompanyContainer from "../components/admin/comapany/editCompanyContainer";
 
 // USER
-import RegisterContainer from '../components/registration/addUserContainer';
+import RegisterContainer from '../components/user/addUserContainer';
 import LoginContainer from '../components/login/login.container';
+import AddBranchContainer from '../components/branch/addBranchContainer';
+import EditBranchContainer from '../components/branch/editBranchContainer';
 
 // LAYOUTS
 import UserLayout from "./userLayouts";
-import EditUserContainer from "../components/registration/editUserConatainer";
+import EditUserContainer from "../components/user/editUserConatainer";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -38,6 +40,9 @@ const AppRoutes: React.FC = () => {
               <Route path="company" element={<AddCompanyContainer />} />
               <Route path= "company/:id" element={<EditCompanyContainer />} />
               <Route path= "user/:id" element={<EditUserContainer />} />
+              <Route path="branch" element={<AddBranchContainer />} />
+              <Route path="branch/:id" element={<EditBranchContainer />} />
+
             </Route>
           
           {/* USER ROUTES */}

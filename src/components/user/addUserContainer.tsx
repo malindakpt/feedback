@@ -7,7 +7,7 @@ import { createEntity } from '../../services/crudService';
 import { Collection } from '../../enums/collections.enum';
 import { useCompanies } from '../../hooks/useCompanies';
 import { uploadImage } from '../../services/imageUploaderService';
-import { defaultUser } from './defaultUser';
+import { defaultUser } from '../../defaultValues/defaultUser';
 
 const RegisterContainer: React.FC = () => {
   const navigate = useNavigate();

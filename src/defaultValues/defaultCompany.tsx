@@ -1,4 +1,4 @@
-import { Company } from "../../../interfaces/entities/company";
+import { Company } from "../interfaces/entities/company";
 
 export const defaultCompany: Company = {
     id: "",
