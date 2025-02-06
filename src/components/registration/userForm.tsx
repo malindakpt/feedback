@@ -1,14 +1,14 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import AutoCompleteInput from '../../shared/autoComplete/autoCompleteInput';
-import TextInput from '../../shared/textInput/textInput';
+import AutoCompleteInput from '../shared/autoComplete/autoCompleteInput';
+import TextInput from '../shared/textInput/textInput';
 import { Button, Container, Typography } from '@mui/material';
-import { registerValidationSchema } from '../../../validationSchema/registerValidationSchema';
-import ImageUploader from '../../shared/ImageUploader/imageUploader'; // Import ImageUploader
-import { userRoles } from '../../utils/userRoles';
-import DateInput from '../../shared/dateInput/dateInput';
-import BranchSelector from '../../shared/branchSelector/branchSelector';
-import { User } from '../../../interfaces/entities/user';
+import { registerValidationSchema } from '../../validationSchema/registerValidationSchema';
+import ImageUploader from '../shared/ImageUploader/imageUploader'; // Import ImageUploader
+import { userRoles } from '../utils/userRoles';
+import DateInput from '../shared/dateInput/dateInput';
+import BranchSelector from '../shared/branchSelector/branchSelector';
+import { User } from '../../interfaces/entities/user';
 
 interface RegisterFormProps {
   handleRegister: (values: any) => Promise<void>;

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
-import { updateEntity } from '../../../services/crudService';
-import { Collection } from '../../../enums/collections.enum';
-import { uploadImage } from '../../../services/imageUploaderService';
+import { updateEntity } from '../../services/crudService';
+import { Collection } from '../../enums/collections.enum';
+import { uploadImage } from '../../services/imageUploaderService';
 import { useParams } from 'react-router-dom';
 import RegisterForm from './userForm';
-import { User } from '../../../interfaces/entities/user';
-import { useUserByUId } from '../../../hooks/useUserByUId';
-import { useCompanies } from '../../../hooks/useCompanies';
+import { User } from '../../interfaces/entities/user';
+import { useUserByUId } from '../../hooks/useUserByUId';
+import { useCompanies } from '../../hooks/useCompanies';
 
 const EditUserContainer: React.FC = () => {
     const { id } = useParams<{ id?: string }>();

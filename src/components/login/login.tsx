@@ -3,8 +3,8 @@ import { Button, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Formik, Form } from 'formik';
-import { loginValidationSchema } from '../../../validationSchema/loginValidationSchema'; 
-import TextInput from '../../shared/textInput/textInput'; 
+import { loginValidationSchema } from '../../validationSchema/loginValidationSchema'; 
+import TextInput from '../shared/textInput/textInput'; 
 
 interface LoginFormProps {
   email: string;

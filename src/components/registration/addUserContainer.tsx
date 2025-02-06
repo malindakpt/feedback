@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../../services/auth/firebase';
+import { auth } from '../../services/auth/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import RegisterForm from './userForm';
-import { createEntity } from '../../../services/crudService';
-import { Collection } from '../../../enums/collections.enum';
-import { useCompanies } from '../../../hooks/useCompanies';
-import { uploadImage } from '../../../services/imageUploaderService';
+import { createEntity } from '../../services/crudService';
+import { Collection } from '../../enums/collections.enum';
+import { useCompanies } from '../../hooks/useCompanies';
+import { uploadImage } from '../../services/imageUploaderService';
 import { defaultUser } from './defaultUser';
 
 const RegisterContainer: React.FC = () => {
