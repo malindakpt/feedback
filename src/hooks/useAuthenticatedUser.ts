@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '../components/admin/login/store';
+import { RootState } from '../components/login/store';
 import { AuthUser } from '../interfaces/entities/authUser';
 
 const useAuthenticatedUser  = () => {

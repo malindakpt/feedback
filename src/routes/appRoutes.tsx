@@ -9,8 +9,7 @@ import PrivateRoute from "./privateRoutes";
 import MainLayout from "./mainLayout";
 
 // ADMIN
-import RegisterContainer from '../components/admin/registration/addUserContainer';
-import LoginContainer from '../components/admin/login/login.container';
+
 import BranchManager from '../components/branch/branchManager';
 import BranchView from '../components/admin/branchView';
 import CompanyView from '../components/admin/companyView';
@@ -20,14 +19,15 @@ import AddCompanyContainer from "../components/admin/comapany/addCompanyContaine
 import EditCompanyContainer from "../components/admin/comapany/editCompanyContainer";
 
 // USER
+import RegisterContainer from '../components/registration/addUserContainer';
+import LoginContainer from '../components/login/login.container';
 import BranchFeedback from "../components/usersView/branchFeedback";
 import EmployeeFeedback from "../components/usersView/employeesFeedback";
 import SingleEmployeeFeedback from "../components/usersView/employerFeedback";
 
 // LAYOUTS
-import AdminLayout from "./adminLayout";
 import UserLayout from "./userLayouts";
-import EditUserContainer from "../components/admin/registration/editUserConatainer";
+import EditUserContainer from "../components/registration/editUserConatainer";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -39,7 +39,7 @@ const AppRoutes: React.FC = () => {
           {/* ADMIN ROUTES */}
           <Route path="/login" element={<LoginContainer />} />
           <Route path="register" element={<RegisterContainer />} />
-          <Route path="/admin" element={<AdminLayout />}>
+          
             
 
             {/* Protected Admin Routes */}
@@ -53,7 +53,7 @@ const AppRoutes: React.FC = () => {
               <Route path= "company/:id" element={<EditCompanyContainer />} />
               <Route path= "user/:id" element={<EditUserContainer />} />
             </Route>
-          </Route>
+          
 
           {/* USER ROUTES */}
           <Route path="/" element={<UserLayout />}>
