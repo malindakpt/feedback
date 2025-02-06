@@ -4,7 +4,7 @@ import { createEntity, updateEntity } from '../../services/crudService';
 import { Branch } from '../../interfaces/entities/branch';
 import { Collection } from '../../enums/collections.enum';
 import { uploadImage } from '../../services/imageUploaderService';
-import { defaultBranch } from './defaultBranch';
+import { defaultBranch } from '../../defaultValues/defaultBranch';
 import BranchForm from './branchForm';
 import { useCompanies } from '../../hooks/useCompanies';
 

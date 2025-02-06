@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import BranchForm from './branchForm';
 import { useBranchByBranchID } from '../../hooks/useBranchByBranchId';
 import { useCompanies } from '../../hooks/useCompanies';
+import { defaultBranch } from '../../defaultValues/defaultBranch';
 
 const EditBranchContainer: React.FC = () => {
     const { id } = useParams<{ id?: string }>(); // Mark id as optional
@@ -17,14 +18,7 @@ const EditBranchContainer: React.FC = () => {
     const {companies} = useCompanies();
 
 
-    const initialValues: Branch = branch || {
-        id: '',
-        name: '',
-        companyId:'',
-        number: '',
-        address: '',
-        image: ''
-    };
+    const initialValues: Branch = { ...defaultBranch, ...(branch || {})};
 
     const handleImageChange = (file: File | null) => {
         setBranchImage(file);

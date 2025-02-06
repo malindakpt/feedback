@@ -3,7 +3,7 @@ import { Formik, Form } from 'formik';
 import { Button, Container, Typography } from '@mui/material';
 import TextInput from '../shared/textInput/textInput';
 import ImageUploader from '../shared/ImageUploader/imageUploader';
-import { BranchValidationSchema } from '../../validationSchema/branchValidationSchema copy';
+import { BranchValidationSchema } from '../../validationSchema/branchValidationSchema';
 import { Branch } from '../../interfaces/entities/branch';
 import AutoCompleteInput from '../shared/autoComplete/autoCompleteInput';
 

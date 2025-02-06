@@ -1,4 +1,4 @@
-import { User } from "../../interfaces/entities/user";
+import { User } from "../interfaces/entities/user";
 
 export const defaultUser: User = {
     id: "",

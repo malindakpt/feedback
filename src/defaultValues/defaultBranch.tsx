@@ -1,4 +1,4 @@
-import { Branch } from "../../interfaces/entities/branch";
+import { Branch } from "../interfaces/entities/branch";
 
 export const defaultBranch: Branch = {
     id: "",
