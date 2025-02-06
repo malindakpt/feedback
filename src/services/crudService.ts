@@ -22,7 +22,7 @@ import {
 
   export const createEntity = async <T extends DocumentData>(
     collectionName: Collection,
-    data: WithFieldValue<T>  & { id?: string }// Check for id instead of id
+    data: WithFieldValue<T> 
   ): Promise<string | undefined> => {
     try {
       if (data.id) {
