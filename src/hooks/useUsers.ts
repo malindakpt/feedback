@@ -3,7 +3,7 @@ import { readAllEntity } from "../services/crudService";
 import { User } from "../interfaces/entities/user";
 import { Collection } from "../enums/collections.enum";
 
-export const useFetchUser = (userId?: string) => {
+export const useUsers = (userId?: string) => {
   const [users, setUsers] = useState<User[]>([]);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);

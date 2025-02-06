@@ -5,13 +5,13 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import RegisterForm from './userForm';
 import { createEntity } from '../../services/crudService';
 import { Collection } from '../../enums/collections.enum';
-import { useFetchCompany } from '../../hooks/useFetchCompanies';
+import { useCompanies } from '../../hooks/useCompanies';
 import { uploadImage } from '../../services/imageUploaderService';
 import { defaultUser } from './defaultUser';
 
 const RegisterContainer: React.FC = () => {
   const navigate = useNavigate();
-  const { companies } = useFetchCompany();
+  const { companies } = useCompanies();
   const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
 
   const handleRegister = async (values: any) => {
