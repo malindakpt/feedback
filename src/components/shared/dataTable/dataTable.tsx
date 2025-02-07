@@ -4,7 +4,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import { DataTableColumn } from './types/dataTableColumn';
 
 interface DataTableProps {
-    rows: any; // Rows for the table
+    rows: any[]; // Rows for the table
     columns: DataTableColumn[]; // Columns for the table
     hideFooter?: boolean; // Option to hide footer
     checkboxSelection?: boolean; // Option for checkbox selection
