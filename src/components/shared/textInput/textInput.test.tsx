@@ -12,11 +12,9 @@ describe('TextInput Component', () => {
     );
     
     const input = screen.getByLabelText('Username');
-    
-    // Check if the input is rendered
+  
     expect(input).toBeInTheDocument();
     
-    // Check if the input has the correct value
     expect(input).toHaveValue('Nithila');
   });
 
