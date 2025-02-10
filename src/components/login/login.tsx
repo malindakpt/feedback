@@ -61,7 +61,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ handleLogin }) => {
 
             <p>
               {t('login.noAccount')}{' '}
-              <Link to="/register">{t('login.register')}</Link>.
+              <Link to="/register">{t('login.register')}</Link>
             </p>
           </Form>
         )}

@@ -1,11 +1,7 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import PrivateRoute from "./privateRoutes";
+import PublicRoutes from "./publicRoutes";  
 import MainLayout from "./mainLayout";
 
 // ADMIN
@@ -28,6 +24,9 @@ const AppRoutes: React.FC = () => {
   return (
     <Router>
       <Routes>
+        {/* Public Routes */}
+        <Route path="/*" element={<PublicRoutes />} />
+
         <Route element={<MainLayout />}>
           <Route path="/" element={<Navigate to="/login?lang=en" />} />
 
