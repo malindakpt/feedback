@@ -22,6 +22,7 @@ import EmployeesByBranch from '../components/employee/employeesByBranch'
 
 // LAYOUTS
 import UserLayout from "./userLayouts";
+import AddEmployeeContainer from "../components/admin/addEmployee/addEmployeeContainer";
 import EditUserContainer from "../components/user/editUserConatainer";
 
 const AppRoutes: React.FC = () => {
@@ -44,6 +45,7 @@ const AppRoutes: React.FC = () => {
               <Route path="branch" element={<AddBranchContainer />} />
               <Route path="branch/:id" element={<EditBranchContainer />} />
               <Route path="employees/:id" element={<EmployeesByBranch />} />
+              <Route path="add-employee" element={<AddEmployeeContainer />} />
 
             </Route>
           
