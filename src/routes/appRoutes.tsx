@@ -9,23 +9,21 @@ import PrivateRoute from "./privateRoutes";
 import MainLayout from "./mainLayout";
 
 // ADMIN
-import RegisterContainer from '../components/admin/registration/register.container';
-import LoginContainer from '../components/admin/login/login.container';
 import BranchManager from '../components/branch/branchManager';
-import BranchView from '../components/admin/branchView';
-import CompanyView from '../components/admin/companyView';
-import BranchStatView from '../components/admin/singleView/branchStatView';
-import EmployeeStatView from '../components/admin/singleView/employeeStatView';
+import AddCompanyContainer from "../components/admin/comapany/addCompanyContainer";
+import EditCompanyContainer from "../components/admin/comapany/editCompanyContainer";
 
 // USER
-import BranchFeedback from "../components/usersView/branchFeedback";
-import EmployeeFeedback from "../components/usersView/employeesFeedback";
-import SingleEmployeeFeedback from "../components/usersView/employerFeedback";
+import RegisterContainer from '../components/user/addUserContainer';
+import LoginContainer from '../components/login/login.container';
+import AddBranchContainer from '../components/branch/addBranchContainer';
+import EditBranchContainer from '../components/branch/editBranchContainer';
+import EmployeesByBranch from '../components/employee/employeesByBranch'
 
 // LAYOUTS
-import AdminLayout from "./adminLayout";
 import UserLayout from "./userLayouts";
 import AddEmployeeContainer from "../components/admin/addEmployee/addEmployeeContainer";
+import EditUserContainer from "../components/user/editUserConatainer";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -37,29 +35,23 @@ const AppRoutes: React.FC = () => {
           {/* ADMIN ROUTES */}
           <Route path="/login" element={<LoginContainer />} />
           <Route path="register" element={<RegisterContainer />} />
-          <Route path="/admin" element={<AdminLayout />}>
-            
-
+          
             {/* Protected Admin Routes */}
             <Route element={<PrivateRoute />}>
               <Route path="branch-manager" element={<BranchManager />} />
-              <Route path="branchView" element={<BranchView />} />
-              <Route path="companyView" element={<CompanyView />} />
-              <Route path="branchStatView/:id" element={<BranchStatView />} />
-              <Route
-                path="employeeStatView/:id"
-                element={<EmployeeStatView />}
-              />
-              {/* <Route path="dashboard" element={<Dashboard />} /> */}
-            </Route>
-            <Route path="add-employee" element={<AddEmployeeContainer />} />
-          </Route>
+              <Route path="company" element={<AddCompanyContainer />} />
+              <Route path= "company/:id" element={<EditCompanyContainer />} />
+              <Route path= "user/:id" element={<EditUserContainer />} />
+              <Route path="branch" element={<AddBranchContainer />} />
+              <Route path="branch/:id" element={<EditBranchContainer />} />
+              <Route path="employees/:id" element={<EmployeesByBranch />} />
+              <Route path="add-employee" element={<AddEmployeeContainer />} />
 
+            </Route>
+          
           {/* USER ROUTES */}
           <Route path="/" element={<UserLayout />}>
-            <Route path="branchFeedback/:id" element={<BranchFeedback />} />
-            <Route path="employeesList/:id" element={<EmployeeFeedback />} />
-            <Route path="employee/:id" element={<SingleEmployeeFeedback />} />
+            
           </Route>
         </Route>
       </Routes>

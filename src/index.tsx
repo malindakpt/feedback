@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';  
 import { Provider } from 'react-redux';  
-import { store } from './components/admin/login/store';  
+import { store } from './components/login/store';  
 import App from './app';  
 
 // Get the root DOM element

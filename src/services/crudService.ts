@@ -2,6 +2,7 @@ import {
     collection,
     deleteDoc,
     doc,
+    setDoc,
     DocumentData,
     getDoc,
     getDocs,
@@ -18,18 +19,29 @@ import {
   import { db } from "./auth/firebase";
   import { Collection } from "../enums/collections.enum";
   
+
   export const createEntity = async <T extends DocumentData>(
     collectionName: Collection,
-    data: WithFieldValue<T>
+    data: WithFieldValue<T> 
   ): Promise<string | undefined> => {
     try {
-      const collectionRef = collection(db, collectionName);
-      const docRef = await addDoc(collectionRef, data);
-      return docRef.id;
+      if (data.id) {
+        // Use id as the document ID
+        const docRef = doc(db, collectionName, data.id);
+        await setDoc(docRef, data);
+        return data.id;
+      } else {
+        // Generate a random ID
+        const collectionRef = collection(db, collectionName);
+        const docRef = await addDoc(collectionRef, data);
+        return docRef.id;
+      }
     } catch (error) {
       console.error("Error adding document: ", error);
     }
   };
+  
+
   
   export const readEntity = async <T extends DocumentData>(
     collectionName: Collection,
@@ -90,6 +102,7 @@ import {
       console.error("Error reading documents: ", error);
     }
   };
+
   export interface FilterCondition {
     field: string;
     operator: WhereFilterOp;
