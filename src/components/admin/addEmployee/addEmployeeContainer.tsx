@@ -4,8 +4,8 @@ import { createEntity, readAllEntity } from "../../../services/crudService";
 import { Collection } from "../../../enums/collections.enum";
 import AddEmployeeForm from "./addEmployee";
 import { Employee } from "../../../interfaces/entities/employee";
-import { useFetchCompany } from "../../../hooks/useFetchCompanies";
-import { useFetchBranches } from "../../../hooks/useBranchesByComapnyId";
+import { useCompanies } from "../../../hooks/useCompanies";
+import { useBranchByCompanyId } from "../../../hooks/useBranchByComapnyId";
 import LinearProgressBar from "../../shared/linearProgressBar/linearProgressBar";
 import { useCreateEmployeeMutation, useUploadImageMutation } from "../../../services/employeeApi";
 
@@ -16,8 +16,8 @@ const AddEmployeeContainer: React.FC = () => {
   const [createEmployee] = useCreateEmployeeMutation();
   const [uploadImage] = useUploadImageMutation();
 
-  const { companies, loading: companiesLoading, error: companiesError } = useFetchCompany();
-  const { branches, loading: branchesLoading, error: branchesError } = useFetchBranches(selectedCompany);
+  const { companies, loading: companiesLoading, error: companiesError } = useCompanies();
+  const { branches, loading: branchesLoading, error: branchesError } = useBranchByCompanyId(selectedCompany);
 
   const handleSave = async (values: Employee, { resetForm }: { resetForm: () => void }) => {
     setIsSaving(true);
