@@ -1,30 +1,36 @@
 import React from "react";
-import {  StoryFn, Meta  } from "@storybook/react";
-import ImageUploader from "./imageUploader"; // Adjust the import path as necessary
-
+import { StoryFn, Meta } from "@storybook/react";
+import ImageUploader from "./imageUploader"; // Adjust the import path
 
 export default {
-  title: 'Components/ImageUploader',
+  title: "Components/ImageUploader",
   component: ImageUploader,
-} as Meta<typeof ImageUploader>;
+  argTypes: {
+    disabled: { control: "boolean" },
+    uploadedUrl: { control: "text" },
+    name: { control: "text" },
+  },
+} as Meta;
 
 const Template: StoryFn<typeof ImageUploader> = (args) => <ImageUploader {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  onSelect: (file: File | null) => {
-    console.log('Selected file:', file);
-  },
-  uploadedUrl: null, // No image uploaded
+  name: "profileImage",
+  uploadedUrl: undefined,
+  disabled: false,
 };
 
 export const WithUploadedImage = Template.bind({});
 WithUploadedImage.args = {
-  onSelect: (file: File | null) => {
-    console.log('Selected file:', file);
-  },
-  uploadedUrl: "https://i.postimg.cc/d1FknZpY/2020-11-11-10-52-IMG-1342.jpg", // Local image import
+  name: "profileImage",
+  uploadedUrl: "https://via.placeholder.com/150", // Placeholder image
+  disabled: false,
 };
 
-
-
+export const Disabled = Template.bind({});
+Disabled.args = {
+  name: "profileImage",
+  uploadedUrl: "https://via.placeholder.com/150", // Placeholder image
+  disabled: true,
+};

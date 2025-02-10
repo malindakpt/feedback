@@ -1,8 +1,7 @@
-import { User } from './user';
+import { AuthUser } from './entities/authUser';
 
 export interface AppState {
-  user: User | null;
+  user: AuthUser | null;
   isAuthenticated: boolean;
 }
-
 
