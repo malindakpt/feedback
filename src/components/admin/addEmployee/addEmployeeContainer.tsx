@@ -32,11 +32,11 @@ const AddEmployeeContainer: React.FC = () => {
       let imageUrl = "";
       if (employeeImage) {
         const uploadedImage = await uploadImage({
-          folder: "employee-images",
           file: employeeImage,
+          userId: values.uid,
         }).unwrap();
         imageUrl = uploadedImage;
-      }
+    }
 
       const formData = { ...values, image: imageUrl };
       const id = await createEmployee(formData).unwrap();
