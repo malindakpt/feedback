@@ -1,6 +1,6 @@
 export interface ReviewFilter {
-    minRating: string;
-    maxRating: String;
+    minRating: number;
+    maxRating: number;
     fromDate:Date;
     toDate:Date;
     userId:string;
