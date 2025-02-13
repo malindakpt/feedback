@@ -11,8 +11,6 @@ import Button from '../shared/button/button';
 
 const ReviewUser:React.FC = () => {
     const { employeeId } = useParams<{ employeeId?: string }>();
-
-    // Call the hook even if employeeId is undefined
     const { user, loading, error } = useUserByEmployeeId(employeeId || '');
 
     // Validation schema
