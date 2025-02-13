@@ -18,6 +18,9 @@ const EditUserContainer: React.FC = () => {
 
     const initialValues: User = user || {
         id: '',
+        employeeId: '',
+        address:'',
+        contactNumber:'',
         firstName: '',
         lastName: '',
         companyId: '',

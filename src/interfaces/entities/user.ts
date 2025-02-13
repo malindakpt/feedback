@@ -10,4 +10,7 @@ export interface User {
   image?: string;
   email: string,
   password: string,
+  employeeId: string,
+  address:string,
+  contactNumber: string,
 }

@@ -33,6 +33,11 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ handleRegister , companyOpt
 return (
           <Form>
             <TextInput
+              label="Employee Id"
+              name="employeeId"
+              errorText={errors.employeeId && touched.employeeId ? errors.employeeId : ""}
+            />
+            <TextInput
               label="First Name"
               name="firstName"
               errorText={errors.firstName && touched.firstName ? errors.firstName : ""}
@@ -41,6 +46,16 @@ return (
               label="Last Name"
               name="lastName"
               errorText={errors.lastName && touched.lastName ? errors.lastName : ""}
+            />
+            <TextInput
+              label="Address"
+              name="address"
+              errorText={errors.address && touched.address ? errors.address : ""}
+            />
+            <TextInput
+              label="Contact Number"
+              name="contactNumber"
+              errorText={errors.contactNumber && touched.contactNumber ? errors.contactNumber : ""}
             />
             <TextInput
               label="NIC"
