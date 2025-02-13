@@ -19,8 +19,9 @@ import LoginContainer from '../components/login/login.container';
 import AddBranchContainer from '../components/branch/addBranchContainer';
 import EditBranchContainer from '../components/branch/editBranchContainer';
 import EmployeesByBranch from '../components/employee/employeesByBranch';
-import UserviewContainer from '../components/user/userViewContainer'
-import CompanyViewContainer from '../components/company/companyViewContainer'
+import UserviewContainer from '../components/user/userViewContainer';
+import CompanyViewContainer from '../components/company/companyViewContainer';
+import BranchViewContainer from "../components/branch/branchViewContainer";
 
 // LAYOUTS
 import UserLayout from "./userLayouts";
@@ -48,6 +49,7 @@ const AppRoutes: React.FC = () => {
               <Route path="employees/:id" element={<EmployeesByBranch />} />
               <Route path="userview/:id" element={<UserviewContainer />} />
               <Route path="companyview/:id" element={<CompanyViewContainer />} />
+              <Route path="branchview/:id" element={<BranchViewContainer />} />
 
             </Route>
           

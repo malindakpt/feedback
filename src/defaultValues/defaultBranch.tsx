@@ -7,4 +7,5 @@ export const defaultBranch: Branch = {
     address: "",
     number: "",
     image: "",
+    email: ""
 }
