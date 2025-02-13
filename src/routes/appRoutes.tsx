@@ -18,7 +18,8 @@ import RegisterContainer from '../components/user/addUserContainer';
 import LoginContainer from '../components/login/login.container';
 import AddBranchContainer from '../components/branch/addBranchContainer';
 import EditBranchContainer from '../components/branch/editBranchContainer';
-import EmployeesByBranch from '../components/employee/employeesByBranch'
+import EmployeesByBranch from '../components/employee/employeesByBranch';
+import UserviewContainer from '../components/user/userViewContainer'
 
 // LAYOUTS
 import UserLayout from "./userLayouts";
@@ -44,6 +45,7 @@ const AppRoutes: React.FC = () => {
               <Route path="branch" element={<AddBranchContainer />} />
               <Route path="branch/:id" element={<EditBranchContainer />} />
               <Route path="employees/:id" element={<EmployeesByBranch />} />
+              <Route path="userview/:id" element={<UserviewContainer />} />
 
             </Route>
           
