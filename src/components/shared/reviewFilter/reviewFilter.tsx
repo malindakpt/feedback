@@ -3,24 +3,30 @@ import { Grid, Button } from "@mui/material";
 import { Formik, Form } from "formik";
 import TextInput from "../textInput/textInput"; 
 import DateInput from "../dateInput/dateInput";
+import type { ReviewFilter } from "../../../interfaces/reviewFilterT";
+import { defaultReview } from "../../../defaultValues/defaultReview";
 
 interface ReviewFilterProps {
-  reviewFilter: (filters: { minRating?: number; maxRating?: number; fromDate?: string; toDate?: string }) => void;
+  onFilterChange: (filter: ReviewFilter) => void;
 }
 
-const ReviewFilter: React.FC<ReviewFilterProps> = ({ reviewFilter }) => {
+const ReviewFilter: React.FC<ReviewFilterProps> = ({ onFilterChange }) => {
   return (
     <Formik
-      initialValues={{ minRating: "", maxRating: "", fromDate: "", toDate: "" }}
-      onSubmit={(values) => {
-        reviewFilter({
-          minRating: values.minRating ? parseFloat(values.minRating) : undefined,
-          maxRating: values.maxRating ? parseFloat(values.maxRating) : undefined,
-          fromDate: values.fromDate || undefined,
-          toDate: values.toDate || undefined,
-        });
-      }}
-    >
+  initialValues={{ ...defaultReview }} 
+  onSubmit={(values) => {
+    onFilterChange({
+      minRating: values.minRating ,
+      maxRating: values.maxRating ,
+      fromDate: values.fromDate,
+      toDate: values.toDate,
+      userId: "",
+      companyId: "",
+      branchId: ""
+    });
+  }}
+>
+
       {({ handleSubmit }) => (
         <Form>
           <Grid container spacing={2} alignItems="center">

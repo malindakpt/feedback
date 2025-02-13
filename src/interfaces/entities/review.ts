@@ -1,4 +1,5 @@
 export interface Review {
+  length: number;
   id: string;
   companyId: string;
   branchId?: string;
