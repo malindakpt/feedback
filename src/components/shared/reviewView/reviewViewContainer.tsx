@@ -4,26 +4,31 @@ import ReviewDisplay from "./reviewView";
 import ReviewFilter from "../reviewFilter/reviewFilter";
 import { Card } from "@mui/material";
 
-
 interface ReviewContainerProps {
-  userId: string;
-  companyId: string;
-  branchId: string;
+  userId?: string;
+  companyId?: string;
+  branchId?: string;
 }
 
-const ReviewContainer: React.FC<ReviewContainerProps> = ({ userId }) => {
-    const [filters, setFilters] = useState<{ minRating?: number; maxRating?: number; fromDate?: string; toDate?: string }>({});
-    const reviewFilter = { userId, ...filters };
-    const { reviews, reviewloading, reviewerror } = useReviews(reviewFilter);
+const ReviewContainer: React.FC<ReviewContainerProps> = (props) => {
+  const [filters, setFilters] = useState<{ minRating?: number; maxRating?: number; fromDate?: string; toDate?: string }>({});
+
+  // Identify which prop is provided
+  const filterKey = props.userId ? { userId: props.userId } :
+                    props.companyId ? { companyId: props.companyId } :
+                    props.branchId ? { branchId: props.branchId } : {};
+
+  const reviewFilter = { ...filterKey, ...filters };
+  const { reviews, reviewloading, reviewerror } = useReviews(reviewFilter);
 
   return (
-    <Card sx={{ mt: 3, p: 2, borderRadius: 3, boxShadow: 3 }} >
+    <Card sx={{ mt: 3, p: 2, borderRadius: 3, boxShadow: 3 }}>
       <ReviewFilter reviewFilter={setFilters} />
       <ReviewDisplay 
         reviews={reviews} 
         reviewloading={reviewloading} 
         reviewerror={reviewerror} 
-    />
+      />
     </Card>
   );
 };

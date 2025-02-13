@@ -4,6 +4,7 @@ export const defaultCompany: Company = {
     id: "",
     name: "",
     number: '',
+    email: '',
     address: "",
     image: "",
 }
