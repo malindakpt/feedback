@@ -2,5 +2,6 @@ export enum Collection{
     Employee = 'Employee',
     Branches = 'Branches', 
     Companies = 'Companies',
-    Users = 'Users'
+    Users = 'Users',
+    Reviews = 'Reviews'
 }

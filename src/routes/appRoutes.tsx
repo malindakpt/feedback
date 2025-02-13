@@ -24,6 +24,8 @@ import EmployeesByBranch from '../components/employee/employeesByBranch'
 import UserLayout from "./userLayouts";
 import EditUserContainer from "../components/user/editUserConatainer";
 
+import ReviewUser from "../components/reviewUser/reviewUser";
+
 const AppRoutes: React.FC = () => {
   return (
     <Router>
@@ -49,7 +51,7 @@ const AppRoutes: React.FC = () => {
           
           {/* USER ROUTES */}
           <Route path="/" element={<UserLayout />}>
-            
+          <Route path="/review-user/:employeeId" element={<ReviewUser />} />
           </Route>
         </Route>
       </Routes>

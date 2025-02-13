@@ -86,3 +86,5 @@ export const StarReview: React.FC<StarReviewProps> = ({ name, type = 'star', err
     </Stack>
   );
 };
+
+export default StarReview;
