@@ -32,14 +32,14 @@ export interface ChartProps {
 }
 
 const defaultOptions = {
-  height: 200,
+  height: 300,
   width: '80%',
   showLegend: true,
   showGrid: true,
   title: '',
 };
 
-const ReusableMUIChart: React.FC<ChartProps> = ({ data, options }) => {
+const Chart2: React.FC<ChartProps> = ({ data, options }) => {
   const {
     chartType,
     xLabels,
@@ -143,4 +143,4 @@ const ReusableMUIChart: React.FC<ChartProps> = ({ data, options }) => {
   );
 };
 
-export default ReusableMUIChart;
+export default Chart2;

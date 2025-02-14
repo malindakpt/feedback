@@ -1,9 +1,9 @@
 import React from 'react';
-import ReusableChart, { ChartData } from './muiCharts';
+import ReusableChart, { ChartData } from './charts2';
 
 const ExamplePage: React.FC = () => {
   const lineChartData: ChartData = {
-    chartType: 'line',
+    chartType: 'bar',
     xLabels: ['January', 'February', 'March', 'April', 'May'],
     datasets: [
       {
