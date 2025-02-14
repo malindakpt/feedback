@@ -30,7 +30,6 @@ const AppRoutes: React.FC = () => {
           <Route path="/" element={<Navigate to="/login?lang=en" />} />
 
           {/* ADMIN ROUTES */}
-<<<<<<< Updated upstream
           <Route path="/login" element={<LoginContainer />} />
           <Route path="register" element={<RegisterContainer />} />
           
@@ -42,18 +41,6 @@ const AppRoutes: React.FC = () => {
               <Route path= "user/:id" element={<EditUserContainer />} />
               <Route path="branch" element={<AddBranchContainer />} />
               <Route path="branch/:id" element={<EditBranchContainer />} />
-=======
-          <Route path="/admin" element={<AdminLayout />}>
-            <Route element={<PrivateRoute />}>
-              <Route path="branch-manager" element={<BranchManager />} />
-              <Route path="branchView" element={<BranchView />} />
-              <Route path="companyView" element={<CompanyView />} />
-              <Route path="branchStatView/:id" element={<BranchStatView />} />
-              <Route path="employeeStatView/:id" element={<EmployeeStatView />} />
-              <Route path="dashboard" element={<Dashboard />} />
-            </Route>
-          </Route>
->>>>>>> Stashed changes
 
             </Route>
           
