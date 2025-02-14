@@ -15,11 +15,11 @@ const ReviewContainer: React.FC<ReviewContainerProps> = (props) => {
   const [filters, setFilters] = useState<ReviewFilter>();
 
   // Identify which prop is provided
-  const defaultContainer = props.userId ? { userId: props.userId } :
+  const defaultFilter = props.userId ? { userId: props.userId } :
     props.companyId ? { companyId: props.companyId } :
     props.branchId ? { branchId: props.branchId } : {};
 
-  const reviewFilter = { ...defaultContainer, ...filters };
+  const reviewFilter = { ...defaultFilter, ...filters };
   const { reviews, reviewloading, reviewerror } = useReviews(reviewFilter);
 
   return (
