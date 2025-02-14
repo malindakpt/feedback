@@ -3,9 +3,9 @@ import { SelectChangeEvent } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
-import { auth, db } from '../../services/auth/firebase';
 import i18n from '../languageSelector/i18n';
 import AppBarForm from './appBar';
+import { auth, db } from '../../../services/auth/firebase';
 
 const AppBarContainer: React.FC = () => {
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);

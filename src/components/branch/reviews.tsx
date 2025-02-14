@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useBranchByBranchId } from "../../hooks/useBranchByBranchId";
-import { useCompanyByCompanyId } from "../../hooks/useCompanyByCompanyId";
+import { useBranchByBranchID } from "../../hooks/useBranchByBranchId";
+import { useCompanyByCompanyID } from "../../hooks/useCompanyByCompanyId";
 import { StarReview } from "../shared/rating/starReview";
 import CommentBox from "../shared/commentBox/comments";
 import Button from "../shared/button/button";
@@ -24,10 +24,10 @@ interface FormValues {
 
 const BranchReviewPage: React.FC = () => {
   const { branchId } = useParams<{ branchId: string }>();
-  const { branch, loading: branchLoading, error: branchError } = useBranchByBranchId(branchId || "");
+  const { branch, loading: branchLoading, error: branchError } = useBranchByBranchID(branchId || "");
   
   // Fetch company details using companyId from branch data
-  const { company, loading: companyLoading, error: companyError } = useCompanyByCompanyId(branch?.companyId || "");
+  const { company, loading: companyLoading, error: companyError } = useCompanyByCompanyID(branch?.companyId || "");
 
   console.log("Branch data:", branch);
   console.log("Company data:", company);
