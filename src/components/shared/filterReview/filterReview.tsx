@@ -3,14 +3,14 @@ import { Grid, Button } from "@mui/material";
 import { Formik, Form } from "formik";
 import TextInput from "../textInput/textInput"; 
 import DateInput from "../dateInput/dateInput";
-import type { ReviewFilter } from "../../../interfaces/reviewFilterT";
+import type { ReviewFilter } from "../../../interfaces/reviewFilter";
 import { defaultReview } from "../../../defaultValues/defaultReview";
 
-interface ReviewFilterProps {
+interface filterReviewProps {
   onFilterChange: (filter: ReviewFilter) => void;
 }
 
-const ReviewFilter: React.FC<ReviewFilterProps> = ({ onFilterChange }) => {
+const FilterReview: React.FC<filterReviewProps> = ({ onFilterChange }) => {
   return (
     <Formik
   initialValues={{ ...defaultReview }} 
@@ -20,9 +20,6 @@ const ReviewFilter: React.FC<ReviewFilterProps> = ({ onFilterChange }) => {
       maxRating: values.maxRating ,
       fromDate: values.fromDate,
       toDate: values.toDate,
-      userId: "",
-      companyId: "",
-      branchId: ""
     });
   }}
 >
@@ -54,4 +51,4 @@ const ReviewFilter: React.FC<ReviewFilterProps> = ({ onFilterChange }) => {
   );
 };
 
-export default ReviewFilter;
+export default FilterReview;

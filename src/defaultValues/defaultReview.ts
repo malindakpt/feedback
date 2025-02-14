@@ -1,11 +1,8 @@
-import { ReviewFilter } from "../interfaces/reviewFilterT";
+import { ReviewFilter } from "../interfaces/reviewFilter";
 
 export const defaultReview: ReviewFilter = {
     minRating: 0,
     maxRating: 5,
-    fromDate: new Date(),
-    toDate: new Date(),   
-    userId:"",
-    companyId:"",
-    branchId:"",
+    fromDate: '',
+    toDate: '',   
 }
