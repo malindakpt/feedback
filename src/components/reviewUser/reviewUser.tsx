@@ -8,10 +8,14 @@ import StarReview from '../shared/rating/starReview';
 import CommentBox from '../shared/commentBox/comments';
 import { Collection } from '../../enums/collections.enum';
 import Button from '../shared/button/button';
+import { useCompanies } from '../../hooks/useCompanies';
+import { useBranches } from '../../hooks/useBranches';
 
 const ReviewUser:React.FC = () => {
     const { employeeId } = useParams<{ employeeId?: string }>();
     const { user, loading, error } = useUserByEmployeeId(employeeId || '');
+    const { companies, loading: loadingCompanies, error: errorCompanies } = useCompanies(user?.companyId);
+    const { branches, loading: loadingBranches, error: errorBranches } = useBranches();
 
     // Validation schema
     const validationSchema = Yup.object({
@@ -26,12 +30,16 @@ const ReviewUser:React.FC = () => {
     if (error) return <p>Error loading user data</p>;
     if (!user) return <p>User not found</p>;
 
+    // Find company and branch names
+    const company = companies.find(c => c.id === user.companyId);
+    const branch = branches.find(b => b.id === user.branchId);
+
     return (
         <div>
             {user.image && <img src={user.image} alt={`${user.firstName} ${user.lastName}`} style={{ width: '100px', height: '100px', borderRadius: '50%' }} />}
             <h2>{user.firstName} {user.lastName}</h2>
-            <p>Company ID: {user.companyId}</p>
-            <p>Branch ID: {user.branchId}</p>
+            <p>Company: {company?.name}</p>
+            <p>Branch: {branch?.name}</p>
             <p>Position: {user.position}</p>
             <Formik
                 initialValues={{
