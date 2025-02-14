@@ -1,34 +1,39 @@
 import React from "react";
 import { Grid, Button } from "@mui/material";
 import { Formik, Form } from "formik";
-import TextInput from "../textInput/textInput"; 
+import TextInput from "../textInput/textInput";
 import DateInput from "../dateInput/dateInput";
+import type { ReviewFilter } from "../../../interfaces/reviewFilter";
+import { defaultReview } from "../../../defaultValues/defaultReview";
+import AutoCompleteInput from "../autoComplete/autoCompleteInput";
+import { Ratings } from "../../utils/ratings";
 
-interface ReviewFilterProps {
-  reviewFilter: (filters: { minRating?: number; maxRating?: number; fromDate?: string; toDate?: string }) => void;
+interface filterReviewProps {
+  onFilterChange: (filter: ReviewFilter) => void;
 }
 
-const ReviewFilter: React.FC<ReviewFilterProps> = ({ reviewFilter }) => {
+const FilterReview: React.FC<filterReviewProps> = ({ onFilterChange }) => {
   return (
     <Formik
-      initialValues={{ minRating: "", maxRating: "", fromDate: "", toDate: "" }}
+      initialValues={{ ...defaultReview }}
       onSubmit={(values) => {
-        reviewFilter({
-          minRating: values.minRating ? parseFloat(values.minRating) : undefined,
-          maxRating: values.maxRating ? parseFloat(values.maxRating) : undefined,
-          fromDate: values.fromDate || undefined,
-          toDate: values.toDate || undefined,
+        onFilterChange({
+          minRating:  values.minRating ? Number(values.minRating) : 0,
+          maxRating: values.maxRating ? Number(values.maxRating) : 5,
+          fromDate: values.fromDate,
+          toDate: values.toDate,
         });
       }}
     >
+
       {({ handleSubmit }) => (
         <Form>
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12} sm={2.5}>
-              <TextInput label="Min Rating" name="minRating" type="number" />
+              <AutoCompleteInput label="Min Rating" name="minRating" options={Ratings}/>
             </Grid>
             <Grid item xs={12} sm={2.5}>
-              <TextInput label="Max Rating" name="maxRating" type="number" />
+              <AutoCompleteInput label="Max Rating" name="maxRating" options={Ratings}/>
             </Grid>
             <Grid item xs={12} sm={2.7}>
               <DateInput label="From Date" name="fromDate" />
@@ -48,4 +53,4 @@ const ReviewFilter: React.FC<ReviewFilterProps> = ({ reviewFilter }) => {
   );
 };
 
-export default ReviewFilter;
+export default FilterReview;

@@ -1,8 +1,9 @@
 import React from "react";
 import { Card, CardContent, Typography, CircularProgress, List } from "@mui/material";
+import { Review } from "../../../interfaces/entities/review";
 
 interface ReviewViewProps {
-  reviews: { id: string; comment: string }[];
+  reviews: Review[];
   reviewloading: boolean;
   reviewerror: string | null;
 }

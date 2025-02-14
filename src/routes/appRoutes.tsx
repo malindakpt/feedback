@@ -31,29 +31,31 @@ const AppRoutes: React.FC = () => {
     <Router>
       <Routes>
         <Route element={<MainLayout />}>
+          {/* PUBLIC ROUTES */}
           <Route path="/" element={<Navigate to="/login?lang=en" />} />
-
-          {/* ADMIN ROUTES */}
           <Route path="/login" element={<LoginContainer />} />
           <Route path="register" element={<RegisterContainer />} />
-          
-            {/* Protected Admin Routes */}
-            <Route element={<PrivateRoute />}>
-              <Route path="branch-manager" element={<BranchManager />} />
-              <Route path="company" element={<AddCompanyContainer />} />
-              <Route path= "company/:id" element={<EditCompanyContainer />} />
-              <Route path= "user/:id" element={<EditUserContainer />} />
-              <Route path="branch" element={<AddBranchContainer />} />
-              <Route path="branch/:id" element={<EditBranchContainer />} />
-              <Route path="employees/:id" element={<EmployeesByBranch />} />
-              <Route path="userview/:id" element={<UserviewContainer />} />
-              <Route path="companyview/:id" element={<CompanyViewContainer />} />
 
-            </Route>
-          
+         
+
+          {/* Protected Admin Routes */}
+          { <Route element={<PrivateRoute />}>
+            <Route path="branch-manager" element={<BranchManager />} />
+            <Route path="company" element={<AddCompanyContainer />} />
+            <Route path="company/:id" element={<EditCompanyContainer />} />
+            <Route path="user/:id" element={<EditUserContainer />} />
+            <Route path="branch" element={<AddBranchContainer />} />
+            <Route path="branch/:id" element={<EditBranchContainer />} />
+            <Route path="employees/:id" element={<EmployeesByBranch />} />
+            <Route path="userview/:id" element={<UserviewContainer />} />
+
+          </Route> }
+
+
+
           {/* USER ROUTES */}
           <Route path="/" element={<UserLayout />}>
-            
+
           </Route>
         </Route>
       </Routes>

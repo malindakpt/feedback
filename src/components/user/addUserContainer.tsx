@@ -15,7 +15,7 @@ const RegisterContainer: React.FC = () => {
   const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
 
   const handleRegister = async (values: any) => {
-    const { email, password, firstName, lastName, nic, birthday, companyId, branchId, position } = values;
+    const { email, password, firstName, lastName, nic, birthday, companyId, branchId, position, employeeId, address, contactNumber } = values;
   
     try {
       // Step 1: Authenticate user and get UID
@@ -34,6 +34,9 @@ const RegisterContainer: React.FC = () => {
       const userData = {
         firstName,
         lastName,
+        employeeId,
+        address,
+        contactNumber,
         nic,
         birthday,
         email,
