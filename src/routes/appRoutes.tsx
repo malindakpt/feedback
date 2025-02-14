@@ -48,6 +48,7 @@ const AppRoutes: React.FC = () => {
             <Route path="branch/:id" element={<EditBranchContainer />} />
             <Route path="employees/:id" element={<EmployeesByBranch />} />
             <Route path="userview/:id" element={<UserviewContainer />} />
+            <Route path="companyview/:id" element={<CompanyViewContainer />} />
 
           </Route> }
 
