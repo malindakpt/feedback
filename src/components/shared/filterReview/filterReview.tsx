@@ -1,10 +1,12 @@
 import React from "react";
 import { Grid, Button } from "@mui/material";
 import { Formik, Form } from "formik";
-import TextInput from "../textInput/textInput"; 
+import TextInput from "../textInput/textInput";
 import DateInput from "../dateInput/dateInput";
 import type { ReviewFilter } from "../../../interfaces/reviewFilter";
 import { defaultReview } from "../../../defaultValues/defaultReview";
+import AutoCompleteInput from "../autoComplete/autoCompleteInput";
+import { Ratings } from "../../utils/ratings";
 
 interface filterReviewProps {
   onFilterChange: (filter: ReviewFilter) => void;
@@ -13,25 +15,25 @@ interface filterReviewProps {
 const FilterReview: React.FC<filterReviewProps> = ({ onFilterChange }) => {
   return (
     <Formik
-  initialValues={{ ...defaultReview }} 
-  onSubmit={(values) => {
-    onFilterChange({
-      minRating: values.minRating ,
-      maxRating: values.maxRating ,
-      fromDate: values.fromDate,
-      toDate: values.toDate,
-    });
-  }}
->
+      initialValues={{ ...defaultReview }}
+      onSubmit={(values) => {
+        onFilterChange({
+          minRating:  values.minRating ? Number(values.minRating) : 0,
+          maxRating: values.maxRating ? Number(values.maxRating) : 5,
+          fromDate: values.fromDate,
+          toDate: values.toDate,
+        });
+      }}
+    >
 
       {({ handleSubmit }) => (
         <Form>
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12} sm={2.5}>
-              <TextInput label="Min Rating" name="minRating" type="number" />
+              <AutoCompleteInput label="Min Rating" name="minRating" options={Ratings}/>
             </Grid>
             <Grid item xs={12} sm={2.5}>
-              <TextInput label="Max Rating" name="maxRating" type="number" />
+              <AutoCompleteInput label="Max Rating" name="maxRating" options={Ratings}/>
             </Grid>
             <Grid item xs={12} sm={2.7}>
               <DateInput label="From Date" name="fromDate" />
