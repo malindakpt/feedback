@@ -1,16 +1,14 @@
 import React from 'react';
 import { TextField } from '@mui/material';
-import {  useFormikContext } from 'formik';
+import { useFormikContext } from 'formik';
 
 export interface TextInputProps {
   label: string;
   name: string;
   required?: boolean;
-  type?: string;
+  type?: 'text' | 'password' | 'email' | 'number';
   errorText?: string | false;
   disabled?: boolean;
-
-
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -20,32 +18,30 @@ const TextInput: React.FC<TextInputProps> = ({
   type = 'text',
   errorText,
   disabled = false,
-
 }) => {
 
-  
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const formikProps = useFormikContext<any>()
-  
-  
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (formikProps && formikProps.handleBlur) {
       formikProps.handleBlur(e);
     }
-    
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (formikProps && formikProps.setFieldValue) {
-      formikProps.setFieldValue(name, e.target.value);
+      if (type === 'number') {
+        formikProps.setFieldValue(name, Number(e.target.value));
+      } else {
+        formikProps.setFieldValue(name, e.target.value);
+      }
     }
   };
 
-  const fieldValue = formikProps?  formikProps.values[name] : '';
+  const fieldValue = formikProps ? formikProps.values[name] : '';
 
   return (
-
     <TextField
       label={label}
       value={fieldValue}
@@ -59,9 +55,7 @@ const TextInput: React.FC<TextInputProps> = ({
       type={type}
       error={Boolean(errorText)}
       helperText={errorText || ''}
-      disabled = {disabled}
-
-
+      disabled={disabled}
     />
   );
 };
