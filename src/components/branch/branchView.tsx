@@ -2,12 +2,14 @@ import React from "react";
 import { Container, Card, CardContent, Typography, Avatar, Grid, Divider } from "@mui/material";
 import ReviewView from "../shared/reviewView/reviewViewContainer";
 import { Branch } from "../../interfaces/entities/branch";
+import { Company } from "../../interfaces/entities/company";
 
 interface BranchViewProps {
     Branch: Branch;
+    company: Company | null;
 }
 
-const BranchView: React.FC<BranchViewProps> = ({ Branch }) => {
+const BranchView: React.FC<BranchViewProps> = ({ Branch , company}) => {
     return (
         <Container maxWidth="md">
             <Card sx={{ display: "flex", p: 2, borderRadius: 3, boxShadow: 3 }}>
@@ -25,7 +27,7 @@ const BranchView: React.FC<BranchViewProps> = ({ Branch }) => {
                                 {Branch.name}
                             </Typography>
                             <Typography>
-                                <strong>Company:</strong> {Branch.companyId || "N/A"}
+                                <strong>Company:</strong> {company?.name || "N/A"}
                             </Typography>
                             <Divider sx={{ my: 1 }} />
                             <Typography>
