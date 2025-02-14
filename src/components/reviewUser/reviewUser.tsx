@@ -10,12 +10,14 @@ import { Collection } from '../../enums/collections.enum';
 import Button from '../shared/button/button';
 import { useCompanies } from '../../hooks/useCompanies';
 import { useBranches } from '../../hooks/useBranches';
+import { userRoles } from '../utils/userRoles';
 
 const ReviewUser:React.FC = () => {
     const { employeeId } = useParams<{ employeeId?: string }>();
     const { user, loading, error } = useUserByEmployeeId(employeeId || '');
     const { companies, loading: loadingCompanies, error: errorCompanies } = useCompanies(user?.companyId);
     const { branches, loading: loadingBranches, error: errorBranches } = useBranches();
+    
 
     // Validation schema
     const validationSchema = Yup.object({
@@ -34,13 +36,16 @@ const ReviewUser:React.FC = () => {
     const company = companies.find(c => c.id === user.companyId);
     const branch = branches.find(b => b.id === user.branchId);
 
+    const userRole = userRoles.find(role => role.id === user.position);
+    const roleLabel = userRole ? userRole.label : 'Unknown Position';
+
     return (
         <div>
             {user.image && <img src={user.image} alt={`${user.firstName} ${user.lastName}`} style={{ width: '100px', height: '100px', borderRadius: '50%' }} />}
             <h2>{user.firstName} {user.lastName}</h2>
             <p>Company: {company?.name}</p>
             <p>Branch: {branch?.name}</p>
-            <p>Position: {user.position}</p>
+            <p>Position: {roleLabel}</p>
             <Formik
                 initialValues={{
                     rating: 0,
