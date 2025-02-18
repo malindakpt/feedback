@@ -5,11 +5,11 @@ import { useCompanyByCompanyID } from "../../hooks/useCompanyByCompanyId";
 import UserView from "./userView";
 
 const UserViewContainer: React.FC = () => {
-    const { id } = useParams<{ id?: string }>();
-    const userId = id ?? "";
+    const { uId } = useParams<{ uId?: string }>();
+    const userId = uId ?? "";
 
     const [companyId, setCompanyId] = useState<string | null>(null);
-    const [branchId, setBranchId] = useState<string>("");
+    const [branchId] = useState<string>("");
 
     const { user, loading, error } = useUserByUId(userId);
     const { company } = useCompanyByCompanyID(companyId ?? "");

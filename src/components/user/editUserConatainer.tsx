@@ -8,30 +8,16 @@ import RegisterForm from './userForm';
 import { User } from '../../interfaces/entities/user';
 import { useUserByUId } from '../../hooks/useUserByUId';
 import { useCompanies } from '../../hooks/useCompanies';
+import { defaultUser } from '../../defaultValues/defaultUser';
 
 const EditUserContainer: React.FC = () => {
-    const { id } = useParams<{ id?: string }>();
-    const uId = id ?? "";
+    const { uId } = useParams<{ uId?: string }>();
+    const userId = uId ?? "";
     const { companies } = useCompanies();
     const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
-    const { user, loading, error } = useUserByUId(uId);
+    const { user, loading, error } = useUserByUId(userId);
 
-    const initialValues: User = user || {
-        id: '',
-        employeeId: '',
-        address:'',
-        contactNumber:'',
-        firstName: '',
-        lastName: '',
-        companyId: '',
-        branchId: '',
-        position: '',
-        birthday: '',
-        nic: '',
-        image: '',
-        email: '',
-        password: ''
-    };
+    const initialValues: User = { ...defaultUser, ...(user) };
 
     const handleImageChange = (file: File | null) => {
         setProfileImageFile(file);
@@ -44,12 +30,12 @@ const EditUserContainer: React.FC = () => {
 
 
             if (profileImageFile) {
-                const uniqueFileName = `${id}.jpg`; // Use company ID as file name
+                const uniqueFileName = `${userId}.jpg`; // Use user ID as file name
                 profileImageUrl = await uploadImage('profile-images', uniqueFileName, profileImageFile);
             }
 
             // Step 2: Save company data in Firestore and get the document ID
-            await updateEntity(Collection.Users, uId, {
+            await updateEntity(Collection.Users, userId, {
                 firstName: values.firstName,
                 lastName: values.lastName,
                 companyId: values.companyId,

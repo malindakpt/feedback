@@ -1,3 +1,4 @@
+import { UserRoles } from "../enums/userRoles";
 import { User } from "../interfaces/entities/user";
 
 export const defaultUser: User = {
@@ -13,7 +14,7 @@ export const defaultUser: User = {
     password: "",
     companyId: "",
     branchId: "",
-    position: "",
+    position: UserRoles.Employee,
     image: "",
 }
 

@@ -4,8 +4,8 @@ import { useCompanyByCompanyID } from "../../hooks/useCompanyByCompanyId";
 import CompanyView from "./companyView";
 
 const CompanyViewContainer: React.FC = () => {
-    const { id } = useParams<{ id?: string }>();
-    const companyId = id ?? "";
+    const { compId } = useParams<{ compId?: string }>();
+    const companyId = compId ?? "";
 
     const { company, loading, error } = useCompanyByCompanyID(companyId);
 

@@ -9,7 +9,6 @@ import PrivateRoute from "./privateRoutes";
 import MainLayout from "./mainLayout";
 
 // ADMIN
-import BranchManager from '../components/branch/branchManager';
 import AddCompanyContainer from "../components/admin/comapany/addCompanyContainer";
 import EditCompanyContainer from "../components/admin/comapany/editCompanyContainer";
 
@@ -19,13 +18,20 @@ import LoginContainer from '../components/login/login.container';
 import AddBranchContainer from '../components/branch/addBranchContainer';
 import EditBranchContainer from '../components/branch/editBranchContainer';
 import EmployeesByBranch from '../components/employee/employeesByBranch';
-import UserviewContainer from '../components/user/userViewContainer';
-import CompanyViewContainer from '../components/company/companyViewContainer';
+import UserviewContainer from '../components/user/userViewContainer'
+import CompanyViewContainer from '../components/company/companyViewContainer'
 import BranchViewContainer from "../components/branch/branchViewContainer";
+import CompanyReview from "../components/company/companyReview";
+import BranchReview from "../components/branch/branchReview";
+import EmployeeReview from '../components/employee/employeeReview';
+import ReviewView from "../components/review/reviewView";
 
 // LAYOUTS
 import UserLayout from "./userLayouts";
 import EditUserContainer from "../components/user/editUserConatainer";
+import CompanyAccess from "./companyAccess";
+import BranchAccess from "./branchAccess";
+import EmployeeAccess from "./employeeAccess";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -37,24 +43,31 @@ const AppRoutes: React.FC = () => {
           <Route path="/login" element={<LoginContainer />} />
           <Route path="register" element={<RegisterContainer />} />
 
-         
+          {/* STAT VIEW ROUTES */}
+          <Route element={<CompanyAccess />}>
+            <Route path="company/:compId" element={<CompanyViewContainer />}></Route> Show all branches, show pennding users for comapany, add branch link
+            <Route path="company/:compId/edit" element={<EditCompanyContainer />}></Route> Show all branches
+          </Route>
 
-          {/* Protected Admin Routes */}
-          { <Route element={<PrivateRoute />}>
-            <Route path="branch-manager" element={<BranchManager />} />
-            <Route path="company" element={<AddCompanyContainer />} />
-            <Route path="company/:id" element={<EditCompanyContainer />} />
-            <Route path="user/:id" element={<EditUserContainer />} />
-            <Route path="branch" element={<AddBranchContainer />} />
-            <Route path="branch/:id" element={<EditBranchContainer />} />
-            <Route path="employees/:id" element={<EmployeesByBranch />} />
-            <Route path="userview/:id" element={<UserviewContainer />} />
-            <Route path="companyview/:id" element={<CompanyViewContainer />} />
-            <Route path="branchview/:id" element={<BranchViewContainer />} />
+          <Route element={<BranchAccess />}>
+            <Route path="company/:compId/branch/add" element={<AddBranchContainer />}></Route>
+            <Route path="company/:compId/branch/:branchId" element={<BranchViewContainer />}></Route> Show all EMployees, , show pennding users for branch
+            <Route path="company/:compId/branch/:branchId/edit" element={<EditBranchContainer />}></Route> edit , delete branch
+            <Route path="company/:compId/branch/:branchId/employee/add" element={<EmployeesByBranch />}></Route>  Show all EMployees
+          </Route>
 
-          </Route> }
+          <Route element={<EmployeeAccess />}>
+            <Route path="company/:compId/branch/:branchId/user/:uId" element={<UserviewContainer />}></Route>
+            <Route path="company/:compId/branch/:branchId/user/:uId/edit" element={<EditUserContainer />}></Route>
+            <Route path="company/:compId/branch/:branchId/user/:uId/review/:reviewId" element={<ReviewView />}></Route>  review data
+          </Route>
 
-
+          {/* ADD REVIEW ROUTES */}
+          <Route path="review">
+            <Route path="company/:compId" element={<CompanyReview />}></Route> SHow all branches
+            <Route path="company/:compId/branch/:branchId" element={<BranchReview />}></Route> SHow all EMployees
+            <Route path="company/:compId/branch/:branchId/employee/:employeeId" element={<EmployeeReview />}></Route>  Show all reviews DESC
+          </Route>
 
           {/* USER ROUTES */}
           <Route path="/" element={<UserLayout />}>
