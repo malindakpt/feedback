@@ -6,9 +6,8 @@ import { useBranchByBranchID } from '../hooks/useBranchByBranchId';
 
 const BranchAccess: React.FC = () => {
     const { branchId } = useParams<{ branchId?: string }>();
-    const bId = branchId ?? "";
     const { user } = useAuthenticatedUser();
-    const { branch } = useBranchByBranchID(bId)
+    const { branch } = useBranchByBranchID(branchId ?? '');
 
     if (user) {
         if (user.position === UserRoles.Admin || user.position === UserRoles.Owner || user.position === UserRoles.Manager) {
