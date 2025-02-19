@@ -11,10 +11,10 @@ import { useCompanies } from '../../hooks/useCompanies';
 import { defaultBranch } from '../../defaultValues/defaultBranch';
 
 const EditBranchContainer: React.FC = () => {
-    const { id } = useParams<{ id?: string }>(); // Mark id as optional
-    const branchId = id ?? ""; // Ensure id is always a string
+    const { branchId } = useParams<{ branchId?: string }>(); // Mark id as optional
+    const bId = branchId ?? ""; // Ensure id is always a string
     const [branchImage, setBranchImage] = useState<File | null>(null);
-    const { branch, loading, error } = useBranchByBranchID(branchId);
+    const { branch, loading, error } = useBranchByBranchID(bId);
     const {companies} = useCompanies();
 
 
@@ -31,11 +31,11 @@ const EditBranchContainer: React.FC = () => {
 
 
             if (branchImage) {
-                const uniqueFileName = `${id}.jpg`; // Use branch ID as file name
+                const uniqueFileName = `${bId}.jpg`; // Use branch ID as file name
                 imageUrl = await uploadImage('branches', uniqueFileName, branchImage);
             }
             // Step 2: Save branch data in Firestore and get the document ID
-            await updateEntity(Collection.Branches, branchId, {
+            await updateEntity(Collection.Branches, bId, {
                 name: values.name,
                 companyId: values.companyId,
                 number: values.number,

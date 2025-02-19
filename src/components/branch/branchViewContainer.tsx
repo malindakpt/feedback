@@ -5,21 +5,17 @@ import { useBranchByBranchID } from "../../hooks/useBranchByBranchId";
 import { useCompanyByCompanyID } from "../../hooks/useCompanyByCompanyId";
 
 const BranchViewContainer: React.FC = () => {
-    const { id } = useParams<{ id?: string }>();
-    const branchId = id ?? "";
-
-    const { branch, loading, error } = useBranchByBranchID(branchId);
-    
+    const { branchId } = useParams<{ branchId?: string }>();
+    const bId = branchId ?? "";
+    const { branch, loading, error } = useBranchByBranchID(bId);
     const [companyId, setCompanyId] = useState<string | null>(null);
     const { company } = useCompanyByCompanyID(companyId ?? "");
 
-    
-
     useEffect(() => {
-            if (branch) {
-                setCompanyId(branch.companyId);
-            }
-        }, [branch]);
+        if (branch) {
+            setCompanyId(branch.companyId);
+        }
+    }, [branch]);
 
     // Handle loading and error states
     if (loading) return <p>Loading branch data...</p>;

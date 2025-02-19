@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { useDispatch } from 'react-redux';
 import LoginForm from './login';
 import { login } from './appSlice'; 
@@ -10,7 +9,6 @@ import { LocationState } from '../../interfaces/locationState';
 const LoginContainer: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();

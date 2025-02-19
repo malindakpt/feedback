@@ -6,7 +6,7 @@ import { User } from "../../interfaces/entities/user";
 import { Company } from "../../interfaces/entities/company";
 
 interface UserViewProps {
-  user: User ;
+  user: User;
   company: Company | null;
   userId: string;
   companyId: string;

@@ -1,9 +1,9 @@
+import { UserRoles } from "../../enums/userRoles";
+
 export const userRoles = [
-  { id: "1", label: "Manager" },
-  { id: "2", label: "Associate" },
-  { id: "3", label: "Admin" },
-  { id: "4", label: "Clerk" },
-  { id: "5", label: "Trainee" },
+  { id: UserRoles.Owner, label: "Owner" },
+  { id: UserRoles.Manager, label: "Manager" },
+  { id: UserRoles.Employee, label: "Employee" },
 ];
 
 export const getUserRoles = (id?: string): string => {
