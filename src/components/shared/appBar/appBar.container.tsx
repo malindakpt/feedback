@@ -3,17 +3,20 @@ import { SelectChangeEvent } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import i18n from '../languageSelector/i18n';
 import AppBarForm from './appBar';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../login/appSlice';
+import { AppDispatch } from '../../login/store';
 
 const AppBarContainer: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-  // Retrieve current language from URL or default to 'en'
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  
   const currentParams = new URLSearchParams(location.search);
   const currentLanguage = currentParams.get('lang') || 'en';
-
   const [language, setLanguage] = useState(currentLanguage);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -35,11 +38,16 @@ const AppBarContainer: React.FC = () => {
   const handleLanguageChange = (event: SelectChangeEvent) => {
     const selectedLanguage = event.target.value;
     setLanguage(selectedLanguage);
-    i18n.changeLanguage(selectedLanguage); // Change the language globally
+    i18n.changeLanguage(selectedLanguage);
 
-    // Update the `lang` query parameter in the URL
     currentParams.set('lang', selectedLanguage);
     navigate(`${location.pathname}?${currentParams.toString()}`);
+  };
+
+  // Handle Logout
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigate('/login'); // Redirect to login page after logout
   };
 
   return (
@@ -52,6 +60,7 @@ const AppBarContainer: React.FC = () => {
       onCloseNavMenu={handleCloseNavMenu}
       onCloseUserMenu={handleCloseUserMenu}
       onLanguageChange={handleLanguageChange}
+      onLogout={handleLogout} // Pass logout function to AppBarForm
     />
   );
 };
