@@ -25,6 +25,7 @@ import CompanyReview from "../components/company/companyReview";
 import BranchReview from "../components/branch/branchReview";
 import EmployeeReview from '../components/employee/employeeReview';
 import ReviewView from "../components/review/reviewView";
+import HomeView from '../components/homeView/homeView';
 
 // LAYOUTS
 import UserLayout from "./userLayouts";
@@ -42,6 +43,8 @@ const AppRoutes: React.FC = () => {
           <Route path="/" element={<Navigate to="/login?lang=en" />} />
           <Route path="/login" element={<LoginContainer />} />
           <Route path="register" element={<RegisterContainer />} />
+          <Route path="/homeView" element={<HomeView />} />
+
 
           {/* STAT VIEW ROUTES */}
           <Route element={<CompanyAccess />}>

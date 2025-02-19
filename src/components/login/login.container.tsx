@@ -12,7 +12,7 @@ const LoginContainer: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = (location.state as LocationState)?.from?.pathname || '/branch-manager';
+  const from = (location.state as LocationState)?.from?.pathname || '/homeView';
 
   const handleLogin = async (email: string, password: string) => {
     try {

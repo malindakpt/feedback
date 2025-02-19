@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from '../../services/auth/firebase';
 import { AppState } from '../../interfaces/app';
 import { FilterCondition, readFilteredEntity } from '../../services/crudService';
@@ -13,8 +13,8 @@ export const initialAuthState: AppState = {
 
 export const login = createAsyncThunk<
   User,
-  { email: string; password: string }, // Arguments type
-  { rejectValue: string } // Rejection type
+  { email: string; password: string },
+  { rejectValue: string }
 >(
   'auth/login',
   async ({ email, password }, thunkAPI) => {
@@ -22,9 +22,9 @@ export const login = createAsyncThunk<
       const response = await signInWithEmailAndPassword(auth, email, password);
       const user = response.user;
 
-      //Firestore readFilteredEntity to get the user data
       const filters: FilterCondition[] = [
-        { field: "id", operator: "==", value: user.uid },];
+        { field: "id", operator: "==", value: user.uid },
+      ];
 
       const userData = await readFilteredEntity<User>(Collection.Users, filters);
 
@@ -33,7 +33,19 @@ export const login = createAsyncThunk<
       }
 
       return thunkAPI.rejectWithValue('Authentication error.');
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
+// 🔹 NEW: Logout Action (Async)
+export const logoutUser = createAsyncThunk(
+  'auth/logout',
+  async (_, thunkAPI) => {
+    try {
+      await signOut(auth); // Sign out from Firebase
+      return true; // Success
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -43,19 +55,19 @@ export const login = createAsyncThunk<
 const authSlice = createSlice({
   name: 'auth',
   initialState: initialAuthState,
-  reducers: {
-    logout: (state) => {
-      state.user = null;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
         state.user = action.payload;
+        state.isAuthenticated = true;
       })
+      // 🔹 Handle Logout Success
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.user = null;
+        state.isAuthenticated = false;
+      });
   },
 });
-
-export const { logout } = authSlice.actions;
 
 export default authSlice.reducer;
