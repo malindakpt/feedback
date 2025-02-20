@@ -25,7 +25,7 @@ import CompanyReview from "../components/company/companyReview";
 import BranchReview from "../components/branch/branchReview";
 import EmployeeReview from '../components/employee/employeeReview';
 import ReviewView from "../components/review/reviewView";
-import HomeView from '../components/homeView/homeView';
+import HomeViewContainer from '../components/homeView/homeViewContainer';
 
 // LAYOUTS
 import UserLayout from "./userLayouts";
@@ -33,6 +33,7 @@ import EditUserContainer from "../components/user/editUserConatainer";
 import CompanyAccess from "./companyAccess";
 import BranchAccess from "./branchAccess";
 import EmployeeAccess from "./employeeAccess";
+import AdminAccess from "./adminAccess";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -43,20 +44,23 @@ const AppRoutes: React.FC = () => {
           <Route path="/" element={<Navigate to="/login?lang=en" />} />
           <Route path="/login" element={<LoginContainer />} />
           <Route path="register" element={<RegisterContainer />} />
-          <Route path="/homeView" element={<HomeView />} />
+          <Route path="/homeViewContainer" element={<HomeViewContainer />} />
 
+          <Route element={<AdminAccess />}>
+            <Route path="/addCompany" element={<AddCompanyContainer />} />
+          </Route>
 
           {/* STAT VIEW ROUTES */}
           <Route element={<CompanyAccess />}>
             <Route path="company/:compId" element={<CompanyViewContainer />}></Route> Show all branches, show pennding users for comapany, add branch link
             <Route path="company/:compId/edit" element={<EditCompanyContainer />}></Route> Show all branches
+            <Route path="company/:compId/branch/add" element={<AddBranchContainer />}></Route>
           </Route>
 
           <Route element={<BranchAccess />}>
-            <Route path="company/:compId/branch/add" element={<AddBranchContainer />}></Route>
             <Route path="company/:compId/branch/:branchId" element={<BranchViewContainer />}></Route> Show all EMployees, , show pennding users for branch
             <Route path="company/:compId/branch/:branchId/edit" element={<EditBranchContainer />}></Route> edit , delete branch
-            <Route path="company/:compId/branch/:branchId/employee/add" element={<EmployeesByBranch />}></Route>  Show all EMployees
+            <Route path="company/:compId/branch/:branchId/employeeList" element={<EmployeesByBranch />}></Route>  Show all EMployees
           </Route>
 
           <Route element={<EmployeeAccess />}>

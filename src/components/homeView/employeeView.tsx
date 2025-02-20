@@ -1,0 +1,44 @@
+
+import React from "react";
+import { Card, CardContent, Typography, CardActionArea, Grid2 } from "@mui/material";
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import ReviewsIcon from '@mui/icons-material/Reviews';
+import { Link as RouterLink } from "react-router-dom";
+import useAuthenticatedUser from "../../hooks/useAuthenticatedUser";
+
+const AdminView: React.FC = () => {
+    const { user } = useAuthenticatedUser(); 
+
+    return (
+        <Grid2 container spacing={5} justifyContent="center" sx={{ mt: 4 }} columns={10}>
+            {/* First Row */}
+            <Grid2 size={{ xs: 12, sm: 6, md: 4 }} >
+                <Card sx={{ maxWidth: 350, textAlign: "center", cursor: "pointer", backgroundColor: "#1976d2", borderRadius: 3 }}>
+                    <CardActionArea component={RouterLink} to={`/company/${user?.companyId}/branch/${user?.branchId}/user/${user?.id}`}>
+                        <CardContent>
+                            <AccountBoxIcon sx={{ fontSize: 75, color: "#ffffff" }} />
+                            <Typography variant="h6" sx={{ mt: 2, fontSize: 25, color: "#ffffff" }}>
+                                My Profile
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+            </Grid2>
+
+            <Grid2 size={{ xs: 12, sm: 6, md: 4 }}>
+                <Card sx={{ maxWidth: 350, textAlign: "center", cursor: "pointer", backgroundColor: "#1976d2", borderRadius: 3 }}>
+                    <CardActionArea component={RouterLink} to="/addEmployee">
+                        <CardContent>
+                            <ReviewsIcon sx={{ fontSize: 75, color: "#ffffff" }} />
+                            <Typography variant="h6" sx={{ mt: 2, fontSize: 25, color: "#ffffff" }}>
+                                Review
+                            </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                </Card>
+            </Grid2>
+        </Grid2>
+    );
+};
+
+export default AdminView;

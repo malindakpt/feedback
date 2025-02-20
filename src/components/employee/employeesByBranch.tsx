@@ -5,7 +5,7 @@ import DataTable from '../shared/dataTable/dataTable';
 import { DataTableColumn } from '../shared/dataTable/types/dataTableColumn';
 
 
-const data: DataTableColumn[] =  [
+const data: DataTableColumn[] = [
     { field: 'id', headerName: 'ID', width: 90 },
     {
         field: 'fullName',
@@ -31,23 +31,22 @@ const data: DataTableColumn[] =  [
 
 const EmployeesByBranch: React.FC = () => {
     const { branchId } = useParams<{ branchId?: string }>();
-    const bId = branchId ?? ""; 
-    const { users, loading, error } = useUserByBranchId(bId);
+    const { users, loading, error } = useUserByBranchId(branchId ?? "");
 
     const employees = users.map(user => ({
         ...user,
-        fullName: `${user.firstName || ''} ${user.lastName || ''}`.trim(), 
+        fullName: `${user.firstName || ''} ${user.lastName || ''}`.trim(),
     }));
 
     if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+    if (error) return <p>{error}</p>;
 
     return (
-        <DataTable 
-          rows={employees} 
-          columns={data} 
-          hideFooter={true} 
-          checkboxSelection={true} 
+        <DataTable
+            rows={employees}
+            columns={data}
+            hideFooter={true}
+            checkboxSelection={true}
         />
     );
 };

@@ -15,6 +15,9 @@ import AdbIcon from '@mui/icons-material/Adb';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { SelectChangeEvent } from '@mui/material';
+import { Link } from "react-router-dom";
+import useAuthenticatedUser from '../../../hooks/useAuthenticatedUser';
+
 
 type AppBarFormProps = {
   anchorElNav: HTMLElement | null;
@@ -40,7 +43,8 @@ const AppBarForm: React.FC<AppBarFormProps> = ({
   onLogout,
 }) => {
   const pages = ['Products', 'Pricing', 'Blog'];
-  const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+  const settings = ['Account', 'Dashboard', 'Logout'];
+  const { user } = useAuthenticatedUser();
 
   return (
     <AppBar position="static">
@@ -116,8 +120,8 @@ const AppBarForm: React.FC<AppBarFormProps> = ({
                 displayEmpty
                 inputProps={{ 'aria-label': 'Select Language' }}
                 sx={{
-                  maxHeight:40,
-                  maxWidth:100,
+                  maxHeight: 40,
+                  maxWidth: 100,
                   color: 'white',
                   borderColor: 'white',
                   '& .MuiOutlinedInput-notchedOutline': {
@@ -136,7 +140,11 @@ const AppBarForm: React.FC<AppBarFormProps> = ({
 
             <Tooltip title="Open settings">
               <IconButton onClick={onOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="User" src="/static/images/avatar/2.jpg" />
+                <Avatar
+                  src={user?.image || "/assets/default-user.jpg"}
+                  alt={user?.firstName}
+                  sx={{ width: 45, height: 45, margin: "auto" }}
+                />
               </IconButton>
             </Tooltip>
             <Menu
@@ -149,18 +157,22 @@ const AppBarForm: React.FC<AppBarFormProps> = ({
               open={Boolean(anchorElUser)}
               onClose={onCloseUserMenu}
             >
+
               {settings.map((setting) => (
                 <MenuItem
                   key={setting}
+                  component={setting === "Account" ? Link : "div"}
+                  to={setting === "Account" ? `/company/${user?.companyId}/branch/${user?.branchId}/user/${user?.id}` : undefined}
                   onClick={() => {
                     onCloseUserMenu();
-                    if (setting === 'Logout') {
+                    if (setting === "Logout") {
                       onLogout();
                     }
                   }}
                 >
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
+                  <Typography sx={{ textAlign: "center" }}>{setting}</Typography>
                 </MenuItem>
+
               ))}
             </Menu>
           </Box>
@@ -169,5 +181,5 @@ const AppBarForm: React.FC<AppBarFormProps> = ({
     </AppBar>
   );
 };
-
+//component={RouterLink} to={`/company/${user?.companyId}/branch/${user?.branchId}/user/${user?.id}`}
 export default AppBarForm;

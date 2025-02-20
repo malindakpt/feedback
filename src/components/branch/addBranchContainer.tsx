@@ -7,10 +7,12 @@ import { uploadImage } from '../../services/imageUploaderService';
 import { defaultBranch } from '../../defaultValues/defaultBranch';
 import BranchForm from './branchForm';
 import { useCompanies } from '../../hooks/useCompanies';
+import { useParams } from 'react-router-dom';
 
 const AddBranchContainer: React.FC = () => {
+    const { companyId } = useParams<{ companyId?: string }>(); // Mark id as optional
     const [branchImage, setBranchImage] = useState<File | null>(null);
-    const {companies} = useCompanies();
+    const { companies } = useCompanies(companyId);
 
     const handleImageChange = (file: File | null) => {
         setBranchImage(file);
@@ -24,16 +26,16 @@ const AddBranchContainer: React.FC = () => {
             const branchData: Branch = { ...values };
 
             // Step 2: Save branch data in Firestore and get the document ID
-            const cid = await createEntity(Collection.Branches, branchData);
+            const companyId = await createEntity(Collection.Branches, branchData);
 
-            if (cid) {
+            if (companyId) {
                 // Step 3: Upload image with ID as the file name (id.jpg)
                 if (branchImage) {
-                    const uniqueFileName = `${cid}.jpg`; // Use UID as file name
+                    const uniqueFileName = `${companyId}.jpg`; // Use UID as file name
                     imageUrl = await uploadImage('branches', uniqueFileName, branchImage);
                 }
 
-                await updateEntity(Collection.Branches, cid, { image: imageUrl, id: cid });
+                await updateEntity(Collection.Branches, companyId, { image: imageUrl, id: companyId });
                 alert("Branch added successfully!");
             } else {
                 alert("Failed to add branch!");
@@ -46,7 +48,7 @@ const AddBranchContainer: React.FC = () => {
     const companyOptions = companies.map((company) => ({
         id: company.id, // assuming company has an `id` field
         label: company.name, // assuming company has a `name` field
-      }));
+    }));
 
     return (
         <Box>

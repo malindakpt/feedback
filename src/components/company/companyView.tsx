@@ -1,7 +1,11 @@
 import React from "react";
-import { Container, Card, CardContent, Typography, Avatar, Grid, Divider } from "@mui/material";
+import { Container, Card, CardContent, Typography, Avatar, Grid, Divider, Stack, IconButton } from "@mui/material";
 import ReviewView from "../shared/reviewView/reviewViewContainer";
 import { Company } from "../../interfaces/entities/company";
+import EditIcon from '@mui/icons-material/Edit';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import StoreIcon from '@mui/icons-material/Store';
+import { Link } from "react-router-dom";
 
 interface CompanyViewProps {
     company: Company;
@@ -19,6 +23,7 @@ const UserView: React.FC<CompanyViewProps> = ({ company }) => {
                             sx={{ width: 160, height: 160, margin: "auto" }}
                         />
                     </Grid>
+
                     <Grid item xs={12} sm={8}>
                         <CardContent>
                             <Typography variant="h5" fontWeight="bold">
@@ -39,9 +44,18 @@ const UserView: React.FC<CompanyViewProps> = ({ company }) => {
                 </Grid>
             </Card>
 
-            {/* Pass props to ReviewView */}
+            <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+                <IconButton aria-label="delete" component={Link} to={`/company/${company.id}/edit`}>
+                    <EditIcon />
+                </IconButton>
+                <IconButton aria-label="delete" component={Link} to={`/company/${company.id}/branch/add`}>
+                    <AddBusinessIcon />
+                </IconButton>
+                <IconButton aria-label="delete" component={Link} to={`/company/${company.id}/branchList`}>
+                    <StoreIcon />
+                </IconButton>
+            </Stack>
             <ReviewView companyId={company.id} userId={""} branchId={""} />
-
         </Container>
     );
 };
