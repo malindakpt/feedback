@@ -11,11 +11,7 @@ export const branchApi = createApi({
       async queryFn() {
         try {
           const branches = await readAllEntity<Branch>(Collection.Branches);
-          if (branches) {
-            return { data: branches };
-          } else {
-            return { error: { status: "FETCH_ERROR", error: "Failed to fetch branches." } };
-          }
+            return { data: branches }
         } catch (error) {
           console.error("Error fetching branches:", error);
           return { error: { status: "FETCH_ERROR", error: "Failed to fetch branches." } };
