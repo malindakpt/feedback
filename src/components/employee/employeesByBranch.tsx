@@ -30,9 +30,9 @@ const data: DataTableColumn[] =  [
 ];
 
 const EmployeesByBranch: React.FC = () => {
-    const { id } = useParams<{ id?: string }>();
-    const branchId = id ?? ""; 
-    const { users, loading, error } = useUserByBranchId(branchId);
+    const { branchId } = useParams<{ branchId?: string }>();
+    const bId = branchId ?? ""; 
+    const { users, loading, error } = useUserByBranchId(bId);
 
     const employees = users.map(user => ({
         ...user,

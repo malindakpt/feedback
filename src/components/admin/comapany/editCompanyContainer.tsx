@@ -10,8 +10,8 @@ import { useCompanyByCompanyID } from '../../../hooks/useCompanyByCompanyId';
 import { defaultCompany } from '../../../defaultValues/defaultCompany';
 
 const EditCompanyContainer: React.FC = () => {
-    const { id } = useParams<{ id?: string }>(); // Mark id as optional
-    const companyId = id ?? ""; // Ensure id is always a string
+    const { compId } = useParams<{ compId?: string }>(); // Mark id as optional
+    const companyId = compId ?? ""; // Ensure id is always a string
     const [companyImage, setCompanyImage] = useState<File | null>(null);
     const { company, loading, error } = useCompanyByCompanyID(companyId);
 
@@ -28,7 +28,7 @@ const EditCompanyContainer: React.FC = () => {
 
 
             if (companyImage) {
-                const uniqueFileName = `${id}.jpg`; // Use company ID as file name
+                const uniqueFileName = `${compId}.jpg`; // Use company ID as file name
                 imageUrl = await uploadImage('companies', uniqueFileName, companyImage);
             }
             // Step 2: Save company data in Firestore and get the document ID

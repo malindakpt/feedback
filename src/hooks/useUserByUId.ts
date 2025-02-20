@@ -15,23 +15,23 @@ export const useUserByUId = (id: string) => {
         setError(null);
 
         // Retrieve the user for the relevant ID from the collection
-                const filters: FilterCondition[] = [{ field: "id", operator: "==", value: id }];
-                const result = await readFilteredEntity<User>(Collection.Users, filters);
-        
-                if (result && result.length > 0) {
-                  setUser(result[0]); 
-                } else {
-                  console.log("No matching user found!");
-                  setUser(null);
-                }
-              } catch (error) {
-                console.error("Error fetching user: ", error);
-                setError("Failed to fetch user.");
-              } finally {
-                setLoading(false);
-              }
-          
-            };
+        const filters: FilterCondition[] = [{ field: "id", operator: "==", value: id }];
+        const result = await readFilteredEntity<User>(Collection.Users, filters);
+
+        if (result && result.length > 0) {
+          setUser(result[0]);
+        } else {
+          console.log("No matching user found!");
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Error fetching user: ", error);
+        setError("Failed to fetch user.");
+      } finally {
+        setLoading(false);
+      }
+
+    };
 
     if (id) {
       fetchUser();

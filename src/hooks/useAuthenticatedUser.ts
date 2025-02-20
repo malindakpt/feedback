@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../components/login/store';
-import { AuthUser } from '../interfaces/entities/authUser';
+import { User } from '../interfaces/entities/user';
 
 const useAuthenticatedUser  = () => {
-  const user: AuthUser | null = useSelector((state: RootState) => state.auth.user);
+  const user: User | null = useSelector((state: RootState) => state.auth.user);
 
   const isAuthenticated = user !== null;
 
@@ -11,3 +11,4 @@ const useAuthenticatedUser  = () => {
 };
 
 export default useAuthenticatedUser ;
+

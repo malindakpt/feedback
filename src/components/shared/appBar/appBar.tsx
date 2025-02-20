@@ -25,6 +25,7 @@ type AppBarFormProps = {
   onCloseNavMenu: () => void;
   onCloseUserMenu: () => void;
   onLanguageChange: (event: SelectChangeEvent) => void;
+  onLogout: () => void; // Add logout function
 };
 
 const AppBarForm: React.FC<AppBarFormProps> = ({
@@ -36,6 +37,7 @@ const AppBarForm: React.FC<AppBarFormProps> = ({
   onCloseNavMenu,
   onCloseUserMenu,
   onLanguageChange,
+  onLogout,
 }) => {
   const pages = ['Products', 'Pricing', 'Blog'];
   const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -114,6 +116,8 @@ const AppBarForm: React.FC<AppBarFormProps> = ({
                 displayEmpty
                 inputProps={{ 'aria-label': 'Select Language' }}
                 sx={{
+                  maxHeight:40,
+                  maxWidth:100,
                   color: 'white',
                   borderColor: 'white',
                   '& .MuiOutlinedInput-notchedOutline': {
@@ -132,27 +136,29 @@ const AppBarForm: React.FC<AppBarFormProps> = ({
 
             <Tooltip title="Open settings">
               <IconButton onClick={onOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="User" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
               keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
               open={Boolean(anchorElUser)}
               onClose={onCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={onCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => {
+                    onCloseUserMenu();
+                    if (setting === 'Logout') {
+                      onLogout();
+                    }
+                  }}
+                >
                   <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
                 </MenuItem>
               ))}
