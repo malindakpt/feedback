@@ -7,10 +7,12 @@ import { uploadImage } from '../../services/imageUploaderService';
 import { defaultBranch } from '../../defaultValues/defaultBranch';
 import BranchForm from './branchForm';
 import { useCompanies } from '../../hooks/useCompanies';
+import { useCreateBranchMutation } from "../../services/branchApi";
 
 const AddBranchContainer: React.FC = () => {
     const [branchImage, setBranchImage] = useState<File | null>(null);
     const {companies} = useCompanies();
+    const [createBranchMutation] = useCreateBranchMutation();
 
     const handleImageChange = (file: File | null) => {
         setBranchImage(file);
@@ -24,7 +26,8 @@ const AddBranchContainer: React.FC = () => {
             const branchData: Branch = { ...values };
 
             // Step 2: Save branch data in Firestore and get the document ID
-            const cid = await createEntity(Collection.Branches, branchData);
+            const response = await createBranchMutation(branchData);
+            const cid = response.data;
 
             if (cid) {
                 // Step 3: Upload image with ID as the file name (id.jpg)

@@ -3,12 +3,14 @@ import React from 'react';
 import AppRoutes from './routes/appRoutes';
 import { Provider } from 'react-redux';
 import { store } from './components/login/store';
+import AddBranchContainer from './components/branch/addBranchContainer';
 
 const App: React.FC = () => {
   return (
     <Provider store={store}>
     <div className="App">
-    <AppRoutes />
+    {/* <AppRoutes /> */}
+    <AddBranchContainer/>
     </div>
   </Provider>
     
